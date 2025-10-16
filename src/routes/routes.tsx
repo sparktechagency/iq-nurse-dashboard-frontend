@@ -14,6 +14,7 @@ import TermsAndCondition from '../pages/dashboard/terms-and-condition';
 import Disclaimer from '../pages/dashboard/disclaimer';
 import Profile from '../pages/dashboard/profile';
 import NotificaitonPage from '../pages/dashboard/notification';
+import TransactionsTable from '../pages/dashboard/transections';
 
 
 const router = createBrowserRouter([
@@ -31,6 +32,7 @@ const router = createBrowserRouter([
             {path:"disclaimer",element:<Disclaimer/>},
             { path: 'profile', element: <Profile /> },
             { path: 'notification', element: <NotificaitonPage /> },
+            {path:"transactions",element:<TransactionsTable/>},
         ],
     },
     { path: '/login', element: <Login /> },

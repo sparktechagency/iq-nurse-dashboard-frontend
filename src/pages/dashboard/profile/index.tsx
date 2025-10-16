@@ -86,6 +86,8 @@ export default function Profile() {
   const handleProfileSubmit = (values: typeof initialProfileValues) => {
     console.log(values)
     // TODO: Submit form values to backend as needed
+    console.log(values);
+    
     message.success('Profile updated successfully!');
   };
 

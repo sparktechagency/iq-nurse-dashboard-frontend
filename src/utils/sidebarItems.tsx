@@ -2,7 +2,7 @@ import { LiaThListSolid } from 'react-icons/lia';
 import { TSidebarItem } from './generateSidebarItems';
 import { LuClipboardList } from 'react-icons/lu';
 import { TbBook } from 'react-icons/tb';
-import { PiUserList } from 'react-icons/pi';
+import { PiMoney, PiUserList } from 'react-icons/pi';
 
 const sidebarItems: TSidebarItem[] = [
     {
@@ -22,6 +22,12 @@ const sidebarItems: TSidebarItem[] = [
         label: 'Clubs Deck',
         path: 'clubs-deck',
         icon: <PiUserList size={24} />,
+    },
+    {
+        key: 'transactions',
+        label: 'Transactions',
+        path: 'transactions',
+        icon: <PiMoney size={24} />,
     },
     {
         key: 'training-material',
