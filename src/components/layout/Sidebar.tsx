@@ -3,6 +3,7 @@ import { TSidebarItem } from '../../utils/generateSidebarItems';
 import sidebarItems from '../../utils/sidebarItems';
 import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
+import { LogOut, Settings } from 'lucide-react';
 const { Sider } = Layout;
 
 const Sidebar = () => {
@@ -87,6 +88,22 @@ const Sidebar = () => {
                     style={{ background: 'transparent' }}
                     className="flex-1 z-50 [&_.ant-menu-submenu]:!bg-transparent [&_.ant-menu-sub]:!bg-transparent"
                 />
+
+                <div className="p-4 w-full space-y-2 absolute bottom-0 right-0">
+
+                    {/* Logout Button */}
+                    <button
+                        onClick={() => {
+                            // your logout logic here
+                            console.log("Logout clicked");
+                        }}
+                        className="w-full flex items-center gap-3 px-4 py-3 bg-white/15 
+                          text-[#F44336]  font-semibold rounded-md transition"
+                    >
+                        <LogOut size={20} />
+                        <span>Log Out</span>
+                    </button>
+                </div>
             </Sider>
         </ConfigProvider>
     );
