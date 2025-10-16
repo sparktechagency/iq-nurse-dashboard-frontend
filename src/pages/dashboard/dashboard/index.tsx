@@ -1,19 +1,8 @@
-import  { useState } from 'react';
+
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Area, AreaChart, Legend } from 'recharts';
-import { DatePicker, Select } from 'antd';
-import dayjs from 'dayjs';
-import { FaRegCalendarAlt } from 'react-icons/fa';
+import {  Select } from 'antd';
 
 export default function Dashboard() {
-    const [selectedDate, setSelectedDate] = useState(dayjs('2025-01-01'));
-
- 
-
-    const handleChange = (value: dayjs.Dayjs | null) => {
-        if (value) {
-            setSelectedDate(value);
-        }
-    };
 
     const activeUsersData = [
         { month: 'Jan', '2024': 45, '2025': 60 },
