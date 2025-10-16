@@ -9,6 +9,7 @@ const Sidebar = () => {
     const location = useLocation();
     const [openKeys, setOpenKeys] = useState<string[]>([]);
     const [collapsed, setCollapsed] = useState(false);
+console.log(collapsed);
 
     const handleOpenChange = (keys: string[]) => {
         setOpenKeys(keys);

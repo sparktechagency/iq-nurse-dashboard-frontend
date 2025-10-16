@@ -92,7 +92,7 @@ const UserTable = () => {
 
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
+    <div className=" bg-gray-50">
       <div className="bg-white rounded-lg shadow">
         <Table 
           columns={columns as any} 

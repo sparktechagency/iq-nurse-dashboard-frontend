@@ -1,38 +1,14 @@
 import { Button, ConfigProvider, Form, FormProps, Input } from 'antd';
 import { FieldNamesType } from 'antd/es/cascader';
-import { useNavigate } from 'react-router';
-import { useForgetPasswordMutation } from '../../redux/apiSlices/authSlice';
-import { useEffect } from 'react';
-import { errorType } from './Login';
-import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
+
 
 const ForgetPassword = () => {
     const navigate = useNavigate();
-    const [forgetPassword,{isSuccess,error}]=useForgetPasswordMutation()
-
-    useEffect(() => {
-        if(isSuccess){
-            
-            navigate('/verify-otp')
-        }
-        else if(error){
-            const errorMessage =
-                (error as errorType)?.data?.errorMessages
-                    ? (error as errorType)?.data?.errorMessages.map((msg: { message: string }) => msg?.message).join("\n")
-                    : (error as errorType)?.data?.message || "Something went wrong. Please try again.";
-            Swal.fire({
-                title: "Failed to Login",
-                text: errorMessage,
-                icon: "error",
-                timer: 1500,
-                showConfirmButton: false
-            })
-        }
-    }, [isSuccess,error]);
     const onFinish: FormProps<FieldNamesType>['onFinish'] = (values:any) => {
-        
-        forgetPassword(values);
-       localStorage.setItem('forgetEmail',JSON.stringify(values.email))
+
+        localStorage.setItem('forgetEmail',JSON.stringify(values.email))
+        navigate('/verify-otp')
     };
 
     return (
@@ -55,16 +31,12 @@ const ForgetPassword = () => {
                 },
             }}
         >
-            <div className="flex  items-center justify-center h-screen" style={{
-            backgroundImage: `url('/authBg.svg')`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'top',
-            backgroundRepeat: 'no-repeat',
-            objectFit: 'cover',
+            <div className="flex  items-center justify-center h-screen !bg-gradient-to-b !from-[#540D6E] !to-[#13293D]" style={{
+
         }}>
                 <div className="bg-white w-[630px] rounded-lg shadow-lg p-10 ">
                     <div className="text-primaryText space-y-3 text-center">
-                        <h1 className="text-3xl  font-medium text-center mt-2">Forget Password</h1>
+                        <h1 className="text-3xl  font-medium text-center mt-2 text-[#540D6E]">Forget Password</h1>
                     </div>
 
                     <Form
@@ -88,13 +60,13 @@ const ForgetPassword = () => {
 
                         <Form.Item>
                             <Button
-                                shape="round"
-                                type="primary"
                                 htmlType="submit"
                                 style={{
                                     height: 45,
                                     width: '100%',
                                     fontWeight: 500,
+                                    backgroundColor: '#36C9B8',
+                                    color: '#fff',
                                 }}
                             >
                                 Send Code

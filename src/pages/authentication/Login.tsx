@@ -1,9 +1,7 @@
 import { Button, Checkbox, ConfigProvider, Form, FormProps, Input } from 'antd';
 import { FieldNamesType } from 'antd/es/cascader';
 import { Link, useNavigate } from 'react-router-dom';
-import { useLoginMutation } from '../../redux/apiSlices/authSlice';
-import { useEffect } from 'react';
-import Swal from 'sweetalert2';
+
 
 export type errorType = {
     data: {
@@ -12,46 +10,11 @@ export type errorType = {
     };
 };
 const Login = () => {
-     const [login, { isSuccess, isError, data, error,}] = useLoginMutation()
     const navigate = useNavigate();
-        useEffect(() => {
-        if (isSuccess) {
-            if (data) {
-                Swal.fire({
-                    title: "Login Successful",
-                    text: "Welcome to Admin Dashboard",
-                    icon: "success",
-                    timer: 1500,
-                    showConfirmButton: false
-                }).then(() => {             
-                    
-                       
-                    localStorage.setItem("token", data.data?.token);
-                    navigate("/");
-                    window.location.reload();
-                });
+    const onFinish: FormProps<FieldNamesType>['onFinish'] = async() => {
 
-            }
 
-        }
-        if (isError) {
-            const errorMessage =
-                (error as errorType)?.data?.errorMessages
-                    ? (error as errorType)?.data?.errorMessages.map((msg: { message: string }) => msg?.message).join("\n")
-                    : (error as errorType)?.data?.message || "Something went wrong. Please try again.";
-            Swal.fire({
-                title: "Failed to Login",
-                text: errorMessage,
-                icon: "error",
-            });
-        }
-    }, [isSuccess, isError, error, data, navigate]);
-    const onFinish: FormProps<FieldNamesType>['onFinish'] = async(values) => {
-
-        
-        await login(values);
-
-        // navigate('/');
+        navigate('/');
     };
 
     return (
@@ -74,17 +37,10 @@ const Login = () => {
                 },
             }}
         >
-            <div className="flex items-center justify-center h-screen" style={{
-            backgroundImage: `url('/authBg.svg')`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'top',
-            backgroundRepeat: 'no-repeat',
-            objectFit: 'cover',
-        }}>
+            <div className="flex items-center justify-center h-screen !bg-gradient-to-b !from-[#540D6E] !to-[#13293D] " >
                 <div className="bg-white w-[630px] rounded-lg shadow-lg p-10 ">
-                    <div className="text-primaryText space-y-3 text-center">
-                        <h1 className="text-3xl  font-medium text-center mt-2">Login to Account</h1>
-                        <p className="text-lg">Please enter your email and password to continue</p>
+                    <div className=" space-y-3 text-center">
+                        <h1 className="text-3xl text-[#540D6E]  font-medium text-center mt-2">Login to Account</h1>
                     </div>
 
                     <Form
@@ -122,20 +78,21 @@ const Login = () => {
                             <Form.Item name="remember" valuePropName="checked" noStyle>
                                 <Checkbox className="text-primaryText text-lg">Remember me</Checkbox>
                             </Form.Item>
-                            <Link to="/forget-password" className="text-primary text-md hover:text-primary">
+                            <Link to="/forget-password" className="text-primary text-md ">
                                 Forget password
                             </Link>
                         </div>
 
                         <Form.Item>
                             <Button
-                                shape="round"
-                                type="primary"
+                            className='!bg-[#36C9B8]'
                                 htmlType="submit"
                                 style={{
                                     height: 45,
                                     width: '100%',
                                     fontWeight: 500,
+                                    color: '#fff',
+                                    
                                 }}
                                 // onClick={() => navigate('/')}
                             >
