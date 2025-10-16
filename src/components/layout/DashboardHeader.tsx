@@ -45,12 +45,15 @@ export default function DashboardHeader() {
           </div>
 
           {/* Notifications */}
-          <button className="relative p-2 text-[#223047] hover:text-gray-900 hover:bg-gray-100 rounded-full transition-colors">
-            <FiBell className="h-6 w-6" />
-            <span className="absolute -top-1 -right-0 flex items-center justify-center bg-[#34D3C7] text-white text-xs font-semibold rounded-full w-6 h-6 shadow-md border-2 border-white">
-              2
-            </span>
-          </button>
+          <Link to='/notification'>
+
+            <button className="relative p-2 text-[#223047] hover:text-gray-900 hover:bg-gray-100 rounded-full transition-colors">
+              <FiBell className="h-6 w-6" />
+              <span className="absolute -top-1 -right-0 flex items-center justify-center bg-[#34D3C7] text-white text-xs font-semibold rounded-full w-6 h-6 shadow-md border-2 border-white">
+                2
+              </span>
+            </button>
+          </Link>
           {/* Profile */}
           <div className="flex items-center space-x-3">
             <Link to='/profile'>
