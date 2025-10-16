@@ -1,16 +1,24 @@
 import { FiBell, } from "react-icons/fi";
 import { Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
+import getNavbatItem from "../../data/getNavbarItems";
+import { useLocation } from "react-router-dom";
 
 export default function DashboardHeader() {
 
+  const param = useLocation().pathname.split("/")[1];
+  
+  const keyItem = getNavbatItem(param!)?.label || "Dashboard";
+
+  
+  
   return (
     <div className="bg-white border-b border-gray-200 px-4 sm:px-6 py-4 " >
       <div className="flex items-center justify-between gap-4">
         {/* Left section - Greeting */}
         <div>
           <h1 className="text-xl sm:text-3xl text-[#425464]">
-            Dashboard
+            {keyItem}
           </h1>
         </div>
 
