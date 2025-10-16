@@ -18,9 +18,9 @@ const sidebarItems: TSidebarItem[] = [
         icon: <TbBook size={24} />,
     },
     {
-        key: 'service-deck',
+        key: 'clubs-deck',
         label: 'Clubs Deck',
-        path: 'service-deck',
+        path: 'clubs-deck',
         icon: <PiUserList size={24} />,
     },
     {
@@ -30,7 +30,7 @@ const sidebarItems: TSidebarItem[] = [
         icon: <LiaThListSolid size={24} />,
         children: [
             {
-                key: 'preferences',
+                key: 'about-us',
                 label: 'About us',
                 path: 'about-us',
                 icon: <TbBook size={20} />,
