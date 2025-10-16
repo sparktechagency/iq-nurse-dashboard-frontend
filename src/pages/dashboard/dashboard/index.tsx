@@ -1,15 +1,11 @@
-import React, { useState } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart, Line, Legend } from 'recharts';
+import  { useState } from 'react';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Area, AreaChart, Legend } from 'recharts';
 import { DatePicker, Select } from 'antd';
 import dayjs from 'dayjs';
-import { HiOutlineCalendar } from 'react-icons/hi';
-import { FaCalendarAlt, FaRegCalendarAlt } from 'react-icons/fa';
+import { FaRegCalendarAlt } from 'react-icons/fa';
 
 export default function Dashboard() {
     const [selectedDate, setSelectedDate] = useState(dayjs('2025-01-01'));
-    // Remove openPicker state, allow DatePicker to manage its own open state
-
-    const dateFormat = '';
 
  
 
@@ -17,10 +13,7 @@ export default function Dashboard() {
         if (value) {
             setSelectedDate(value);
         }
-        // No need to set openPicker
     };
-
-    // Removed handleOpenChange and openPicker states
 
     const activeUsersData = [
         { month: 'Jan', '2024': 45, '2025': 60 },

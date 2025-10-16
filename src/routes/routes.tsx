@@ -12,6 +12,8 @@ import AboutUs from '../pages/dashboard/about-us';
 import PrivacyPolicy from '../pages/dashboard/privacy-policy';
 import TermsAndCondition from '../pages/dashboard/terms-and-condition';
 import Disclaimer from '../pages/dashboard/disclaimer';
+import Profile from '../pages/dashboard/profile';
+import NotificaitonPage from '../pages/dashboard/notification';
 
 
 const router = createBrowserRouter([
@@ -27,6 +29,8 @@ const router = createBrowserRouter([
             {path:"privacy-policy",element:<PrivacyPolicy/>},
             {path:"terms-of-service",element:<TermsAndCondition/>},
             {path:"disclaimer",element:<Disclaimer/>},
+            { path: 'profile', element: <Profile /> },
+            { path: 'notification', element: <NotificaitonPage /> },
         ],
     },
     { path: '/login', element: <Login /> },
