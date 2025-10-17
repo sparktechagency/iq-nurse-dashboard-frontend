@@ -62,7 +62,7 @@ const ClubsTable: React.FC = () => {
         if (result.isConfirmed) {
           Swal.fire(
             'Locked!',
-            'Your file has been locked.',
+            'Your club has been locked.',
             'success'
           )
         }

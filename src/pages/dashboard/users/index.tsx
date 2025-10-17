@@ -34,7 +34,7 @@ const UserTable = () => {
           if (result.isConfirmed) {
             Swal.fire(
               'Locked!',
-              'Your file has been locked.',
+              'Your user has been locked.',
               'success'
             )
           }
