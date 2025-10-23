@@ -1,39 +1,69 @@
-import { LiaThListSolid } from 'react-icons/lia';
+
 import { TSidebarItem } from './generateSidebarItems';
 import { LuClipboardList } from 'react-icons/lu';
 import { TbBook } from 'react-icons/tb';
-import { PiMoney, PiUserList } from 'react-icons/pi';
+
 
 const sidebarItems: TSidebarItem[] = [
     {
         key: 'client-list',
         label: 'Dashboard',
         path: '',
-        icon: <LuClipboardList  size={24} />,
+        icon: "/icons/analtycs.png",
     },
     {
         key: 'users',
         label: 'Users',
         path: 'users',
-        icon: <TbBook size={24} />,
+        icon: "/icons/users.png",
     },
     {
-        key: 'clubs-deck',
-        label: 'Clubs Deck',
-        path: 'clubs-deck',
-        icon: <PiUserList size={24} />,
+        key: 'package',
+        label: 'Package',
+        path: 'package',
+        icon:"/icons/package.png", 
     },
     {
-        key: 'transactions',
-        label: 'Transactions',
-        path: 'transactions',
-        icon: <PiMoney size={24} />,
+        key: 'study-notes',
+        label: 'Study Notes',
+        path: 'study-notes',
+        icon: "/icons/study-notes.png",
     },
     {
-        key: 'training-material',
+        key: 'patient-assessment',
+        label: 'Patient Assessment',
+        path: 'patient-assessment',
+        icon: "/icons/assessment.png",
+    },
+    {
+        key: 'clinical-skills',
+        label: 'Clinical Skills',
+        path: 'clinical-skills',
+        icon: "/icons/clinical-skill.png",
+    },
+    {
+        key: 'templates',
+        label: 'Templates',
+        path: 'templates',
+        icon: "/icons/templates.png",
+    },
+    {
+        key: 'quiz',
+        label: 'Quiz',
+        path: 'quiz',
+        icon: "/icons/quiz.png",
+    },
+    {
+        key: 'flashcards',
+        label: 'Flashcards',
+        path: 'flashcards',
+        icon: "/icons/flashcard.png",
+    },
+    {
+        key: 'settings',
         label: 'Settings',
-        path: 'training-material',
-        icon: <LiaThListSolid size={24} />,
+        path: 'settings',
+        icon: "/icons/setting.png",
         children: [
             {
                 key: 'about-us',

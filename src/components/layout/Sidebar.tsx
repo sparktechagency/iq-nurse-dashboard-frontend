@@ -2,7 +2,7 @@ import { ConfigProvider, Layout, Menu, MenuProps } from 'antd';
 import { TSidebarItem } from '../../utils/generateSidebarItems';
 import sidebarItems from '../../utils/sidebarItems';
 import { Link, useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { LogOut } from 'lucide-react';
 const { Sider } = Layout;
 
@@ -14,16 +14,31 @@ const Sidebar = () => {
         setOpenKeys(keys);
     };
 
+
+    const getIcon = (icon:ReactNode|string)=>{
+
+
+    
+        
+        if(typeof icon === 'string'){
+            return <img src={icon} className='w-6' alt="icon" />
+        }
+        return icon
+    }
+
     const sidebarItemsGenerator = (items: TSidebarItem[]): MenuProps['items'] => {
+
         return items.map((item) => {
+        
+            
             if (item.children) {
                 return {
                     key: item.key,
-                    icon: item.icon,
+                    icon: getIcon(item.icon),
                     label: item.label,
                     children: item.children.map((child) => ({
                         key: `/${child.path}`,
-                        icon: child.icon,
+                        icon: getIcon(child.icon),
                         label: <Link to={`/${child.path}`}>{child.label}</Link>,
                     })),
                 };
@@ -31,7 +46,7 @@ const Sidebar = () => {
 
             return {
                 key: `/${item.path}`,
-                icon: item.icon,
+                icon: getIcon(item.icon),
                 label: <Link to={`/${item.path}`}>{item.label}</Link>,
             };
         });
@@ -45,12 +60,12 @@ const Sidebar = () => {
                 },
                 components: {
                     Menu: {
-                        itemActiveBg: '#F69348',
+                        itemActiveBg: '#003877',
                         itemSelectedColor: '#fff',
                         itemBorderRadius: '10px 10px 10px 10px' as any,
                         itemHeight: 45,
                         itemMarginBlock: 12,
-                        itemSelectedBg: '#F69348',
+                        itemSelectedBg: '#003877',
                     },
                 },
             }}
@@ -60,22 +75,18 @@ const Sidebar = () => {
                 theme="light"
                 breakpoint="lg"
                 collapsedWidth="0"
-                className="!relative overflow-hidden !bg-gradient-to-b !from-[#540D6E] !to-[#13293D] flex flex-col"
+                className="!relative overflow-hidden !bg-overlay  flex flex-col"
             >
-                {/* Background circle behind menu */}
-                <p className="absolute top-28 -left-20 w-64 h-56 bg-white/5 rounded-[50%] pointer-events-none z-40" />
-                <p className="absolute w-96 h-64 top-52 -left-28 bg-white/5 rounded-[50%] pointer-events-none z-30" />
-                <p className="absolute top-80 -left-20 w-64 h-56 bg-white/5 rounded-[50%] pointer-events-none z-20" />
 
                 {/* logo of the website */}
                 <Link to="/">
                     <div className="flex flex-col gap-3 items-center justify-center p-5 pb-2">
-                        <img src="/logo-lunaspin.png" alt="" className="h-14" />
+                        <img src="/logo.png" alt="" className="h-14" />
                     </div>
                 </Link>
 
                 <Menu
-                    theme="dark"
+                    theme="light"
                     mode="inline"
                     selectedKeys={[location.pathname]}
                     openKeys={openKeys}

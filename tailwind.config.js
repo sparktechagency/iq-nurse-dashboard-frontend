@@ -4,9 +4,10 @@ export default {
     theme: {
         extend: {
             colors: {
-                primary: '#F69348',
+                primary: '#003877',
                 primaryText: '#474042',
-                shadeColor:"#F9F0EC"
+                shadeColor:"#F9F0EC",
+                overlay:"#F6F7F8"
             },
         },
     },

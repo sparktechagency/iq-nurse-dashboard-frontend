@@ -15,7 +15,8 @@ export default function DashboardHeader() {
 
 
   return (
-    <div className="bg-white border-b border-gray-200 px-4 sm:px-6 py-4 " >
+    <div className="p-5">
+      <div className="bg-overlay rounded-lg  border-b border-gray-200 px-4 sm:px-6 py-4 " >
       <div className="flex items-center justify-between gap-4">
         {/* Left section - Greeting */}
         <div>
@@ -70,6 +71,7 @@ export default function DashboardHeader() {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }

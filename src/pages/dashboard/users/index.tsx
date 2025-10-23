@@ -1,138 +1,122 @@
+import { Button, Card, Table } from 'antd';
+import { EyeOutlined, LockOutlined } from '@ant-design/icons';
+import { User, userData } from '../../../demo-data/users.data';
 import { useState } from 'react';
-import { Table, Tag, Avatar, Space, Button } from 'antd';
-import { InfoCircleOutlined, LockOutlined } from '@ant-design/icons';
-import { demoData } from '../../../demo-data/users.data';
 import UserModal from './UserModal';
-import Swal from 'sweetalert2';
 
-const UserTable = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedUser, setSelectedUser] = useState<any>(null);
+import BlockModal from './BlockModal';
 
-  const handleInfoClick = (user:any) => {
-    setSelectedUser(user);
-    setIsModalOpen(true);
+export default function Users({ dashboard }: { dashboard?: boolean }) {
+    const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+    const [selectedUser, setSelectedUser] = useState<User | null>(null);
+    const [isBlockModalVisible, setIsBlockModalVisible] = useState<boolean>(false);
+    const [userToBlock, setUserToBlock] = useState<User | null>(null);
+
+    
+    const showUserDetails = (user: User) => {
+        setSelectedUser(user);
+        setIsModalVisible(true);
+    };
+
+    const handleModalClose = () => {
+        setIsModalVisible(false);
+        setSelectedUser(null);
+    };
+
+   const showBlockModal = (user: User) => {
+    setUserToBlock(user);
+    setIsBlockModalVisible(true);
   };
 
-  const handleModalClose = () => {
-    setIsModalOpen(false);
-    setSelectedUser(null);
+  const handleBlockConfirm = () => {
+    // Handle block user logic here
+    console.log('Blocking user:', userToBlock);
+    setIsBlockModalVisible(false);
+    setUserToBlock(null);
   };
 
-    const handleLockUser=(id: string): void =>{
-        console.log(id);
-  
-        Swal.fire({
-          title: 'Are you sure?',
-          text: "You want to lock this user?",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, lock it!'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            Swal.fire(
-              'Locked!',
-              'Your user has been locked.',
-              'success'
-            )
-          }
-        })
-        
-    }
-
-  const columns = [
-    {
-      title: 'User ID',
-      dataIndex: 'userId',
-      key: 'userId',
-      width: 100,
-    },
-    {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
-      render: (text:string, record:any) => (
-        <Space>
-          <Avatar src={record.avatar} size={40} />
-          <span>{text}</span>
-        </Space>
-      ),
-    },
-    {
-      title: 'Email',
-      dataIndex: 'email',
-      key: 'email',
-    },
-    {
-      title: 'Clubs',
-      dataIndex: 'clubs',
-      key: 'clubs',
-      width: 80,
-      align: 'center',
-    },
-    {
-      title: 'Posts',
-      dataIndex: 'posts',
-      key: 'posts',
-      width: 80,
-      align: 'center',
-    },
-    {
-      title: 'Country',
-      dataIndex: 'country',
-      key: 'country',
-    },
-    {
-      title: 'Status',
-      dataIndex: 'status',
-      key: 'status',
-      render: (status:string) => (
-        <Tag color={status === 'Active' ? 'success' : 'error'}>
-          {status}
-        </Tag>
-      ),
-    },
-    {
-      title: 'Action',
-      key: 'action',
-      width: 100,
-      render: (_:any, record:any) => (
-        <Space>
-          <Button 
-            type="text" 
-            icon={<InfoCircleOutlined />} 
-            onClick={() => handleInfoClick(record)}
-          />
-          <Button type="text" icon={<LockOutlined />} onClick={() => handleLockUser(record.userId)} />
-        </Space>
-      ),
-    },
-  ];
+  const handleBlockCancel = () => {
+    setIsBlockModalVisible(false);
+    setUserToBlock(null);
+  };
 
 
+    const columns = [
+        {
+            title: 'Serial ID',
+            dataIndex: 'serialId',
+            key: 'serialId',
+            responsive: ['sm'] as any,
+        },
+        {
+            title: 'User Name',
+            dataIndex: 'userName',
+            key: 'userName',
+        },
+        {
+            title: 'Email',
+            dataIndex: 'email',
+            key: 'email',
+            responsive: ['md'] as any,
+        },
+        {
+            title: 'Contact Number',
+            dataIndex: 'contactNumber',
+            key: 'contactNumber',
+            responsive: ['lg'] as any,
+        },
+        {
+            title: 'Subscription',
+            dataIndex: 'subscription',
+            key: 'subscription',
+            responsive: ['sm'] as any,
+        },
+        {
+            title: 'Action',
+            key: 'action',
+            render: (_: any, record: User) => (
+                <div className="flex gap-2">
+                    <Button
+                        type="text"
+                        icon={<EyeOutlined />}
+                        className="text-gray-500 hover:text-blue-500"
+                        onClick={() => showUserDetails(record)}
+                    />
+                    <Button
+                        type="text"
+                        icon={<LockOutlined />}
+                        className={record?.status =="active"? "text-gray-500 hover:!text-red-500":"hover:!text-gray-500 !text-red-500"}
+                        onClick={() => showBlockModal(record)}
+                    />
+                </div>
+            ),
+        },
+    ];
 
+    return (
+        <>
+            <Card className="rounded-lg shadow-sm border border-gray-200">
+                <h2 className="text-lg font-semibold mb-4">Users</h2>
+                <Table
+                    columns={columns}
+                    dataSource={userData}
+                    pagination={dashboard ? false : { pageSize: 10, total: 50 }}
+                    className="custom-table"
+                />
+            </Card>
 
+            <UserModal
+                isModalVisible={isModalVisible}
+                handleModalClose={handleModalClose}
+                selectedUser={selectedUser}
+            />
 
-  return (
-    <div className=" bg-gray-50">
-      <div className="bg-white rounded-lg shadow">
-        <Table 
-          columns={columns as any} 
-          dataSource={demoData} 
-          pagination={{
-            defaultPageSize: 10,
-            showSizeChanger: false,
-            total: 50
-          }}
-          className="user-management-table"
-        />
-      </div>
-
-      <UserModal isModalOpen={isModalOpen} handleModalClose={handleModalClose} selectedUser={selectedUser}/>
-    </div>
-  );
-};
-
-export default UserTable;
+            <BlockModal
+                isBlockModalVisible={isBlockModalVisible}
+                handleBlockCancel={handleBlockCancel}
+                handleBlockConfirm={handleBlockConfirm}
+                isUserBlocked={userToBlock?.status !== 'active'}
+            />
+        </>
+    );
+}

@@ -37,10 +37,10 @@ const VerifyOtp = () => {
                 },
             }}
         >
-            <div className="flex  items-center justify-center h-screen !bg-gradient-to-b !from-[#540D6E] !to-[#13293D]" style={{}}>
-                <div className="bg-white w-[630px] rounded-lg shadow-lg p-10 ">
+            <div className="flex  items-center justify-center h-screen p-5 " style={{}}>
+                <div className="bg-white max-w-[630px] w-full rounded-lg drop-shadow-2xl shadow-lg p-10 ">
                     <div className="text-primaryText space-y-3 text-center">
-                        <h1 className="text-3xl  font-medium text-center mt-2 text-[#540D6E]">Check your email</h1>
+                        <h1 className="text-3xl  font-medium text-center mt-2 text-[#000]">Check your email</h1>
                         <p>We sent a reset link to {email} enter 5 digit code that mentioned in the email</p>
                     </div>
 
@@ -68,17 +68,18 @@ const VerifyOtp = () => {
 
                         <Form.Item>
                             <Button
+                            className='!bg-primary'
                                 htmlType="submit"
                                 style={{
                                     height: 45,
                                     width: '100%',
                                     fontWeight: 500,
-                                    backgroundColor: '#36C9B8',
                                     color: '#fff',
+                                    fontSize: 20,                                    
                                 }}
                                 // onClick={() => navigate('/')}
                             >
-                                Verify OTP Code
+                                Verify Code
                             </Button>
                         </Form.Item>
                         <div className="text-center text-lg flex items-center justify-center gap-2">

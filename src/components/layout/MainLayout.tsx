@@ -7,7 +7,7 @@ import DashboardHeader from './DashboardHeader';
 
 const { Content } = Layout;
 
-const MainLayout: React.FC = () => {
+const   MainLayout: React.FC = () => {
 
     return (
         <Layout
@@ -16,11 +16,11 @@ const MainLayout: React.FC = () => {
             }}
         >
             <Sidebar />
-            <Layout>
+            <Layout className='!bg-white'>
                 <DashboardHeader />
                 <Content >
                     <div
-                        className=" min-h-[50vh] w-full p-3 h-[calc(100vh-80px)] overflow-y-scroll"
+                        className=" min-h-[50vh] w-full p-3 h-[calc(100vh-80px)] !bg-white overflow-y-scroll"
                     >
                         <Outlet />
                     </div>

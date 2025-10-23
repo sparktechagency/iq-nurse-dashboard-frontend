@@ -37,10 +37,11 @@ const Login = () => {
                 },
             }}
         >
-            <div className="flex items-center justify-center h-screen !bg-gradient-to-b !from-[#540D6E] !to-[#13293D] " >
-                <div className="bg-white w-[630px] rounded-lg shadow-lg p-10 ">
-                    <div className=" space-y-3 text-center">
-                        <h1 className="text-3xl text-[#540D6E]  font-medium text-center mt-2">Login to Account</h1>
+            <div className="flex items-center justify-center p-5 h-screen  " >
+                <div className="bg-white max-w-[630px] w-full rounded-lg drop-shadow-2xl p-10 ">
+                    <div className=" space-y-5 !pb-3 text-center">
+                        <h1 className="text-3xl text-[#000]  font-medium text-center mt-2">Login to Account!</h1>
+                        <p className='text-xl text-gray-400'>Please enter your email and password to continue</p>
                     </div>
 
                     <Form
@@ -85,14 +86,14 @@ const Login = () => {
 
                         <Form.Item>
                             <Button
-                            className='!bg-[#36C9B8]'
+                            className='!bg-primary'
                                 htmlType="submit"
                                 style={{
                                     height: 45,
                                     width: '100%',
                                     fontWeight: 500,
                                     color: '#fff',
-                                    
+                                    fontSize: 20,                                    
                                 }}
                                 // onClick={() => navigate('/')}
                             >
