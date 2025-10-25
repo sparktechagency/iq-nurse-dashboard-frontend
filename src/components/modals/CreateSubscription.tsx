@@ -8,8 +8,8 @@ import Swal from 'sweetalert2';
 import { IPackage } from '../../types/types';
 
 const CreateSubscription = ({ open, setOpen, items }: { open: boolean, setOpen: (open: boolean) => void, items: IPackage | undefined }) => {
-    const [createPackage, { isLoading }]=useCreatePackageMutation()
-    const [updatePackage,{isLoading:updateLoading}]=useEditPackageMutation()
+    const [createPackage, { isLoading }] = useCreatePackageMutation()
+    const [updatePackage, { isLoading: updateLoading }] = useEditPackageMutation()
     const [form] = Form.useForm()
 
     useEffect(() => {
@@ -19,52 +19,17 @@ const CreateSubscription = ({ open, setOpen, items }: { open: boolean, setOpen: 
     }, [items, form])
 
 
-    const onFinish =async (values: any) => {
-        const packagel:IPackage={
+    const onFinish = async (values: any) => {
+        const packagel: IPackage = {
             ...values,
-            billingCycle:"add-on",
+            billingCycle: "add-on",
         }
-        
-        
 
-        if(!items){
-            const result =  await createPackage(packagel).unwrap()
-        
+        if (!items) {
+            const result = await createPackage(packagel).unwrap()
 
-        if(!result.error){
-            Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Package has been updated',
-                showConfirmButton: false,
-                timer: 1500
-            }).then(() => {
-                setOpen(false)
-                form.resetFields()
-            }).catch((error) => {
-                console.log(error)
-             
-            })
-        }
-        else{
-            Swal.fire({
-                position: 'center',
-                icon: 'error',
-                title: result.error,
-                showConfirmButton: false,
-                timer: 1500
-            }).then(() => {
-                setOpen(false)
-                form.resetFields()
-            }).catch((error) => {
-                console.log(error)
-             
-            })
-        }
-        }
-        else{
-            const result =  await updatePackage({data:packagel,id:items?._id}).unwrap()
-            if(!result.error){
+
+            if (!result.error) {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
@@ -76,10 +41,10 @@ const CreateSubscription = ({ open, setOpen, items }: { open: boolean, setOpen: 
                     form.resetFields()
                 }).catch((error) => {
                     console.log(error)
-                 
+
                 })
             }
-            else{
+            else {
                 Swal.fire({
                     position: 'center',
                     icon: 'error',
@@ -91,11 +56,44 @@ const CreateSubscription = ({ open, setOpen, items }: { open: boolean, setOpen: 
                     form.resetFields()
                 }).catch((error) => {
                     console.log(error)
-                 
+
                 })
             }
         }
-        
+        else {
+            const result = await updatePackage({ data: packagel, id: items?._id }).unwrap()
+            if (!result.error) {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Package has been updated',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    setOpen(false)
+                    form.resetFields()
+                }).catch((error) => {
+                    console.log(error)
+
+                })
+            }
+            else {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: result.error,
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    setOpen(false)
+                    form.resetFields()
+                }).catch((error) => {
+                    console.log(error)
+
+                })
+            }
+        }
+
     };
 
     return (
@@ -128,7 +126,7 @@ const CreateSubscription = ({ open, setOpen, items }: { open: boolean, setOpen: 
                                         message: "Please input Package Name",
                                     },
                                 ]}
-                                
+
                                 label={<p className="text-[#6D6D6D]"> Package Name</p>}
                             >
                                 <Input
@@ -248,7 +246,7 @@ const CreateSubscription = ({ open, setOpen, items }: { open: boolean, setOpen: 
 
 
                         <Form.Item className="text-center mt-8">
-                            <Button onClick={()=> form.submit()} loading={isLoading || updateLoading} className=' bg-primary text-white w-[120px] h-[42px] rounded-lg'>
+                            <Button onClick={() => form.submit()} loading={isLoading || updateLoading} className=' bg-primary text-white w-[120px] h-[42px] rounded-lg'>
                                 Submit
                             </Button>
                         </Form.Item>

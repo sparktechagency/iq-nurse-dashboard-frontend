@@ -1,11 +1,11 @@
 import { FiBell, } from "react-icons/fi";
-import getNavbatItem from "../../data/getNavbarItems";
-import { Link, useLocation } from "react-router-dom";
+// import getNavbatItem from "../../data/getNavbarItems";
+import { Link } from "react-router-dom";
 
 export default function DashboardHeader() {
 
-  const param = useLocation().pathname.split("/")[1];
-  const keyItem = getNavbatItem(param!)?.label || param || "Dashboard";
+  // const param = useLocation().pathname.split("/")[1];
+  // const keyItem = getNavbatItem(param!)?.label || param || "Dashboard"; 
 
   return (
     <div className="p-3.5">
@@ -14,7 +14,8 @@ export default function DashboardHeader() {
         {/* Left section - Greeting */}
         <div>
           <h1 className="text-xl sm:text-3xl text-[#425464]">
-            {keyItem.toLowerCase() === "profile" ? keyItem.charAt(0).toUpperCase() + keyItem.slice(1) : keyItem}
+            {/* {keyItem.toLowerCase() === "profile" ? keyItem.charAt(0).toUpperCase() + keyItem.slice(1) : keyItem} */} 
+
           </h1>
         </div>
 

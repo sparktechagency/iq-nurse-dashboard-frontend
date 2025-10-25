@@ -20,7 +20,7 @@ const MainLayout: React.FC = () => {
                     <DashboardHeader />
                 </div>
 
-                <div className=' ps-4 h-[calc(100vh-97px)]  '  >
+                <div className=' px-4 h-[calc(100vh-97px)]  '  >
                     <div className='h-full overflow-y-auto rounded-md  '>
                          <Outlet />
                     </div>

@@ -1,10 +1,10 @@
-import { Button, Card, Table } from 'antd';
+import { Button, Input, Table } from 'antd';
 import { EyeOutlined, LockOutlined } from '@ant-design/icons';
 import { User, userData } from '../../../demo-data/users.data';
 import { useState } from 'react';
 import UserModal from './UserModal';
-
 import BlockModal from './BlockModal';
+import HeaderTitle from '../../../components/shared/HeaderTitle';
 
 export default function Users({ dashboard }: { dashboard?: boolean }) {
     const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
@@ -95,15 +95,18 @@ export default function Users({ dashboard }: { dashboard?: boolean }) {
 
     return (
         <>
-            <Card className="rounded-lg shadow-sm border border-gray-200">
-                <h2 className="text-lg font-semibold mb-4">Users</h2>
+            <div className="rounded-lg shadow-sm border border-gray-200 p-4"> 
+                <div className="flex items-center justify-between mb-4">  
+                    <HeaderTitle title="Users" />
+                <Input placeholder="Search" className="" style={{ width: 280 , height: 40}} prefix={<i className="bi bi-search"></i>} />
+                </div>
                 <Table
                     columns={columns}
                     dataSource={userData}
-                    pagination={dashboard ? false : { pageSize: 10, total: 50 }}
+                    pagination={dashboard ? false : { pageSize: 9, total: userData.length }}
                     className="custom-table"
                 />
-            </Card>
+            </div>
 
             <UserModal
                 isModalVisible={isModalVisible}

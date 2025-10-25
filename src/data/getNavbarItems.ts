@@ -6,23 +6,17 @@ const getNavbatItem = (key: string)=>{
         if(item.key === key){
             keyItem = item
         }
-
-        else if(item.children){
-            
+        else if(item.children){    
            const childItem = item.children?.find((child) => child.key === key)
 
            if(childItem){
             keyItem = childItem
-           }
-           
+           }   
         }
-
         return null;
-    
     });
 
     return keyItem;
-
 }
 
 export default getNavbatItem;
