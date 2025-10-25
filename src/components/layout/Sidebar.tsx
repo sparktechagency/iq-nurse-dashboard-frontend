@@ -1,36 +1,28 @@
-import { ConfigProvider, Layout, Menu, MenuProps } from 'antd';
+import { ConfigProvider, Menu, MenuProps } from 'antd';
 import { TSidebarItem } from '../../utils/generateSidebarItems';
 import sidebarItems from '../../utils/sidebarItems';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ReactNode, useState } from 'react';
 import { LogOut } from 'lucide-react';
-const { Sider } = Layout;
 
 const Sidebar = () => {
     const location = useLocation();
     const [openKeys, setOpenKeys] = useState<string[]>([]);
+    const navigate = useNavigate();
 
     const handleOpenChange = (keys: string[]) => {
         setOpenKeys(keys);
     };
 
-
-    const getIcon = (icon:ReactNode|string)=>{
-
-
-    
-        
-        if(typeof icon === 'string'){
+    const getIcon = (icon: ReactNode | string) => {
+        if (typeof icon === 'string') {
             return <img src={icon} className='w-6' alt="icon" />
         }
         return icon
     }
 
     const sidebarItemsGenerator = (items: TSidebarItem[]): MenuProps['items'] => {
-
         return items.map((item) => {
-        
-            
             if (item.children) {
                 return {
                     key: item.key,
@@ -43,7 +35,6 @@ const Sidebar = () => {
                     })),
                 };
             }
-
             return {
                 key: `/${item.path}`,
                 icon: getIcon(item.icon),
@@ -53,67 +44,60 @@ const Sidebar = () => {
     };
 
     return (
-        <ConfigProvider
-            theme={{
-                token: {
-                    colorText: '#414446',
-                },
-                components: {
-                    Menu: {
-                        itemActiveBg: '#003877',
-                        itemSelectedColor: '#fff',
-                        itemBorderRadius: '10px 10px 10px 10px' as any,
-                        itemHeight: 45,
-                        itemMarginBlock: 12,
-                        itemSelectedBg: '#003877',
-                    },
-                },
-            }}
-        >
-            <Sider
-                width={250}
-                theme="light"
-                breakpoint="lg"
-                collapsedWidth="0"
-                className="!relative overflow-hidden !bg-overlay  flex flex-col"
-            >
+        <div className='relative h-screen pt-5 w-full'>
+            <div className=' flex flex-col h-[100%] '>
 
-                {/* logo of the website */}
                 <Link to="/">
-                    <div className="flex flex-col gap-3 items-center justify-center p-5 pb-2">
+                    <div className="flex flex-col gap-3 items-center justify-center p-5 pt-0 pb-2">
                         <img src="/logo.png" alt="" className="h-14" />
                     </div>
                 </Link>
 
-                <Menu
-                    theme="light"
-                    mode="inline"
-                    selectedKeys={[location.pathname]}
-                    openKeys={openKeys}
-                    onOpenChange={handleOpenChange}
-                    items={sidebarItemsGenerator(sidebarItems)}
-                    style={{ background: 'transparent' }}
-                    className="flex-1 z-50 [&_.ant-menu-submenu]:!bg-transparent [&_.ant-menu-sub]:!bg-transparent"
-                />
+                <div className='flex-1 overflow-y-auto w-full pb-8 '>
+                    <ConfigProvider
+                        theme={{
+                            token: {
+                                colorText: '#414446',
+                            },
+                            components: {
+                                Menu: {
+                                    itemActiveBg: '#003877',
+                                    itemSelectedColor: '#fff',
+                                    itemBorderRadius: '10px 10px 10px 10px' as any,
+                                    itemHeight: 45,
+                                    itemMarginBlock: 9,
+                                    itemSelectedBg: '#003877',
+                                },
+                            },
+                        }}
+                    >
+                        <Menu
+                            theme="light"
+                            mode="inline"
+                            selectedKeys={[location.pathname]}
+                            openKeys={openKeys}
+                            onOpenChange={handleOpenChange}
+                            items={sidebarItemsGenerator(sidebarItems)}
+                            style={{ background: 'transparent' }}
 
-                <div className="p-4 w-full space-y-2 absolute bottom-0 right-0">
+                        />
+                    </ConfigProvider>
+                </div>
 
-                    {/* Logout Button */}
+                <div className="py-3 ps-4 absolute bottom-0 w-full bg-[#F6F7F8]">
                     <button
                         onClick={() => {
-                            // your logout logic here
-                            console.log("Logout clicked");
+                            navigate("/login");
                         }}
-                        className="w-full flex items-center gap-3 px-4 py-3 bg-white/15 
+                        className="w-full flex items-center gap-3 px-4  bg-white/15 
                           text-[#F44336]  font-semibold rounded-md transition"
                     >
                         <LogOut size={20} />
                         <span>Log Out</span>
                     </button>
                 </div>
-            </Sider>
-        </ConfigProvider>
+            </div>
+        </div>
     );
 };
-
 export default Sidebar;

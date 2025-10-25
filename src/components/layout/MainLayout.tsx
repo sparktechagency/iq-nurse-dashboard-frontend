@@ -1,32 +1,32 @@
 import React from 'react';
-
-import { Layout } from 'antd';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import DashboardHeader from './DashboardHeader';
 
-const { Content } = Layout;
 
-const   MainLayout: React.FC = () => {
+const MainLayout: React.FC = () => {
 
     return (
-        <Layout
-            style={{
-                height: '100vh',
-            }}
-        >
-            <Sidebar />
-            <Layout className='!bg-white'>
-                <DashboardHeader />
-                <Content >
-                    <div
-                        className=" min-h-[50vh] w-full p-3 h-[calc(100vh-80px)] !bg-white overflow-y-scroll"
-                    >
-                        <Outlet />
+        <div className={` grid grid-cols-12   `}>
+
+            {/* side bar */}
+            <div className='col-span-2 h-screen  overflow-x-hidden bg-[#F6F7F8]'>
+                <Sidebar />
+            </div>
+
+            {/* main container with header */}
+            <div className='col-span-10  h-[100vh] '>
+                <div className=' ' >
+                    <DashboardHeader />
+                </div>
+
+                <div className=' ps-4 h-[calc(100vh-97px)]  '  >
+                    <div className='h-full overflow-y-auto rounded-md  '>
+                         <Outlet />
                     </div>
-                </Content>
-            </Layout>
-        </Layout>
+                </div>
+            </div>
+        </div>
     );
 };
 

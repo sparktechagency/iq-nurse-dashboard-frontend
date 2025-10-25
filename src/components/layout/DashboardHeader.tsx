@@ -1,22 +1,15 @@
 import { FiBell, } from "react-icons/fi";
-import { Input } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
 import getNavbatItem from "../../data/getNavbarItems";
 import { Link, useLocation } from "react-router-dom";
 
 export default function DashboardHeader() {
 
   const param = useLocation().pathname.split("/")[1];
-
   const keyItem = getNavbatItem(param!)?.label || param || "Dashboard";
 
-  console.log(param)
-
-
-
   return (
-    <div className="p-5">
-      <div className="bg-overlay rounded-lg  border-b border-gray-200 px-4 sm:px-6 py-4 " >
+    <div className="p-3.5">
+      <div className="bg-overlay rounded-lg  border-b border-gray-200 px-4 sm:px-6 py-3 " >
       <div className="flex items-center justify-between gap-4">
         {/* Left section - Greeting */}
         <div>
@@ -27,23 +20,7 @@ export default function DashboardHeader() {
 
         {/* Right section - Actions */}
         <div className="flex items-center space-x-2 sm:space-x-4">
-          {/* Search */}
-          <div className="hidden sm:flex items-center">
-            <Input
-              placeholder="Search"
-              prefix={<SearchOutlined className="text-gray-400" />}
-              className="!w-64 !rounded-lg !border !border-gray-300 !py-2 !px-3 bg-white focus:!shadow-none"
-              allowClear={false}
-              autoFocus
-              style={{
-                height: '40px',
-                fontSize: '16px',
-                backgroundColor: '#fff',
-                borderColor: '#E5E7EB',
-              }}
-            />
-
-          </div>
+ 
 
           {/* Notifications */}
           <Link to='/notification'>
