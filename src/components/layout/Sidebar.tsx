@@ -57,7 +57,8 @@ const Sidebar = () => {
                     <ConfigProvider
                         theme={{
                             token: {
-                                colorText: '#414446',
+                                colorText: '#414446', 
+                               
                             },
                             components: {
                                 Menu: {
@@ -66,7 +67,8 @@ const Sidebar = () => {
                                     itemBorderRadius: '10px 10px 10px 10px' as any,
                                     itemHeight: 45,
                                     itemMarginBlock: 9,
-                                    itemSelectedBg: '#003877',
+                                    itemSelectedBg: '#003877', 
+                                    
                                 },
                             },
                         }}

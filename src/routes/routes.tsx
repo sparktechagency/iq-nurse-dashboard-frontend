@@ -7,7 +7,6 @@ import VerifyOtp from '../pages/authentication/VerifyOtp';
 import NewPassword from '../pages/authentication/NewPassword';
 import Dashboard from '../pages/dashboard/dashboard';
 import Users from '../pages/dashboard/users';
-
 import TermsAndCondition from '../pages/dashboard/terms-and-condition';
 import Disclaimer from '../pages/dashboard/disclaimer';
 import Profile from '../pages/dashboard/profile';
@@ -16,6 +15,8 @@ import TransactionsTable from '../pages/dashboard/transections';
 import Packages from '../pages/dashboard/package';
 import StudyNotes from '../pages/dashboard/study-notes';
 import PatientAssessment from '../pages/dashboard/patient-assessment';
+import ClinicalSkills from '../pages/dashboard/clinical-skills';
+import PrivacyPolicy from '../pages/dashboard/privacy-policy';
 
 
 const router = createBrowserRouter([
@@ -29,11 +30,14 @@ const router = createBrowserRouter([
             {path:"package",element:<Packages/>},
             {path:"study-notes",element:<StudyNotes/>},
             {path:"patient-assessment",element:<PatientAssessment/>},
+            {path:"clinical-skills",element:<ClinicalSkills/>},
             {path:"terms-of-service",element:<TermsAndCondition/>},
             {path:"disclaimer",element:<Disclaimer/>},
             { path: 'profile', element: <Profile /> },
             { path: 'notification', element: <NotificaitonPage /> },
             {path:"transactions",element:<TransactionsTable/>},
+            {path:"privacy-policy",element:<PrivacyPolicy/>},
+            {path:"terms-and-condition",element:<TermsAndCondition/>},
         ],
     },
     { path: '/login', element: <Login /> },

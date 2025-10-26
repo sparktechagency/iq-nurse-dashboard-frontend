@@ -72,9 +72,9 @@ const sidebarItems: TSidebarItem[] = [
                 icon: <TbBook size={20} />,
             },
             {
-                key: 'terms-of-service',
-                label: 'Terms of Service',
-                path: 'terms-of-service',
+                key: 'terms-and-condition',
+                label: 'Terms and Condition',
+                path: 'terms-and-condition',
                 icon: <LuClipboardList size={20} />,
             },
             {
