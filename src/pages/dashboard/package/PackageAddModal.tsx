@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Divider, Form, Input, InputNumber, Modal, Space } from 'antd'
+import { Button, Divider, Form, Input, InputNumber, Modal } from 'antd'
 import { PlusCircleOutlined } from '@ant-design/icons'
 import FeatureFields, { Feature } from './FeatureFields'
 
