@@ -6,11 +6,13 @@ import router from './routes/routes.tsx';
 import { Provider } from 'react-redux';
 import store from './redux/store.ts';
 import { UserProvider } from './provider/User.tsx';
+import { Toaster } from 'sonner';
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <Provider store={store}>
             <UserProvider>
+                <Toaster position="top-center" />
                 <RouterProvider router={router} />
             </UserProvider>
         </Provider>

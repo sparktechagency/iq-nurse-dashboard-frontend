@@ -13,7 +13,7 @@ function App() {
                             borderRadius: 5,
                         },
                     },
-                }}
+                }} 
             >
                 <MainLayout />
             </ConfigProvider>

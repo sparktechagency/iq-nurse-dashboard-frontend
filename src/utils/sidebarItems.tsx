@@ -1,76 +1,94 @@
-
 import { BsPatchQuestion } from 'react-icons/bs';
 import { TSidebarItem } from './generateSidebarItems';
 import { LuClipboardList } from 'react-icons/lu';
 import { TbBook } from 'react-icons/tb';
-
 
 const sidebarItems: TSidebarItem[] = [
     {
         key: 'client-list',
         label: 'Analytics',
         path: '',
-        icon: "/icons/analtycs.png",
+        icon: '/icons/analtycs.png',
     },
     {
         key: 'users',
         label: 'Users',
         path: 'users',
-        icon: "/icons/users.png",
+        icon: '/icons/users.png',
     },
     {
         key: 'package',
         label: 'Package',
         path: 'package',
-        icon:"/icons/package.png", 
+        icon: '/icons/package.png',
     },
     {
         key: 'study-notes',
         label: 'Study Notes',
         path: 'study-notes',
-        icon: "/icons/study-notes.png",
+        icon: '/icons/study-notes.png',
+        children: [
+            {
+                key: 'np-study-notes',
+                label: 'NP Study Notes',
+                path: 'study-notes/np-study-notes',
+                icon: '/icons/study-notes.png',
+            },
+            {
+                key: 'rp-study-notes',
+                label: 'RP Study Notes',
+                path: 'study-notes/rp-study-notes',
+                icon: '/icons/study-notes.png',
+            },
+            {
+                key: 'lpn-study-notes',
+                label: 'LPN Study Notes',
+                path: 'study-notes/lpn-study-notes',
+                icon: '/icons/study-notes.png',
+            },
+        ],
     },
     {
         key: 'body-system',
         label: 'Body System',
         path: 'body-system',
-        icon: "/icons/body-system.png",
+        icon: '/icons/body-system.png',
     },
     {
         key: 'patient-assessment',
         label: 'Patient Assessment',
         path: 'patient-assessment',
-        icon: "/icons/assessment.png",
+        icon: '/icons/assessment.png',
     },
     {
         key: 'clinical-skills',
         label: 'Clinical Skills',
         path: 'clinical-skills',
-        icon: "/icons/clinical-skill.png",
+        icon: '/icons/clinical-skill.png',
     },
     {
         key: 'templates',
         label: 'Templates',
         path: 'templates',
-        icon: "/icons/templates.png",
+        icon: '/icons/templates.png',
     },
     {
         key: 'exams',
         label: 'Exams',
         path: 'exams',
-        icon: "/icons/quiz.png",
+        icon: '/icons/quiz.png',
     },
     {
         key: 'flashcards',
         label: 'Flashcards',
         path: 'flashcards',
-        icon: "/icons/flashcard.png",
+        icon: '/icons/flashcard.png',
     },
     {
         key: 'settings',
         label: 'Settings',
         path: 'settings',
-        icon: "/icons/setting.png",
+        icon: '/icons/setting.png',
         children: [
             {
                 key: 'about-us',
@@ -97,7 +115,7 @@ const sidebarItems: TSidebarItem[] = [
                 icon: <BsPatchQuestion size={20} />,
             },
         ],
-    }
+    },
 ];
 
 export default sidebarItems;
