@@ -1,4 +1,5 @@
 
+import { BsPatchQuestion } from 'react-icons/bs';
 import { TSidebarItem } from './generateSidebarItems';
 import { LuClipboardList } from 'react-icons/lu';
 import { TbBook } from 'react-icons/tb';
@@ -7,7 +8,7 @@ import { TbBook } from 'react-icons/tb';
 const sidebarItems: TSidebarItem[] = [
     {
         key: 'client-list',
-        label: 'Dashboard',
+        label: 'Analytics',
         path: '',
         icon: "/icons/analtycs.png",
     },
@@ -30,6 +31,12 @@ const sidebarItems: TSidebarItem[] = [
         icon: "/icons/study-notes.png",
     },
     {
+        key: 'body-system',
+        label: 'Body System',
+        path: 'body-system',
+        icon: "/icons/body-system.png",
+    },
+    {
         key: 'patient-assessment',
         label: 'Patient Assessment',
         path: 'patient-assessment',
@@ -48,9 +55,9 @@ const sidebarItems: TSidebarItem[] = [
         icon: "/icons/templates.png",
     },
     {
-        key: 'quiz',
-        label: 'Quiz',
-        path: 'quiz',
+        key: 'exams',
+        label: 'Exams',
+        path: 'exams',
         icon: "/icons/quiz.png",
     },
     {
@@ -84,10 +91,10 @@ const sidebarItems: TSidebarItem[] = [
                 icon: <LuClipboardList size={20} />,
             },
             {
-                key: 'disclaimer',
-                label: 'Disclaimer',
-                path: 'disclaimer',
-                icon: <LuClipboardList size={20} />,
+                key: 'faq',
+                label: 'FAQ',
+                path: 'faq',
+                icon: <BsPatchQuestion size={20} />,
             },
         ],
     }

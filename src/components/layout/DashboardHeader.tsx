@@ -1,11 +1,7 @@
 import { FiBell, } from "react-icons/fi";
-// import getNavbatItem from "../../data/getNavbarItems";
 import { Link } from "react-router-dom";
 
 export default function DashboardHeader() {
-
-  // const param = useLocation().pathname.split("/")[1];
-  // const keyItem = getNavbatItem(param!)?.label || param || "Dashboard"; 
 
   return (
     <div className="p-3.5">

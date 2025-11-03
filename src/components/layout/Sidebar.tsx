@@ -53,7 +53,7 @@ const Sidebar = () => {
                     </div>
                 </Link>
 
-                <div className='flex-1 overflow-y-auto w-full pb-8 '>
+                <div className='flex-1 overflow-y-auto w-full pb-12 '>
                     <ConfigProvider
                         theme={{
                             token: {
