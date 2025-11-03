@@ -20,6 +20,7 @@ import ExamsPage from '../pages/dashboard/exams';
 import TemplatesPage from '../pages/dashboard/templates';
 import FlashcardsPage from '../pages/dashboard/flashcards';
 import FAQPage from '../pages/dashboard/faq';
+import AddBodySystem from '../pages/dashboard/body-system/add-body-system';
 
 const router = createBrowserRouter([
     {
@@ -32,6 +33,7 @@ const router = createBrowserRouter([
             { path: "package", element: <Packages /> },
             { path: "study-notes", element: <StudyNotes /> },
             { path: "body-system", element: <BodySystem /> },
+            { path: "body-system/add-body-system", element: <AddBodySystem /> },
             { path: "patient-assessment", element: <PatientAssessment /> },
             { path: "clinical-skills", element: <ClinicalSkills /> }, 
             { path: "templates", element: <TemplatesPage /> }, 
