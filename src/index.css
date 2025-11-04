@@ -37,3 +37,27 @@
 .ant-form-item {
     margin-bottom: 15px !important;
 }
+
+.ant-menu-light.ant-menu-root.ant-menu-inline {
+    border-inline-end: none !important;
+}
+
+/* sidebar */
+.ant-menu-submenu-selected > .ant-menu-submenu-title {
+    color: #003877 !important;
+}
+.jodit-container:not(.jodit_inline) {
+  border: none !important;
+  background-color: transparent !important;
+  border-radius: 11px !important;
+  /* display: flex;
+  flex-direction: column-reverse;
+  height: 100% !important */
+}
+.jodit-ui-group {
+  background-color: transparent !important;
+}
+.jodit-toolbar__box:not(:empty) {
+  background-color: transparent !important;
+  border: none !important;
+}

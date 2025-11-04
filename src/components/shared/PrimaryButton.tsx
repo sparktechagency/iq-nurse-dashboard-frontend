@@ -4,21 +4,21 @@ type TButton = {
     children: React.ReactNode;
     icon?: ReactNode;
     onClick?: () => void;
-    width?: number;
+    width?: any;
 };
 const PrimaryButton = ({ onClick, icon, children, width }: TButton) => {
     return (
         <Button
             onClick={onClick}
             style={{
-                backgroundColor: '#2461CB',
-                width: width ? width : '100%',
+                backgroundColor: '#003877',
+                color: '#fff',
+                width: width ? width : 'auto',
 
                 height: '40px',
                 borderRadius: 8,
             }}
             htmlType={'submit'}
-            type="primary"
             icon={icon ? icon : ''}
         >
             {children}
