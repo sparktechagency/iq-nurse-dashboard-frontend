@@ -28,6 +28,7 @@ export default function TopicDetailModal({ topic, onUpdate, onClose }: TopicDeta
     const [editOverview, setEditOverview] = useState(topic.overview);
     const [isEditingTitle, setIsEditingTitle] = useState(false);
     const [isImportingQuestions, setIsImportingQuestions] = useState(false);
+    const [isImportingFlashcards, setIsImportingFlashcards] = useState(false);
     const handleSaveTitle = () => {
         if (editTitle.trim()) {
             onUpdate(topic.id, { title: editTitle });
@@ -63,6 +64,12 @@ export default function TopicDetailModal({ topic, onUpdate, onClose }: TopicDeta
     const handleRemoveQuestion = (index: number) => {
         onUpdate(topic.id, { questions: topic.questions.filter((_, i) => i !== index) });
     };
+    const handleImportFlashcards = (flashcards: any[]) => {
+        onUpdate(topic.id, {
+            flashcards: [...(topic.flashcards || []), ...flashcards],
+        });
+        setIsImportingFlashcards(false);
+    };
 
     const tabItems = [
         {
@@ -83,6 +90,9 @@ export default function TopicDetailModal({ topic, onUpdate, onClose }: TopicDeta
                     flashcards={topic.flashcards}
                     onAdd={handleAddFlashcard}
                     onRemove={handleRemoveFlashcard}
+                    setIsImportingFlashcards={setIsImportingFlashcards}
+                    handleImportFlashcards={handleImportFlashcards}
+                    isImportingFlashcards={isImportingFlashcards}
                 />
             ),
         },
