@@ -40,7 +40,7 @@ const Packages: React.FC = () => {
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <HeaderTitle title="Subscription Plans" />
-          <button className=' flex items-center gap-2 bg-[#003877]/15 text-[#003877] border-0  h-[45px] px-6 rounded font-medium' onClick={showAddModal}>
+          <button className=' flex items-center gap-2 text-white bg-[#003877] border-0  h-[45px] px-6 rounded font-medium' onClick={showAddModal}>
             <span > <PlusOutlined size={20} /> </span>
             <span> Add Subscription</span>
           </button>

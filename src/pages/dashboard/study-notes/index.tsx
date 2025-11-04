@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { mockData } from '../../../demo-data/study-note';
 import StudyNotesHeader from './StudyNotesHeader';

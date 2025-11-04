@@ -1,8 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Trash2, Edit2 } from 'lucide-react';
-import TopicForm from './TopicForm';
+import { Trash2 } from 'lucide-react';
 import DeleteModal from '../../../components/shared/DeleteModal';
 import { toast } from 'sonner';
 
@@ -32,13 +31,7 @@ interface TopicListProps {
     editingTopicId: string | null;
 }
 
-export default function TopicList({
-    subcategory,
-    selectedTopic,
-    onSelectTopic,
-    onDeleteTopic,
-    setEditingTopicId,
-}: TopicListProps) {
+export default function TopicList({ subcategory, selectedTopic, onSelectTopic, onDeleteTopic }: TopicListProps) {
     const [isDeletingTopic, setIsDeletingTopic] = useState(false);
     const [topicToDeleteId, setTopicToDeleteId] = useState<string | null>(null);
     return (

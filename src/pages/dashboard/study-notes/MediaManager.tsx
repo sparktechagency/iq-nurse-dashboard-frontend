@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Plus, X, ImageIcon } from 'lucide-react';
+import { Plus, X } from 'lucide-react';
 import { Upload, Button, message } from 'antd';
 import type { UploadFile, RcFile } from 'antd/es/upload/interface';
 import PrimaryButton from '../../../components/shared/PrimaryButton';

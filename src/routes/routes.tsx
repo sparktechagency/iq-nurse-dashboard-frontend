@@ -21,6 +21,7 @@ import FAQPage from '../pages/dashboard/faq';
 import ErrorPage from '../pages/error/ErrorPage';
 import StudyNotesPage from '../pages/dashboard/study-notes';
 import SubcategoryTopicsPage from '../pages/dashboard/study-notes/SubCategoryIndex';
+import AddBodySystem from '../pages/dashboard/body-system/add-body-system';
 
 const router = createBrowserRouter([
     {
@@ -29,21 +30,23 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
             { path: '', element: <Dashboard /> },
-            { path: "users", element: <Users /> },
-            { path: "package", element: <Packages /> },
-            { path: "study-notes/:category", element: <StudyNotesPage /> },
-            { path: "study-notes/:category/:subcategory", element: <SubcategoryTopicsPage /> },
-            { path: "body-system", element: <BodySystem /> },
-            { path: "patient-assessment", element: <PatientAssessment /> },
-            { path: "clinical-skills", element: <ClinicalSkills /> }, 
-            { path: "templates", element: <TemplatesPage /> }, 
-            { path: "exams", element: <ExamsPage /> }, 
-            { path: "flashcards", element: <FlashcardsPage /> }, 
+            { path: 'users', element: <Users /> },
+            { path: 'package', element: <Packages /> },
+            // study notes
+            { path: 'study-notes/:category', element: <StudyNotesPage /> },
+            { path: 'study-notes/:category/:subcategory', element: <SubcategoryTopicsPage /> },
+            { path: 'body-system', element: <BodySystem /> },
+            { path: 'body-system/add-body-system', element: <AddBodySystem /> },
+            { path: 'patient-assessment', element: <PatientAssessment /> },
+            { path: 'clinical-skills', element: <ClinicalSkills /> },
+            { path: 'templates', element: <TemplatesPage /> },
+            { path: 'exams', element: <ExamsPage /> },
+            { path: 'flashcards', element: <FlashcardsPage /> },
             { path: 'profile', element: <Profile /> },
             { path: 'notification', element: <Notification /> },
-            { path: "privacy-policy", element: <PrivacyPolicy /> },
-            { path: "terms-and-condition", element: <TermsAndCondition /> },
-            { path: "faq", element: <FAQPage /> },
+            { path: 'privacy-policy', element: <PrivacyPolicy /> },
+            { path: 'terms-and-condition', element: <TermsAndCondition /> },
+            { path: 'faq', element: <FAQPage /> },
         ],
     },
     { path: '/login', element: <Login /> },

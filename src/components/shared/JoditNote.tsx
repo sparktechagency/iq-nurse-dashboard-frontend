@@ -1,6 +1,6 @@
-import React, { useRef } from 'react';
 import JoditEditor from 'jodit-react';
 import 'jodit/es2021/jodit.min.css';
+import { useRef } from 'react';
 
 interface NoteTabProps {
     handleContentChange?: any;
