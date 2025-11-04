@@ -13,10 +13,15 @@ export const mockData: any = {
                         {
                             id: 'm1',
                             type: 'video' as const,
-                            url: 'https://example.com/hypertension.mp4',
+                            url: 'https://res.cloudinary.com/ds1njqypu/video/upload/v1762255314/Download_3_xjddcb.mp4',
                             title: 'HTN Overview',
                         },
-                        { id: 'm2', type: 'image' as const, url: '/hypertension.jpg', title: 'HTN Diagram' },
+                        {
+                            id: 'm2',
+                            type: 'image' as const,
+                            url: 'https://res.cloudinary.com/ds1njqypu/image/upload/v1762255389/messi-world-cup_hnv4n8.jpg',
+                            title: 'HTN Diagram x',
+                        },
                     ],
                     flashcards: [
                         { id: 'f1', front: 'What is normal blood pressure?', back: 'Less than 120/80 mmHg' },
@@ -28,7 +33,14 @@ export const mockData: any = {
                     id: 'topic-2',
                     title: 'Diabetes Management',
                     overview: 'Type 1 and Type 2 diabetes nursing care',
-                    media: [],
+                    media: [
+                        {
+                            id: 'm1',
+                            type: 'video' as const,
+                            url: 'https://res.cloudinary.com/ds1njqypu/video/upload/v1762255734/Download_4_q8hwzp.mp4',
+                            title: 'Diabetes Overview',
+                        },
+                    ],
                     flashcards: [{ id: 'f3', front: 'Normal fasting glucose', back: '70-100 mg/dL' }],
                     questions: [],
                 },

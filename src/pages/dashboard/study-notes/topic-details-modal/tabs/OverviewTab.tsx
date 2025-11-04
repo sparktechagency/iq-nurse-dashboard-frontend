@@ -24,7 +24,7 @@ export const OverviewTab = ({ overview, onUpdate }: OverviewTabProps) => {
                 <div className="space-y-4">
                     <JoditNote content={content} handleContentChange={setContent} height="300px" />
                     <div className="flex gap-2">
-                        <Button type="primary" onClick={handleSave}>
+                        <Button type="primary" onClick={handleSave} className='!shadow-none'>
                             Save Overview
                         </Button>
                         <Button onClick={() => setIsEditing(false)}>Cancel</Button>

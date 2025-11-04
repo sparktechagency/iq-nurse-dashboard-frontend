@@ -12,6 +12,7 @@ interface Media {
     file: File;
     preview: string;
     title?: string;
+    url?: string;
 }
 
 interface MediaManagerProps {
@@ -78,12 +79,14 @@ export default function MediaManager({ media, onAdd, onRemove }: MediaManagerPro
                         <Button
                             type={mediaType === 'video' ? 'primary' : 'default'}
                             onClick={() => setMediaType('video')}
+                            className="!shadow-none"
                         >
                             Video
                         </Button>
                         <Button
                             type={mediaType === 'image' ? 'primary' : 'default'}
                             onClick={() => setMediaType('image')}
+                            className="!shadow-none"
                         >
                             Image
                         </Button>
@@ -112,7 +115,7 @@ export default function MediaManager({ media, onAdd, onRemove }: MediaManagerPro
                     />
 
                     <div className="flex gap-2">
-                        <Button type="primary" onClick={handleAddMedia} className="flex-1">
+                        <Button type="primary" onClick={handleAddMedia} className="flex-1 !shadow-none">
                             Add
                         </Button>
                         <Button onClick={() => setIsAddingMedia(false)} className="flex-1">
@@ -126,10 +129,14 @@ export default function MediaManager({ media, onAdd, onRemove }: MediaManagerPro
                 {media?.map((m, index) => (
                     <div key={index} className="border border-border rounded-lg overflow-hidden">
                         {m.type === 'video' ? (
-                            <video src={m.preview} controls className="w-full aspect-video object-cover bg-black" />
+                            <video
+                                src={m.preview || m.url}
+                                controls
+                                className="w-full h-fit aspect-video object-top bg-black"
+                            />
                         ) : (
                             <img
-                                src={m.preview}
+                                src={m.preview || m.url}
                                 alt={m.title || 'Media'}
                                 className="w-full aspect-square object-cover"
                             />

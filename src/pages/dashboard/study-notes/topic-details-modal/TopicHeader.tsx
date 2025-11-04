@@ -24,10 +24,10 @@ export const TopicHeader = ({ title, isEditing, setIsEditing, setEditTitle, hand
                         />
                     </Form.Item>
                     <div className="flex gap-2">
-                        <Button type="primary" onClick={handleSave} className="flex-1">
+                        <Button type="primary" onClick={handleSave} className="flex-1 !shadow-none">
                             Save
                         </Button>
-                        <Button onClick={() => setIsEditing(false)} className="flex-1">
+                        <Button onClick={() => setIsEditing(false)} className="flex-1 !shadow-none">
                             Cancel
                         </Button>
                     </div>
