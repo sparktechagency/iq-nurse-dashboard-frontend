@@ -74,10 +74,10 @@ export default function TopicForm({
                 className="w-full px-3 py-2 text-sm border border-border rounded bg-background text-foreground placeholder:text-muted-foreground resize-none"
             />
             <div className="flex gap-2">
-                <Button size="small" className="flex-1">
+                <Button size="large" className="flex-1 bg-primary hover:!bg-primary/90 text-white hover:!text-white">
                     {isEditing ? 'Update Topic' : 'Create Topic'}
                 </Button>
-                <Button size="small" onClick={onCancel} className="flex-1 bg-transparent">
+                <Button size="large" onClick={onCancel} className="flex-1 bg-transparent">
                     Cancel
                 </Button>
             </div>

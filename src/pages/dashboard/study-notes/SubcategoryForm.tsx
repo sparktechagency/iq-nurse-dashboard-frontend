@@ -45,7 +45,7 @@ export default function SubcategoryForm({
                 <div className="flex gap-2 col-span-2">
                     <Button
                         htmlType="submit"
-                        className="flex-1 !h-[40px] bg-primary text-white hover:bg-primary hover:text-white"
+                        className="flex-1 !h-[40px] bg-primary text-white hover:!bg-primary hover:!text-white"
                     >
                         Save
                     </Button>

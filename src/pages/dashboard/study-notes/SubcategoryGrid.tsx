@@ -4,6 +4,8 @@ import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { Button, Card, Empty } from 'antd';
 import SubcategoryForm from './SubcategoryForm';
 import { toast } from 'sonner';
+import DeleteModal from '../../../components/shared/DeleteModal';
+import PrimaryButton from '../../../components/shared/PrimaryButton';
 
 export default function SubcategoryGrid({
     category,
@@ -14,22 +16,10 @@ export default function SubcategoryGrid({
 }: any) {
     const [isAddingNew, setIsAddingNew] = useState(false);
     const [editingId, setEditingId] = useState(null);
+    const [isDeleting, setIsDeleting] = useState(false);
+    const [deletingId, setDeletingId] = useState(null);
 
     const editingSubcategory = editingId ? subcategories.find((s: any) => s.id === editingId) : null;
-
-    const handleDelete = (id: string) => {
-        toast.warning('Are you sure you want to delete this subcategory?', {
-            action: {
-                label: 'Delete',
-                onClick: () => onDeleteSubcategory(id),
-            },
-            cancel: {
-                label: 'Cancel',
-                onClick: () => {},
-            },
-            duration: 5000,
-        });
-    };
     return (
         <div className="h-full overflow-auto p-8">
             <div className="mb-8 flex items-center justify-between">
@@ -79,9 +69,13 @@ export default function SubcategoryGrid({
                         description={
                             <>
                                 <p className="text-muted-foreground mb-2">No subcategories yet</p>
-                                <Button type="primary" icon={<PlusOutlined />} onClick={() => setIsAddingNew(true)}>
-                                    Create First Subcategory
-                                </Button>
+
+                                <PrimaryButton
+                                    icon={<PlusOutlined />}
+                                    onClick={() => setIsAddingNew(true)}
+                                    children={'Create First Subcategory'}
+                                    width={'auto'}
+                                />
                             </>
                         }
                     />
@@ -114,7 +108,10 @@ export default function SubcategoryGrid({
                                             icon={<DeleteOutlined />}
                                             size="small"
                                             danger
-                                            onClick={() => handleDelete(subcategory.id)}
+                                            onClick={() => {
+                                                setDeletingId(subcategory.id);
+                                                setIsDeleting(true);
+                                            }}
                                             title="Delete subcategory"
                                         />
                                     </div>
@@ -132,6 +129,15 @@ export default function SubcategoryGrid({
                     ))}
                 </div>
             )}
+            <DeleteModal
+                isOpen={isDeleting}
+                onCancel={() => setIsDeleting(false)}
+                handleDelete={() => {
+                    onDeleteSubcategory(deletingId);
+                    setIsDeleting(false);
+                    toast.success('Subcategory deleted successfully!');
+                }}
+            />
         </div>
     );
 }

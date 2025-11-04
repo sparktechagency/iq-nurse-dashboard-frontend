@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { Plus, Trash2, Edit2 } from 'lucide-react';
 import { Button } from 'antd';
 import TopicForm from './TopicForm';
+import DeleteModal from '../../../components/shared/DeleteModal';
+import { toast } from 'sonner';
 
 interface Topic {
     id: string;
@@ -25,57 +27,26 @@ interface TopicListProps {
     subcategory: Subcategory;
     selectedTopic: string | null;
     onSelectTopic: (id: string | null) => void;
-    onAddTopic: (topic: Topic) => void;
     onUpdateTopic: (id: string, updates: any) => void;
     onDeleteTopic: (id: string) => void;
+    setEditingTopicId: (id: string | null) => void;
+    editingTopicId: string | null;
 }
 
 export default function TopicList({
     subcategory,
     selectedTopic,
     onSelectTopic,
-    onAddTopic,
     onUpdateTopic,
     onDeleteTopic,
+    setEditingTopicId,
+    editingTopicId,
 }: TopicListProps) {
-    const [isAddingTopic, setIsAddingTopic] = useState(false);
-    const [editingTopicId, setEditingTopicId] = useState<string | null>(null);
-
-    const findTopic = (id: string) => subcategory.topics.find((t) => t.id === id);
-
+    const [isDeletingTopic, setIsDeletingTopic] = useState(false);
+    const [topicToDeleteId, setTopicToDeleteId] = useState<string | null>(null);
     return (
-        <div className="border-b border-border p-6">
-            <div className="flex items-center justify-between mb-4">
-                <div>
-                    <h2 className="text-lg font-semibold">{subcategory.name}</h2>
-                    <p className="text-sm text-muted-foreground">{subcategory.description}</p>
-                </div>
-                <Button
-                    size="small"
-                    onClick={() => {
-                        setIsAddingTopic(!isAddingTopic);
-                        setEditingTopicId(null);
-                    }}
-                    // variant={isAddingTopic ? 'outline' : 'default'}
-                >
-                    <Plus className="w-4 h-4 mr-2" />
-                    New Topic
-                </Button>
-            </div>
-
-            {isAddingTopic && (
-                <div className="mb-4 p-4 border border-border rounded-lg bg-muted/50">
-                    <TopicForm
-                        onSubmit={(topic) => {
-                            onAddTopic(topic);
-                            setIsAddingTopic(false);
-                        }}
-                        onCancel={() => setIsAddingTopic(false)}
-                    />
-                </div>
-            )}
-
-            <div className="grid grid-cols-2 gap-3 max-h-48 overflow-y-auto">
+        <div className=" p-6">
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 ">
                 {subcategory.topics.map((topic) => (
                     <div key={topic.id}>
                         {editingTopicId === topic.id ? (
@@ -122,16 +93,17 @@ export default function TopicList({
                                             }}
                                             className="p-1 hover:bg-primary/20 rounded text-muted-foreground hover:text-primary"
                                         >
-                                            <Edit2 className="w-3 h-3" />
+                                            <Edit2 className="w-5 h-5" />
                                         </button>
                                         <button
                                             onClick={(e) => {
                                                 e.stopPropagation();
-                                                onDeleteTopic(topic.id);
+                                                setTopicToDeleteId(topic.id);
+                                                setIsDeletingTopic(true);
                                             }}
-                                            className="p-1 hover:bg-destructive/20 rounded text-muted-foreground hover:text-destructive"
+                                            className="p-1 hover:bg-primary/20 rounded text-muted-foreground hover:text-destructive"
                                         >
-                                            <Trash2 className="w-3 h-3" />
+                                            <Trash2 className="w-5 h-5" />
                                         </button>
                                     </div>
                                 </div>
@@ -140,6 +112,15 @@ export default function TopicList({
                     </div>
                 ))}
             </div>
+            <DeleteModal
+                isOpen={isDeletingTopic}
+                onCancel={() => setIsDeletingTopic(false)}
+                handleDelete={() => {
+                    onDeleteTopic(topicToDeleteId || '');
+                    setIsDeletingTopic(false);
+                    toast.success('Topic deleted successfully.');
+                }}
+            />
         </div>
     );
 }
