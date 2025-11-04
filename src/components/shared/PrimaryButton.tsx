@@ -13,7 +13,7 @@ const PrimaryButton = ({ onClick, icon, children, width }: TButton) => {
             style={{
                 backgroundColor: '#003877',
                 color: '#fff',
-                width: width ? width : '100%',
+                width: width ? width : 'auto',
 
                 height: '40px',
                 borderRadius: 8,

@@ -4,7 +4,7 @@ import { Button } from 'antd';
 import { useNavigate, useParams } from 'react-router-dom';
 import { mockData } from '../../../demo-data/study-note';
 import TopicList from './TopicList';
-import TopicDetailModal from './TopicDetailModal';
+import TopicDetailModal from './topic-details-modal/TopicDetailModal';
 import TopicForm from './TopicForm';
 import PrimaryButton from '../../../components/shared/PrimaryButton';
 
@@ -79,7 +79,7 @@ export default function SubcategoryTopicsPage() {
                     </div>
 
                     <PrimaryButton
-                        icon={<Plus className='w-4 h-4' />}
+                        icon={<Plus className="w-4 h-4" />}
                         onClick={() => {
                             setIsAddingTopic(true);
                             setEditingTopicId(null);

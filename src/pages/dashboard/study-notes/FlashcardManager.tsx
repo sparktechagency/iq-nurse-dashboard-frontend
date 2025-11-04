@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Plus, X } from 'lucide-react';
 import { Button } from 'antd';
+import PrimaryButton from '../../../components/shared/PrimaryButton';
 
 interface Flashcard {
     id: string;
@@ -13,7 +14,7 @@ interface Flashcard {
 interface FlashcardManagerProps {
     flashcards: Flashcard[];
     onAdd: (card: Flashcard) => void;
-    onRemove: (index: number) => void;
+    onRemove: any;
 }
 
 export default function FlashcardManager({ flashcards, onAdd, onRemove }: FlashcardManagerProps) {
@@ -37,10 +38,11 @@ export default function FlashcardManager({ flashcards, onAdd, onRemove }: Flashc
 
     return (
         <div className="space-y-4">
-            <Button onClick={() => setIsAddingCard(!isAddingCard)} size="small">
-                <Plus className="w-4 h-4 mr-2" />
-                Add Flashcard
-            </Button>
+            <PrimaryButton
+                onClick={() => setIsAddingCard(!isAddingCard)}
+                icon={<Plus className="w-4 h-4 mr-2" />}
+                children="Add Flashcard"
+            />
 
             {isAddingCard && (
                 <div className="p-4 border border-border rounded-lg bg-muted/50 space-y-3">
@@ -59,10 +61,10 @@ export default function FlashcardManager({ flashcards, onAdd, onRemove }: Flashc
                         className="w-full px-3 py-2 text-sm border border-border rounded bg-background text-foreground placeholder:text-muted-foreground resize-none"
                     />
                     <div className="flex gap-2">
-                        <Button size="small" onClick={handleAddCard} className="flex-1">
+                        <Button size="large" type='primary'  onClick={handleAddCard} className="flex-1 !border-0 !shadow-none">
                             Add
                         </Button>
-                        <Button size="small" onClick={() => setIsAddingCard(false)} className="flex-1">
+                        <Button size="large" onClick={() => setIsAddingCard(false)} className="flex-1">
                             Cancel
                         </Button>
                     </div>
