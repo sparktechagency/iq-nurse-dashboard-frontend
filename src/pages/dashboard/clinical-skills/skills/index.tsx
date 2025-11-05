@@ -4,14 +4,16 @@ import { useState, useEffect } from 'react';
 import { ArrowLeft, Plus } from 'lucide-react';
 import { mockClinicalCategories } from '../../../../demo-data/clinical-skills-mock';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Button } from 'antd';
+import { Button, Input } from 'antd';
 import { SkillsTable } from './components/SkillsTable';
 import { SkillFormModal } from './components/SkillFormModal';
 import PrimaryButton from '../../../../components/shared/PrimaryButton';
+import { RiSearch2Line } from 'react-icons/ri';
 
 export default function CategorySkillsPage() {
     const { categoryId } = useParams<{ categoryId: string; subcategory: string }>();
     const navigate = useNavigate();
+    const [searchTerm, setSearchTerm] = useState('');
 
     const [category, setCategory] = useState<any>(null);
     const [skills, setSkills] = useState<any[]>([]);
@@ -53,7 +55,7 @@ export default function CategorySkillsPage() {
         <section className="">
             {/* Header */}
             <div className="mb-8">
-                <Button type="default" onClick={() => navigate(-1)} className="mb-4 gap-2">
+                <Button type="text" onClick={() => navigate(-1)} className="mb-4 gap-2">
                     <ArrowLeft className="w-4 h-4" />
                     Back to Categories
                 </Button>
@@ -63,12 +65,21 @@ export default function CategorySkillsPage() {
                         <h1 className="text-3xl font-bold text-foreground">{category.name}</h1>
                         <p className="text-muted-foreground">{skills.length} Skills</p>
                     </div>
-
-                    <PrimaryButton
-                        icon={<Plus className="w-4 h-4" />}
-                        children="Add Skill"
-                        onClick={() => setIsAddingSkill(true)}
-                    />
+                    <div className="flex items-center gap-4">
+                        <Input
+                            placeholder="Search Skill"
+                            style={{ width: 280, height: 40 }}
+                            value={searchTerm}
+                            allowClear
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            prefix={<RiSearch2Line size={22} color="#999a9e" />}
+                        />
+                        <PrimaryButton
+                            icon={<Plus className="w-4 h-4" />}
+                            children="Add Skill"
+                            onClick={() => setIsAddingSkill(true)}
+                        />
+                    </div>
                 </div>
             </div>
 

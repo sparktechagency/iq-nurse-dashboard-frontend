@@ -23,6 +23,7 @@ import StudyNotesPage from '../pages/dashboard/study-notes';
 import SubcategoryTopicsPage from '../pages/dashboard/study-notes/SubCategoryIndex';
 import AddBodySystem from '../pages/dashboard/body-system/add-body-system';
 import CategorySkillsPage from '../pages/dashboard/clinical-skills/skills';
+import TopicQuestionsPage from '../pages/dashboard/exams/topic-questions';
 
 const router = createBrowserRouter([
     {
@@ -42,7 +43,8 @@ const router = createBrowserRouter([
             { path: 'clinical-skills', element: <ClinicalSkills /> },
             { path: 'clinical-skills/:categoryId', element: <CategorySkillsPage /> },
             { path: 'templates', element: <TemplatesPage /> },
-            { path: 'exams', element: <ExamsPage /> },
+            { path: 'exam', element: <ExamsPage /> },
+            { path: 'exam/:topicId', element: <TopicQuestionsPage /> },
             { path: 'flashcards', element: <FlashcardsPage /> },
             { path: 'profile', element: <Profile /> },
             { path: 'notification', element: <Notification /> },

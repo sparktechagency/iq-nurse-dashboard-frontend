@@ -1,17 +1,20 @@
 import { useState } from 'react';
-import { Plus, Stethoscope } from 'lucide-react';
+import { Plus } from 'lucide-react';
 
 import { useNavigate } from 'react-router-dom';
 import { mockClinicalCategories } from '../../../demo-data/clinical-skills-mock';
 import PrimaryButton from '../../../components/shared/PrimaryButton';
 import { ClinicalSkillsCategoryGrid } from './components/ClinicalSkillsCategoryGrid';
 import { CategoryFormModal } from './components/CategoryFormModal';
+import { Input } from 'antd';
+import { RiSearch2Line } from 'react-icons/ri';
 
 export default function ClinicalSkillsPage() {
     const navigate = useNavigate();
     const [categories, setCategories] = useState(mockClinicalCategories);
     const [isAddingCategory, setIsAddingCategory] = useState(false);
     const [editingCategory, setEditingCategory] = useState<(typeof mockClinicalCategories)[0] | null>(null);
+    const [searchTerm, setSearchTerm] = useState('');
 
     const handleAddCategory = (name: string, logo: string) => {
         const newCategory = {
@@ -47,11 +50,21 @@ export default function ClinicalSkillsPage() {
                     <p className="text-muted-foreground">Manage clinical skill categories and topics</p>
                 </div>
 
-                <PrimaryButton
-                    onClick={() => setIsAddingCategory(true)}
-                    icon={<Plus className="w-4 h-4" />}
-                    children="Add Clinical Skills Category"
-                />
+                <div className="flex items-center gap-4">
+                    <Input
+                        placeholder="Search Skill Category"
+                        style={{ width: 280, height: 40 }}
+                        prefix={<RiSearch2Line size={22} color="#999a9e" />}
+                        value={searchTerm}
+                        allowClear
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                    <PrimaryButton
+                        onClick={() => setIsAddingCategory(true)}
+                        icon={<Plus className="w-4 h-4" />}
+                        children="Add Clinical Skills Category"
+                    />
+                </div>
             </div>
 
             {/* Categories Grid */}
