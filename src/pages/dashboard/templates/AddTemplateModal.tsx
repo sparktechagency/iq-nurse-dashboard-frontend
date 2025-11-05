@@ -4,7 +4,6 @@ import { useMemo, useRef, useState } from "react"
 const { Text } = Typography
 import "jodit/es2021/jodit.min.css";
 import JoditEditor from "jodit-react";
-import { InboxOutlined } from "@ant-design/icons"
 import { GoInbox } from "react-icons/go";
 
 const AddTemplateModal = ({ open, setOpen }: { open: boolean; setOpen: (open: boolean) => void }) => {

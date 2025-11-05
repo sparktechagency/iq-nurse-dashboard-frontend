@@ -22,6 +22,9 @@ import ErrorPage from '../pages/error/ErrorPage';
 import StudyNotesPage from '../pages/dashboard/study-notes';
 import SubcategoryTopicsPage from '../pages/dashboard/study-notes/SubCategoryIndex';
 import AddBodySystem from '../pages/dashboard/body-system/add-body-system';
+
+import FlashcardList from '../pages/dashboard/flashcards/FlashcardList';
+
 import CategorySkillsPage from '../pages/dashboard/clinical-skills/skills';
 import TopicQuestionsPage from '../pages/dashboard/exams/topic-questions';
 
@@ -46,6 +49,7 @@ const router = createBrowserRouter([
             { path: 'exam', element: <ExamsPage /> },
             { path: 'exam/:topicId', element: <TopicQuestionsPage /> },
             { path: 'flashcards', element: <FlashcardsPage /> },
+            { path: 'flashcards/:category', element: <FlashcardList /> },
             { path: 'profile', element: <Profile /> },
             { path: 'notification', element: <Notification /> },
             { path: 'privacy-policy', element: <PrivacyPolicy /> },
