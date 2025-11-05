@@ -1,7 +1,7 @@
 'use client';
 
 import { Eye, Edit2, Trash2 } from 'lucide-react';
-import { Button, Table } from 'antd';
+import { Button, Table, Tooltip } from 'antd';
 import { useState } from 'react';
 import DeleteModal from '../../../../../components/shared/DeleteModal';
 
@@ -38,7 +38,19 @@ export function SkillsTable({ skills, onEditSkill, onDeleteSkill }: SkillsTableP
             title: <span className="text-white font-semibold">Subtitle</span>,
             dataIndex: 'subtitle',
             key: 'subtitle',
-            render: (value: string) => <span className="text-sm text-muted-foreground">{value}</span>,
+            render: (value: string) => {
+                const maxLength = 50; 
+                const isTruncated = value.length > maxLength;
+                const displayValue = isTruncated ? value.slice(0, maxLength) + '…' : value;
+
+                return isTruncated ? (
+                    <Tooltip title={value}>
+                        <span className="text-sm text-muted-foreground cursor-pointer">{displayValue}</span>
+                    </Tooltip>
+                ) : (
+                    <span className="text-sm text-muted-foreground">{displayValue}</span>
+                );
+            },
         },
         {
             title: <span className="text-white font-semibold">Action</span>,
