@@ -22,6 +22,7 @@ import ErrorPage from '../pages/error/ErrorPage';
 import StudyNotesPage from '../pages/dashboard/study-notes';
 import SubcategoryTopicsPage from '../pages/dashboard/study-notes/SubCategoryIndex';
 import AddBodySystem from '../pages/dashboard/body-system/add-body-system';
+import FlashcardList from '../pages/dashboard/flashcards/FlashcardList';
 
 const router = createBrowserRouter([
     {
@@ -42,6 +43,7 @@ const router = createBrowserRouter([
             { path: 'templates', element: <TemplatesPage /> },
             { path: 'exams', element: <ExamsPage /> },
             { path: 'flashcards', element: <FlashcardsPage /> },
+            { path: 'flashcards/:category', element: <FlashcardList /> },
             { path: 'profile', element: <Profile /> },
             { path: 'notification', element: <Notification /> },
             { path: 'privacy-policy', element: <PrivacyPolicy /> },
