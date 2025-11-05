@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Modal, Form, Input, message,} from 'antd';
+import { Button, Modal, Form, Input, message, } from 'antd';
 import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
 import FileUploadBox from '../../../components/shared/FileUploadBox';
 
@@ -71,115 +71,115 @@ const AddPatientAssessmentModal: React.FC<AddPatientAssessmentModalProps> = ({ v
   };
 
   return (
-<Modal
-  title={<span className="text-lg font-semibold">Add Category</span>}
-  open={visible}
-  onCancel={onCancel}
-  footer={null}
-  width={600}
-  zIndex={1000}
-  centered
->
-  <Form form={form} layout="vertical" onFinish={handleFinish}>
-    {/* File uploads side by side */}
-    <div className="flex gap-4 mb-6">
-      <Form.Item
-        label="Category Icon"
-        name="icon"
-        className="flex-1"
-      >
-        <FileUploadBox
-          getFile={handleIconChange}
-          title="Upload Icon"
-        />
-      </Form.Item>
-      <Form.Item
-        label="Category Image"
-        name="image"
-        className="flex-1"
-      >
-        <FileUploadBox
-          getFile={handleImageChange}
-          title="Upload Image"
-        />
-      </Form.Item>
-    </div>
-
-    <Form.Item
-      label="Category Name"
-      name="name"
-      rules={[{ required: true, message: 'Please enter category name' }]}
+    <Modal
+      title={<span className="text-lg font-semibold">Add Category</span>}
+      open={visible}
+      onCancel={onCancel}
+      footer={null}
+      width={600}
+      zIndex={1000}
+      centered
     >
-      <Input placeholder="Enter Category Name" size="large" />
-    </Form.Item>
-
-    <Form.Item label="Description" name="description">
-      <Input.TextArea rows={3} placeholder="Enter description" />
-    </Form.Item>
-
-    <Form.Item label="Note" name="note">
-      <Input.TextArea rows={2} placeholder="Enter note" />
-    </Form.Item>
-
-    <Form.Item label="Syndromes">
-      <div className="border border-gray-300 rounded-lg overflow-hidden">
-        <div className="max-h-80 overflow-y-auto">
-          {syndromes.map((s, idx) => (
-            <div
-              className={`flex gap-2 items-center p-3 ${idx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}
-              key={idx}
-            >
-              <Input
-                placeholder="Assessment"
-                value={s.asessment}
-                onChange={e => handleSyndromeChange(idx, 'asessment', e.target.value)}
-                className="flex-1"
-              />
-              <Input
-                placeholder="Normal"
-                value={s.normal}
-                onChange={e => handleSyndromeChange(idx, 'normal', e.target.value)}
-                className="flex-1"
-              />
-              <Input
-                placeholder="Abnormal"
-                value={s.abnormal}
-                onChange={e => handleSyndromeChange(idx, 'abnormal', e.target.value)}
-                className="flex-1"
-              />
-              {syndromes.length > 1 && (
-                <Button
-                  icon={<DeleteOutlined />}
-                  danger
-                  onClick={() => handleRemoveSyndrome(idx)}
-                  className="flex-shrink-0"
-                />
-              )}
-            </div>
-          ))}
-        </div>
-        <div className="border-t border-gray-300 p-2 bg-gray-50">
-          <Button
-            icon={<PlusOutlined />}
-            onClick={handleAddSyndrome}
-            className="w-full"
+      <Form form={form} layout="vertical" onFinish={handleFinish}>
+        {/* File uploads side by side */}
+        <div className="flex gap-4 mb-6">
+          <Form.Item
+            label="Category Icon"
+            name="icon"
+            className="flex-1"
           >
-            Add Row
+            <FileUploadBox
+              getFile={handleIconChange}
+              title="Upload Icon"
+            />
+          </Form.Item>
+          <Form.Item
+            label="Category Image"
+            name="image"
+            className="flex-1"
+          >
+            <FileUploadBox
+              getFile={handleImageChange}
+              title="Upload Image"
+            />
+          </Form.Item>
+        </div>
+
+        <Form.Item
+          label="Category Name"
+          name="name"
+          rules={[{ required: true, message: 'Please enter category name' }]}
+        >
+          <Input placeholder="Enter Category Name" size="large" />
+        </Form.Item>
+
+        <Form.Item label="Description" name="description">
+          <Input.TextArea rows={3} placeholder="Enter description" />
+        </Form.Item>
+
+        <Form.Item label="Note" name="note">
+          <Input.TextArea rows={2} placeholder="Enter note" />
+        </Form.Item>
+
+        <Form.Item label="Syndromes">
+          <div className="border border-gray-300 rounded-lg overflow-hidden">
+            <div className="max-h-80 overflow-y-auto">
+              {syndromes.map((s, idx) => (
+                <div
+                  className={`flex gap-2 items-center p-3 ${idx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}
+                  key={idx}
+                >
+                  <Input
+                    placeholder="Assessment"
+                    value={s.asessment}
+                    onChange={e => handleSyndromeChange(idx, 'asessment', e.target.value)}
+                    className="flex-1"
+                  />
+                  <Input
+                    placeholder="Normal"
+                    value={s.normal}
+                    onChange={e => handleSyndromeChange(idx, 'normal', e.target.value)}
+                    className="flex-1"
+                  />
+                  <Input
+                    placeholder="Abnormal"
+                    value={s.abnormal}
+                    onChange={e => handleSyndromeChange(idx, 'abnormal', e.target.value)}
+                    className="flex-1"
+                  />
+                  {syndromes.length > 1 && (
+                    <Button
+                      icon={<DeleteOutlined />}
+                      danger
+                      onClick={() => handleRemoveSyndrome(idx)}
+                      className="flex-shrink-0"
+                    />
+                  )}
+                </div>
+              ))}
+            </div>
+            <div className="border-t border-gray-300 p-2 bg-gray-50">
+              <Button
+                icon={<PlusOutlined />}
+                onClick={handleAddSyndrome}
+                className="w-full"
+              >
+                Add Row
+              </Button>
+            </div>
+          </div>
+        </Form.Item>
+
+        <div className="flex justify-end gap-3 mt-6 pt-4 border-t border-gray-200">
+          <Button onClick={onCancel}>
+            Cancel
+          </Button>
+          <Button type="primary" htmlType="submit">
+            Add Category
           </Button>
         </div>
-      </div>
-    </Form.Item>
-
-    <div className="flex justify-end gap-3 mt-6 pt-4 border-t border-gray-200">
-      <Button onClick={onCancel}>
-        Cancel
-      </Button>
-      <Button type="primary" htmlType="submit">
-        Add Category
-      </Button>
-    </div>
-  </Form>
-</Modal>
+      </Form>
+    </Modal>
   );
 };
 
