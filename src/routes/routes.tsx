@@ -22,11 +22,11 @@ import ErrorPage from '../pages/error/ErrorPage';
 import StudyNotesPage from '../pages/dashboard/study-notes';
 import SubcategoryTopicsPage from '../pages/dashboard/study-notes/SubCategoryIndex';
 import AddBodySystem from '../pages/dashboard/body-system/add-body-system';
-<<<<<<< HEAD
+
 import FlashcardList from '../pages/dashboard/flashcards/FlashcardList';
-=======
+
 import CategorySkillsPage from '../pages/dashboard/clinical-skills/skills';
->>>>>>> 4770dd310be264016b540bb23bd006aee642430a
+import TopicQuestionsPage from '../pages/dashboard/exams/topic-questions';
 
 const router = createBrowserRouter([
     {
@@ -46,7 +46,8 @@ const router = createBrowserRouter([
             { path: 'clinical-skills', element: <ClinicalSkills /> },
             { path: 'clinical-skills/:categoryId', element: <CategorySkillsPage /> },
             { path: 'templates', element: <TemplatesPage /> },
-            { path: 'exams', element: <ExamsPage /> },
+            { path: 'exam', element: <ExamsPage /> },
+            { path: 'exam/:topicId', element: <TopicQuestionsPage /> },
             { path: 'flashcards', element: <FlashcardsPage /> },
             { path: 'flashcards/:category', element: <FlashcardList /> },
             { path: 'profile', element: <Profile /> },

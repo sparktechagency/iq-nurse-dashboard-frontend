@@ -75,7 +75,7 @@ const sidebarItems: TSidebarItem[] = [
     {
         key: 'exams',
         label: 'Exams',
-        path: 'exams',
+        path: 'exam',
         icon: '/icons/quiz.png',
     },
     {
