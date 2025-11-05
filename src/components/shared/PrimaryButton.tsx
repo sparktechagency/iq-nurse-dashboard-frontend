@@ -5,18 +5,17 @@ type TButton = {
     icon?: ReactNode;
     onClick?: () => void;
     width?: any;
+    classname?: string;
 };
-const PrimaryButton = ({ onClick, icon, children, width }: TButton) => {
+const PrimaryButton = ({ onClick, icon, children, width, classname }: TButton) => {
     return (
         <Button
             onClick={onClick}
+            type="primary"
+            className={`!shadow-none ${classname} `}
             style={{
-                backgroundColor: '#003877',
-                color: '#fff',
                 width: width ? width : 'auto',
-
                 height: '40px',
-                borderRadius: 8,
             }}
             htmlType={'submit'}
             icon={icon ? icon : ''}

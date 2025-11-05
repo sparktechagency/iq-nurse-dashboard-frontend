@@ -90,12 +90,12 @@ const sidebarItems: TSidebarItem[] = [
         path: 'settings',
         icon: '/icons/setting.png',
         children: [
-            {
-                key: 'about-us',
-                label: 'About us',
-                path: 'about-us',
-                icon: <TbBook size={20} />,
-            },
+            // {
+            //     key: 'about-us',
+            //     label: 'About us',
+            //     path: 'about-us',
+            //     icon: <TbBook size={20} />,
+            // },
             {
                 key: 'terms-and-condition',
                 label: 'Terms and Condition',
