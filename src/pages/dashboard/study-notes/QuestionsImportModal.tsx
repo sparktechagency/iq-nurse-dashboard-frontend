@@ -62,6 +62,7 @@ export default function QuestionsImportModal({ onImport, onClose }: QuestionsImp
             footer={null}
             title="Import Questions"
             width={700}
+            centered
             styles={{
                 body: {
                     maxHeight: '80vh',
