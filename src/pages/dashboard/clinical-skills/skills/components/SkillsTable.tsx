@@ -1,6 +1,6 @@
 'use client';
 
-import { Eye, Edit2, Trash2 } from 'lucide-react';
+import { Edit2, Trash2 } from 'lucide-react';
 import { Button, Table, Tooltip } from 'antd';
 import { useState } from 'react';
 import DeleteModal from '../../../../../components/shared/DeleteModal';
@@ -39,7 +39,7 @@ export function SkillsTable({ skills, onEditSkill, onDeleteSkill }: SkillsTableP
             dataIndex: 'subtitle',
             key: 'subtitle',
             render: (value: string) => {
-                const maxLength = 50; 
+                const maxLength = 50;
                 const isTruncated = value.length > maxLength;
                 const displayValue = isTruncated ? value.slice(0, maxLength) + '…' : value;
 

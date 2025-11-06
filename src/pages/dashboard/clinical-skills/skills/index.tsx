@@ -55,8 +55,8 @@ export default function CategorySkillsPage() {
         <section className="">
             {/* Header */}
             <div className="mb-8">
-                <Button type="text" onClick={() => navigate(-1)} className="mb-4 gap-2">
-                    <ArrowLeft className="w-4 h-4" />
+                <Button onClick={() => navigate(-1)} type="text" size="small" className='mb-1'>
+                    <ArrowLeft className="w-4 h-4 mr-2" />
                     Back to Categories
                 </Button>
 

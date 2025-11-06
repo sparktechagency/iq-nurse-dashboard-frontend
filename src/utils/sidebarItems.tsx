@@ -1,7 +1,6 @@
 import { BsPatchQuestion } from 'react-icons/bs';
 import { TSidebarItem } from './generateSidebarItems';
 import { LuClipboardList } from 'react-icons/lu';
-import { TbBook } from 'react-icons/tb';
 
 const sidebarItems: TSidebarItem[] = [
     {

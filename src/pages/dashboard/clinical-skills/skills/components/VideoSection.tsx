@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Upload, Button, message } from 'antd';
+import { Upload, message } from 'antd';
 import { Plus, X } from 'lucide-react';
 import type { UploadFile, RcFile } from 'antd/es/upload/interface';
 
