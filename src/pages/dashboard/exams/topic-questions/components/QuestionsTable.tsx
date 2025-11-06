@@ -104,6 +104,7 @@ export default function QuestionsTable({ questions, onEdit, onDelete }: Question
                                     okText: 'Delete',
                                     okButtonProps: { danger: true },
                                     onOk: () => onDelete(record.id),
+                                    centered: true,
                                 });
                             }}
                         />
