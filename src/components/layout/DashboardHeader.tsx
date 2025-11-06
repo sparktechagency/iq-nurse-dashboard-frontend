@@ -19,7 +19,7 @@ export default function DashboardHeader() {
                         <Link to="/notification">
                             <button className="relative p-2 text-[#223047] hover:text-gray-900 hover:bg-gray-100 rounded-full transition-colors">
                                 <FiBell className="h-6 w-6" />
-                                <span className="absolute -top-1 -right-0 flex items-center justify-center bg-[#34D3C7] text-white text-xs font-semibold rounded-full w-6 h-6 shadow-md border-2 border-white">
+                                <span className="absolute -top-1 -right-0 flex items-center justify-center bg-primary text-white text-xs font-semibold rounded-full w-6 h-6 shadow-md border-2 border-white">
                                     2
                                 </span>
                             </button>

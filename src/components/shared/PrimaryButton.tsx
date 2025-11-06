@@ -6,10 +6,12 @@ type TButton = {
     onClick?: () => void;
     width?: any;
     classname?: string;
+    isDisabled?: boolean;
 };
-const PrimaryButton = ({ onClick, icon, children, width, classname }: TButton) => {
+const PrimaryButton = ({ onClick, icon, children, width, classname, isDisabled = false }: TButton) => {
     return (
         <Button
+            disabled={isDisabled}
             onClick={onClick}
             type="primary"
             className={`!shadow-none ${classname} `}
