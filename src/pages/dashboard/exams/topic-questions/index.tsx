@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ArrowLeft, Search, Plus } from 'lucide-react';
+import { ArrowLeft,  Plus } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { mockExamTopics } from '../../../../demo-data/mockExamTopics';
 import { Button, Card, Input } from 'antd';

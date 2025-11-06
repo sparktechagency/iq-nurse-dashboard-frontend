@@ -1,6 +1,4 @@
-'use client';
 
-import type React from 'react';
 import { useEffect, useState } from 'react';
 import { Modal, Form, Input, Select, Upload, Button as AntButton, Checkbox, Radio } from 'antd';
 import { PlusOutlined, UploadOutlined, DeleteOutlined } from '@ant-design/icons';
@@ -15,7 +13,7 @@ interface Question {
     explanationImage?: string;
     options?: string[];
     correctAnswers: any;
-    categoryId: any;
+    categoryId?: any;
 }
 
 interface QuestionFormModalProps {
