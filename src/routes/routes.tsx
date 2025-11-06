@@ -22,11 +22,8 @@ import ErrorPage from '../pages/error/ErrorPage';
 import StudyNotesPage from '../pages/dashboard/study-notes';
 import SubcategoryTopicsPage from '../pages/dashboard/study-notes/SubCategoryIndex';
 import AddBodySystem from '../pages/dashboard/body-system/add-body-system';
-<<<<<<< HEAD
 import FlashcardList from '../pages/dashboard/flashcards/FlashcardList';
-=======
 import CategorySkillsPage from '../pages/dashboard/clinical-skills/skills';
->>>>>>> 4770dd310be264016b540bb23bd006aee642430a
 
 const router = createBrowserRouter([
     {
