@@ -47,17 +47,22 @@
     color: #003877 !important;
 }
 .jodit-container:not(.jodit_inline) {
-  border: none !important;
-  background-color: transparent !important;
-  border-radius: 11px !important;
-  /* display: flex;
+    border: none !important;
+    background-color: transparent !important;
+    border-radius: 11px !important;
+    /* display: flex;
   flex-direction: column-reverse;
   height: 100% !important */
 }
 .jodit-ui-group {
-  background-color: transparent !important;
+    background-color: transparent !important;
 }
 .jodit-toolbar__box:not(:empty) {
-  background-color: transparent !important;
-  border: none !important;
+    background-color: transparent !important;
+    border: none !important;
+}
+
+.custom-question-table .ant-table-thead > tr > th {
+    background-color: var(--primary) !important;
+    color: white !important;
 }
