@@ -5,10 +5,12 @@ import HeaderTitle from "../../../../components/shared/HeaderTitle";
 import { PlusOutlined, EditOutlined, DeleteOutlined, EyeOutlined } from "@ant-design/icons";
 import { FlashCategoryData } from "../../../../demo-data/flashcard-data";
 import AddCardInfoModal from "./AddCardInfoModal";
+import CardDetailsModal from "./CardDetailsModal";
 
 const FlashcardList = () => {
   const { category } = useParams<{ category: string }>();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false); 
+  const [addCardInfoOpen, setCardInfoOpen] = useState(false);
 
   const columns = [
     {
@@ -36,7 +38,7 @@ const FlashcardList = () => {
       key: "action",
       render: () => (
         <Space size="middle">
-            <EyeOutlined className="text-blue-500 hover:text-blue-700 cursor-pointer text-lg" />
+            <EyeOutlined className="text-blue-500 hover:text-blue-700 cursor-pointer text-lg" onClick={()=>setCardInfoOpen(true)}/>
             <EditOutlined className="text-green-500 hover:text-green-700 cursor-pointer text-lg" onClick={()=>setOpen(true)} />
             <DeleteOutlined className="text-red-500 hover:text-red-700 cursor-pointer text-lg" />
         </Space>
@@ -65,7 +67,8 @@ const FlashcardList = () => {
         pagination={{ pageSize: 5 }}
         className=""
       /> 
-      <AddCardInfoModal open={open} setOpen={setOpen} />
+      <AddCardInfoModal open={open} setOpen={setOpen} /> 
+      <CardDetailsModal open={addCardInfoOpen} onCancel={() => setCardInfoOpen(false)} />
     </div>
   );
 };
