@@ -55,6 +55,7 @@ export default function SubcategoryTopicsPage() {
         setSelectedTopic(null);
         setShowTopicDetail(false);
     };
+    
 
     return (
         <div className="flex flex-col ">
@@ -68,13 +69,13 @@ export default function SubcategoryTopicsPage() {
                         </Button>
                         <div>
                             <div className="flex items-center gap-2">
-                                <h2 className="text-lg font-semibold text-foreground">{subcategoryData.name}</h2>
+                                <h2 className="text-lg font-semibold text-foreground">{subcategoryData?.name}</h2>
                                 <p className="text-sm text-muted-foreground">
-                                    {subcategoryData.topics.length} topic
-                                    {subcategoryData.topics.length !== 1 ? 's' : ''}
+                                    {subcategoryData?.topics.length} topic
+                                    {subcategoryData?.topics.length !== 1 ? 's' : ''}
                                 </p>
                             </div>
-                            <p className="text-sm text-muted-foreground">{subcategoryData.description}</p>
+                            <p className="text-sm text-muted-foreground">{subcategoryData?.description}</p>
                         </div>
                     </div>
 

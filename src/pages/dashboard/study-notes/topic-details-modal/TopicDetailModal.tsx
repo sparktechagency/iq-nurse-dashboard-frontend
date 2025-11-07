@@ -6,7 +6,7 @@ import { TopicHeader } from './TopicHeader';
 import { OverviewTab } from './tabs/OverviewTab';
 import MediaTab from './tabs/MediaTab';
 import FlashcardsTab from './tabs/FlashcardsTab';
-import QuestionsTab from './tabs/QuestionsTab';
+import QuestionsTab from './tabs/question-tab/QuestionsTab';
 
 interface Topic {
     id: string;
@@ -70,6 +70,11 @@ export default function TopicDetailModal({ topic, onUpdate, onClose }: TopicDeta
         });
         setIsImportingFlashcards(false);
     };
+    const handleAddQuestionManually = (question: any) => {
+        onUpdate(topic.id, {
+            questions: [...(topic.questions || []), question],
+        });
+    };
 
     const tabItems = [
         {
@@ -106,6 +111,7 @@ export default function TopicDetailModal({ topic, onUpdate, onClose }: TopicDeta
                     onRemove={handleRemoveQuestion}
                     isImporting={isImportingQuestions}
                     setIsImporting={setIsImportingQuestions}
+                    handleAddQuestionManually={handleAddQuestionManually}
                 />
             ),
         },

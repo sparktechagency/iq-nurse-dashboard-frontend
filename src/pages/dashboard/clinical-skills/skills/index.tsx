@@ -47,23 +47,19 @@ export default function CategorySkillsPage() {
         setSkills(skills.filter((skill) => skill.id !== skillId));
     };
 
-    if (!category) {
-        return <div className="p-8">Loading...</div>;
-    }
-
     return (
         <section className="">
             {/* Header */}
             <div className="mb-8">
-                <Button onClick={() => navigate(-1)} type="text" size="small" className='mb-1'>
+                <Button onClick={() => navigate(-1)} type="text" size="small" className="mb-1">
                     <ArrowLeft className="w-4 h-4 mr-2" />
                     Back to Categories
                 </Button>
 
                 <div className="flex items-center justify-between">
                     <div>
-                        <h1 className="text-3xl font-bold text-foreground">{category.name}</h1>
-                        <p className="text-muted-foreground">{skills.length} Skills</p>
+                        <h1 className="text-3xl font-bold text-foreground">{category?.name}</h1>
+                        <p className="text-muted-foreground">{skills?.length} Skills</p>
                     </div>
                     <div className="flex items-center gap-4">
                         <Input

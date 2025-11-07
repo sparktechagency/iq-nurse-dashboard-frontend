@@ -1,7 +1,9 @@
 'use client';
 import { Button, Card } from 'antd';
 import { Plus, X } from 'lucide-react';
-import QuestionsImportModal from '../../QuestionsImportModal';
+import QuestionsImportModal from '../../../QuestionsImportModal';
+import { useState } from 'react';
+import AddQuestionModal from './AddQuestionModal';
 
 interface QuestionsTabProps {
     questions: any[];
@@ -9,14 +11,38 @@ interface QuestionsTabProps {
     onRemove: (index: number) => void;
     isImporting: boolean;
     setIsImporting: (val: boolean) => void;
+    handleAddQuestionManually: (question: any) => void;
 }
 
-const QuestionsTab = ({ questions, onImport, onRemove, isImporting, setIsImporting }: QuestionsTabProps) => {
+const QuestionsTab = ({
+    questions,
+    onImport,
+    onRemove,
+    isImporting,
+    setIsImporting,
+    handleAddQuestionManually,
+}: QuestionsTabProps) => {
+    const [isAddingQuestion, setIsAddingQuestion] = useState(false);
     return (
-        <div className="space-y-4 mt-4">
-            <Button type="primary" onClick={() => setIsImporting(true)} icon={<Plus />} className='!h-[40px] !shadow-none'>
-                Import Questions
-            </Button>
+        <div className="space-y-4 ">
+            <div className="flex items-center gap-2">
+                <Button
+                    type="primary"
+                    onClick={() => setIsAddingQuestion(true)}
+                    icon={<Plus />}
+                    className="!h-[40px] !shadow-none"
+                >
+                    Add Questions
+                </Button>
+                <Button
+                    type="default"
+                    onClick={() => setIsImporting(true)}
+                    icon={<Plus />}
+                    className="!h-[40px] !shadow-none"
+                >
+                    Import Questions
+                </Button>
+            </div>
 
             {questions && questions.length > 0 ? (
                 <div className="space-y-3 max-h-96 overflow-y-auto">
@@ -57,6 +83,10 @@ const QuestionsTab = ({ questions, onImport, onRemove, isImporting, setIsImporti
             )}
 
             {isImporting && <QuestionsImportModal onImport={onImport} onClose={() => setIsImporting(false)} />}
+
+            {isAddingQuestion && (
+                <AddQuestionModal onAdd={handleAddQuestionManually} onClose={() => setIsAddingQuestion(false)} />
+            )}
         </div>
     );
 };
