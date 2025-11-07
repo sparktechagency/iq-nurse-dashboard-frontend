@@ -6,6 +6,7 @@ import SubcategoryForm from './SubcategoryForm';
 import { toast } from 'sonner';
 import DeleteModal from '../../../components/shared/DeleteModal';
 import PrimaryButton from '../../../components/shared/PrimaryButton';
+import StudyNotesHeader from './StudyNotesHeader';
 
 export default function SubcategoryGrid({
     category,
@@ -24,7 +25,7 @@ export default function SubcategoryGrid({
         <div className="h-full overflow-auto p-8">
             <div className="mb-8 flex items-center justify-between">
                 <div>
-                    <h2 className="text-2xl font-bold text-foreground">Subcategories</h2>
+                    <StudyNotesHeader category={category as string} />
                     <p className="text-sm text-muted-foreground mt-1">Select a subcategory to view and manage topics</p>
                 </div>
                 <Button

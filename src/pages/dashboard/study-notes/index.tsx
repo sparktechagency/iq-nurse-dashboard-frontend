@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { mockData } from '../../../demo-data/study-note';
-import StudyNotesHeader from './StudyNotesHeader';
 import SubcategoryGrid from './SubcategoryGrid';
 
 export default function StudyNotesPage() {
@@ -36,9 +35,6 @@ export default function StudyNotesPage() {
 
     return (
         <div className="flex flex-col ">
-            <StudyNotesHeader category={category as string} />
-            {/* <CategoryTabs category={category} /> */}
-
             <div className="flex flex-col flex-1 overflow-hidden">
                 <SubcategoryGrid
                     category={category}

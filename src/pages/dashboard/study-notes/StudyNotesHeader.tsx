@@ -14,10 +14,8 @@ export default function StudyNotesHeader({ category }: StudyNotesHeaderProps) {
     };
 
     return (
-        <div className="border-b border-border px-6 py-4 bg-card">
-            <div className="flex items-center justify-between">
-                <h1 className="text-3xl font-bold text-foreground">{formatCategory(category)}</h1>
-            </div>
+        <div className="flex items-center justify-between">
+            <h1 className="text-3xl font-bold text-foreground">{formatCategory(category)}</h1>
         </div>
     );
 }

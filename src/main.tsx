@@ -12,7 +12,7 @@ createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <Provider store={store}>
             <UserProvider>
-                <Toaster position="top-center" />
+                <Toaster position="top-center" duration={1500.} />
                 <RouterProvider router={router} />
             </UserProvider>
         </Provider>
