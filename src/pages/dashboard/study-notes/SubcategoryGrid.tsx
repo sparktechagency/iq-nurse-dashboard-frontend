@@ -22,7 +22,7 @@ export default function SubcategoryGrid({
 
     const editingSubcategory = editingId ? subcategories.find((s: any) => s.id === editingId) : null;
     return (
-        <div className="h-full overflow-auto p-8">
+        <div className="h-full overflow-auto pb-8">
             <div className="mb-8 flex items-center justify-between">
                 <div>
                     <StudyNotesHeader category={category as string} />
