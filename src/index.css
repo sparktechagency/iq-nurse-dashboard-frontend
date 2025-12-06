@@ -66,3 +66,7 @@
     background-color: var(--primary) !important;
     color: white !important;
 }
+
+.ant-btn {
+    box-shadow: none !important;
+}

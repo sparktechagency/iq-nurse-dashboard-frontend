@@ -4,6 +4,7 @@ export const mockData: any = {
             id: 'sub-1',
             name: 'Medical-Surgical Nursing',
             description: 'Core medical and surgical nursing concepts',
+            icon: '🧠',
             topics: [
                 {
                     id: 'topic-1',
@@ -50,6 +51,7 @@ export const mockData: any = {
             id: 'sub-2',
             name: 'Pharmacology',
             description: 'Drug classifications and nursing considerations',
+            icon: '🧪',
             topics: [
                 {
                     id: 'topic-3',

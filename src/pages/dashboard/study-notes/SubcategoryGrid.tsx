@@ -2,11 +2,12 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { Button, Card, Empty } from 'antd';
-import SubcategoryForm from './SubcategoryForm';
 import { toast } from 'sonner';
+
 import DeleteModal from '../../../components/shared/DeleteModal';
 import PrimaryButton from '../../../components/shared/PrimaryButton';
 import StudyNotesHeader from './StudyNotesHeader';
+import SubcategoryFormModal from './SubcategoryForm';
 
 export default function SubcategoryGrid({
     category,
@@ -15,128 +16,113 @@ export default function SubcategoryGrid({
     onUpdateSubcategory,
     onDeleteSubcategory,
 }: any) {
-    const [isAddingNew, setIsAddingNew] = useState(false);
-    const [editingId, setEditingId] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [editingSubcategory, setEditingSubcategory] = useState<any>(null);
     const [isDeleting, setIsDeleting] = useState(false);
-    const [deletingId, setDeletingId] = useState(null);
+    const [deletingId, setDeletingId] = useState<any>(null);
 
-    const editingSubcategory = editingId ? subcategories.find((s: any) => s.id === editingId) : null;
+    const openAddModal = () => {
+        setEditingSubcategory(null);
+        setIsModalOpen(true);
+    };
+
+    const openEditModal = (subcategory: any) => {
+        setEditingSubcategory(subcategory);
+        setIsModalOpen(true);
+    };
+    console.log(subcategories);
+
     return (
         <div className="h-full overflow-auto p-8">
+            {/* Header */}
             <div className="mb-8 flex items-center justify-between">
                 <div>
-                    <StudyNotesHeader category={category as string} />
+                    <StudyNotesHeader category={category} />
                     <p className="text-sm text-muted-foreground mt-1">Select a subcategory to view and manage topics</p>
                 </div>
-                <Button
-                    className="!h-[40px] bg-primary text-white hover:!bg-primary/90 hover:!text-white"
-                    icon={<PlusOutlined />}
-                    onClick={() => setIsAddingNew(true)}
-                >
+
+                <Button className="!h-[40px] !bg-primary !text-white" icon={<PlusOutlined />} onClick={openAddModal}>
                     Add Subcategory
                 </Button>
             </div>
 
-            {/* Add/Edit Form */}
-            <div className="">
-                {(isAddingNew || editingId) && (
-                    <Card className="mb-8" title={editingId ? 'Edit Subcategory' : 'Add New Subcategory'} bordered>
-                        <SubcategoryForm
-                            initialName={editingSubcategory?.name}
-                            initialDescription={editingSubcategory?.description}
-                            onSubmit={(name, description) => {
-                                if (editingId) {
-                                    onUpdateSubcategory(editingId, name, description);
-                                } else {
-                                    onAddSubcategory(name, description);
-                                }
-                                setIsAddingNew(false);
-                                setEditingId(null);
-                            }}
-                            onCancel={() => {
-                                setIsAddingNew(false);
-                                setEditingId(null);
-                            }}
-                        />
-                    </Card>
-                )}
-            </div>
-
-            {/* Subcategories Grid */}
+            {/* Grid */}
             {subcategories.length === 0 ? (
-                <div className="text-center py-16">
-                    <Empty
-                        image={Empty.PRESENTED_IMAGE_SIMPLE}
-                        description={
-                            <>
-                                <p className="text-muted-foreground mb-2">No subcategories yet</p>
-
-                                <PrimaryButton
-                                    icon={<PlusOutlined />}
-                                    onClick={() => setIsAddingNew(true)}
-                                    children={'Create First Subcategory'}
-                                    width={'auto'}
-                                />
-                            </>
-                        }
-                    />
-                </div>
+                <Empty
+                    description={
+                        <>
+                            <p className="text-muted-foreground mb-2">No subcategories yet</p>
+                            <PrimaryButton
+                                icon={<PlusOutlined />}
+                                onClick={openAddModal}
+                                children={'Create First Subcategory'}
+                            />
+                        </>
+                    }
+                />
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {subcategories?.map((subcategory: any) => (
-                        <Link
-                            key={subcategory.id}
-                            to={`/study-notes/${category}/${subcategory.id}`}
-                            style={{ textDecoration: 'none' }}
-                        >
-                            <Card
-                                hoverable
-                                className="h-full transition-all"
-                                title={subcategory.name}
-                                extra={
+                    {subcategories.map((s: any) => (
+                        <Link key={s.id} to={`/study-notes/${category}/${s.id}`} style={{ textDecoration: 'none' }}>
+                            <Card hoverable>
+                                <div className="flex justify-between items-center border-b pb-2">
+                                    <h4 className='text-lg font-medium' >
+                                        <span className="text-2xl mr-1"> {s.icon}</span> {s.name}
+                                    </h4>
                                     <div onClick={(e) => e.preventDefault()} style={{ display: 'flex', gap: 8 }}>
                                         <Button
                                             icon={<EditOutlined />}
                                             size="small"
                                             onClick={(e) => {
                                                 e.preventDefault();
-                                                e.stopPropagation();
-                                                setEditingId(subcategory.id);
+                                                openEditModal(s);
                                             }}
-                                            title="Edit subcategory"
                                         />
                                         <Button
                                             icon={<DeleteOutlined />}
                                             size="small"
                                             danger
                                             onClick={() => {
-                                                setDeletingId(subcategory.id);
+                                                setDeletingId(s.id);
                                                 setIsDeleting(true);
                                             }}
-                                            title="Delete subcategory"
                                         />
                                     </div>
-                                }
-                            >
-                                {/* <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
-                                    {subcategory.description}
-                                </p> */}
-                                <p className="text-sm text-muted-foreground">
-                                    {subcategory.topics.length} topic
-                                    {subcategory.topics.length !== 1 ? 's' : ''}
+                                </div>
+                                <p className="text-sm text-muted-foreground pt-2">
+                                    {s.topics.length} topic{s.topics.length === 1 ? '' : 's'}
                                 </p>
                             </Card>
                         </Link>
                     ))}
                 </div>
             )}
+
+            {/* Modal for Add/Edit */}
+            <SubcategoryFormModal
+                isOpen={isModalOpen}
+                subcategory={editingSubcategory}
+                onClose={() => setIsModalOpen(false)}
+                onSubmit={(name: any, icon: any) => {
+                    if (editingSubcategory) {
+                        onUpdateSubcategory(editingSubcategory.id, name, icon);
+                        toast.success('Subcategory updated!');
+                    } else {
+                        onAddSubcategory(name, icon);
+                        toast.success('Subcategory added!');
+                    }
+                    setIsModalOpen(false);
+                }}
+            />
+
+            {/* Delete Confirmation */}
             <DeleteModal
                 isOpen={isDeleting}
                 onCancel={() => setIsDeleting(false)}
                 handleDelete={() => {
                     onDeleteSubcategory(deletingId);
                     setIsDeleting(false);
-                    toast.success('Subcategory deleted successfully!');
+                    toast.success('Deleted successfully!');
                 }}
             />
         </div>

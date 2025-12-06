@@ -12,11 +12,11 @@ export default function StudyNotesPage() {
     const [subcategories, setSubcategories] = useState(mockData[category as string] || []);
     const [selectedSubcategory, setSelectedSubcategory] = useState<string | null>(subcategories[0]?.id || null);
 
-    const handleAddSubcategory = (name: string, description: string) => {
+    const handleAddSubcategory = (name: string, icon: string) => {
         const newSubcategory = {
             id: `sub-${Date.now()}`,
             name,
-            description,
+            icon,
             topics: [],
         };
         setSubcategories([...subcategories, newSubcategory]);
