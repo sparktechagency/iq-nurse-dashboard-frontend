@@ -1,62 +1,107 @@
-import {  Button, Descriptions, Modal, Tag } from 'antd'
+import { Button, Descriptions, Modal, Tag } from 'antd';
 
 import { UserOutlined, MailOutlined, PhoneOutlined, CalendarOutlined } from '@ant-design/icons';
+import { Briefcase, Earth } from 'lucide-react';
 export default function UserModal({
     isModalVisible,
     handleModalClose,
-    selectedUser
+    selectedUser,
 }: {
     isModalVisible: boolean;
     handleModalClose: () => void;
-    selectedUser: any
+    selectedUser: any;
 }) {
-  
-  return (
-    <Modal
-    centered
-          title={<span className="text-lg font-semibold">User Details</span>}
-          open={isModalVisible}
-          onCancel={handleModalClose}
-          footer={[
-            <Button key="close" onClick={handleModalClose}>
-              Close
-            </Button>,
-          ]}
-          width={600}
+    return (
+        <Modal
+            centered
+            title={<span className="text-lg font-semibold">User Details</span>}
+            open={isModalVisible}
+            onCancel={handleModalClose}
+            footer={[
+                <Button key="close" onClick={handleModalClose}>
+                    Close
+                </Button>,
+            ]}
+            width={600}
         >
-          {selectedUser && (
-            <div className="py-4">
-              <Descriptions bordered column={1} size="middle">
-                <Descriptions.Item 
-                  label={<span className="font-medium"><UserOutlined className="mr-2" />Serial ID</span>}
-                >
-                  <Tag color="blue">{selectedUser.serialId}</Tag>
-                </Descriptions.Item>
-                <Descriptions.Item 
-                  label={<span className="font-medium"><UserOutlined className="mr-2" />User Name</span>}
-                >
-                  {selectedUser.userName}
-                </Descriptions.Item>
-                <Descriptions.Item 
-                  label={<span className="font-medium"><MailOutlined className="mr-2" />Email</span>}
-                >
-                  {selectedUser.email}
-                </Descriptions.Item>
-                <Descriptions.Item 
-                  label={<span className="font-medium"><PhoneOutlined className="mr-2" />Contact Number</span>}
-                >
-                  {selectedUser.contactNumber}
-                </Descriptions.Item>
-                <Descriptions.Item 
-                  label={<span className="font-medium"><CalendarOutlined className="mr-2" />Subscription</span>}
-                >
-                  <Tag color={selectedUser.subscription === 'Yearly' ? 'green' : 'orange'}>
-                    {selectedUser.subscription}
-                  </Tag>
-                </Descriptions.Item>
-              </Descriptions>
-            </div>
-          )}
+            {selectedUser && (
+                <div className="py-4">
+                    <Descriptions bordered column={1} size="middle">
+                        <Descriptions.Item
+                            label={
+                                <span className="font-medium">
+                                    <UserOutlined className="mr-2" />
+                                    Serial ID
+                                </span>
+                            }
+                        >
+                            <Tag color="blue">{selectedUser.serialId}</Tag>
+                        </Descriptions.Item>
+                        <Descriptions.Item
+                            label={
+                                <span className="font-medium">
+                                    <UserOutlined className="mr-2" />
+                                    User Name
+                                </span>
+                            }
+                        >
+                            {selectedUser.userName}
+                        </Descriptions.Item>
+                        <Descriptions.Item
+                            label={
+                                <span className="font-medium">
+                                    <MailOutlined className="mr-2" />
+                                    Email
+                                </span>
+                            }
+                        >
+                            {selectedUser.email}
+                        </Descriptions.Item>
+                        <Descriptions.Item
+                            label={
+                                <span className="font-medium">
+                                    <PhoneOutlined className="mr-2" />
+                                    Contact Number
+                                </span>
+                            }
+                        >
+                            {selectedUser.contactNumber}
+                        </Descriptions.Item>
+                        <Descriptions.Item
+                            label={
+                                <span className="font-medium inline-flex items-center">
+                                    <Earth size={14} className="mr-2" />
+                                    Country
+                                </span>
+                            }
+                        >
+                            {selectedUser.country}
+                        </Descriptions.Item>
+                        <Descriptions.Item
+                            label={
+                                <span className="font-medium inline-flex items-center">
+                                    <Briefcase size={14} className="mr-2" />
+                                    Profession
+                                </span>
+                            }
+                        >
+                            {selectedUser?.profession}
+                        </Descriptions.Item>
+                        <Descriptions.Item
+                            label={
+                                <span className="font-medium">
+                                    <CalendarOutlined className="mr-2" />
+                                    Subscription
+                                </span>
+                            }
+                        >
+                            <Tag color={selectedUser.subscription === 'Yearly' ? 'green' : 'orange'}>
+                                {selectedUser.subscription}
+                            </Tag>
+                        </Descriptions.Item>
+                    </Descriptions>
+                </div>
+            )}
         </Modal>
-  )
+    );
 }
