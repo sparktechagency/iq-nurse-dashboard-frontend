@@ -17,7 +17,6 @@ import BodySystem from '../pages/dashboard/body-system';
 import ExamsPage from '../pages/dashboard/exams';
 import TemplatesPage from '../pages/dashboard/templates';
 import FlashcardsPage from '../pages/dashboard/flashcards';
-import FAQPage from '../pages/dashboard/faq';
 import ErrorPage from '../pages/error/ErrorPage';
 import StudyNotesPage from '../pages/dashboard/study-notes';
 import SubcategoryTopicsPage from '../pages/dashboard/study-notes/SubCategoryIndex';
@@ -27,6 +26,8 @@ import FlashcardList from '../pages/dashboard/flashcards/FlashcardList';
 
 import CategorySkillsPage from '../pages/dashboard/clinical-skills/skills';
 import TopicQuestionsPage from '../pages/dashboard/exams/topic-questions';
+import FAQCategoryPage from '../pages/dashboard/faq';
+import FAQs from '../pages/dashboard/faq/faqs';
 
 const router = createBrowserRouter([
     {
@@ -54,7 +55,8 @@ const router = createBrowserRouter([
             { path: 'notification', element: <Notification /> },
             { path: 'privacy-policy', element: <PrivacyPolicy /> },
             { path: 'terms-and-condition', element: <TermsAndCondition /> },
-            { path: 'faq', element: <FAQPage /> },
+            { path: 'faq', element: <FAQCategoryPage /> },
+            { path: 'faq/:category', element: <FAQs /> },
         ],
     },
     { path: '/login', element: <Login /> },
