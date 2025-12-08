@@ -21,13 +21,12 @@ import ErrorPage from '../pages/error/ErrorPage';
 import StudyNotesPage from '../pages/dashboard/study-notes';
 import SubcategoryTopicsPage from '../pages/dashboard/study-notes/SubCategoryIndex';
 import AddBodySystem from '../pages/dashboard/body-system/add-body-system';
-
 import FlashcardList from '../pages/dashboard/flashcards/FlashcardList';
-
 import CategorySkillsPage from '../pages/dashboard/clinical-skills/skills';
 import TopicQuestionsPage from '../pages/dashboard/exams/topic-questions';
 import FAQCategoryPage from '../pages/dashboard/faq';
 import FAQs from '../pages/dashboard/faq/faqs';
+import PatientAssessmentCategory from '../pages/dashboard/patient-assessment/PatientAssessmentCategory';
 
 const router = createBrowserRouter([
     {
@@ -43,7 +42,8 @@ const router = createBrowserRouter([
             { path: 'study-notes/:category/:subcategory', element: <SubcategoryTopicsPage /> },
             { path: 'body-system', element: <BodySystem /> },
             { path: 'body-system/add-body-system', element: <AddBodySystem /> },
-            { path: 'patient-assessment', element: <PatientAssessment /> },
+            { path: 'patient-assessment', element: <PatientAssessmentCategory /> },
+            { path: 'patient-assessment/:categoryId', element: <PatientAssessment /> },
             { path: 'clinical-skills', element: <ClinicalSkills /> },
             { path: 'clinical-skills/:categoryId', element: <CategorySkillsPage /> },
             { path: 'templates', element: <TemplatesPage /> },
