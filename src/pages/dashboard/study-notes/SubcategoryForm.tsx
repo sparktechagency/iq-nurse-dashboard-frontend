@@ -3,7 +3,17 @@
 import { useEffect, useState } from 'react';
 import { Modal, Form, Input, Button } from 'antd';
 
-const NOTE_EMOJIS = ['🧠', '✨', '📒', '📂', '📄', '📑', '🧪', '⚗️', '💊', '🏨'];
+const NOTE_ICONS = [
+    '/icons/study-notes/icon1.png',
+    '/icons/study-notes/icon2.png',
+    '/icons/study-notes/icon3.png',
+    '/icons/study-notes/icon4.png',
+    '/icons/study-notes/icon5.png',
+    '/icons/study-notes/icon6.png',
+    '/icons/study-notes/icon7.png',
+    '/icons/study-notes/icon8.png',
+    '/icons/study-notes/icon9.png',
+];
 
 interface SubcategoryFormModalProps {
     isOpen: boolean;
@@ -14,7 +24,7 @@ interface SubcategoryFormModalProps {
 
 export default function SubcategoryFormModal({ isOpen, subcategory, onClose, onSubmit }: SubcategoryFormModalProps) {
     const [form] = Form.useForm();
-    const [selectedIcon, setSelectedIcon] = useState(NOTE_EMOJIS[0]);
+    const [selectedIcon, setSelectedIcon] = useState(NOTE_ICONS[0]);
 
     // Prefill form
     useEffect(() => {
@@ -26,8 +36,8 @@ export default function SubcategoryFormModal({ isOpen, subcategory, onClose, onS
             setSelectedIcon(subcategory.icon);
         } else {
             form.resetFields();
-            form.setFieldsValue({ icon: NOTE_EMOJIS[0] });
-            setSelectedIcon(NOTE_EMOJIS[0]);
+            form.setFieldsValue({ icon: NOTE_ICONS[0] });
+            setSelectedIcon(NOTE_ICONS[0]);
         }
     }, [subcategory, isOpen]);
 
@@ -55,7 +65,7 @@ export default function SubcategoryFormModal({ isOpen, subcategory, onClose, onS
                     {/* Icon Picker */}
                     <Form.Item label="Subcategory Icon" name="icon">
                         <div className="grid grid-cols-5 gap-2 mt-2">
-                            {NOTE_EMOJIS.map((icon) => (
+                            {NOTE_ICONS.map((icon) => (
                                 <button
                                     key={icon}
                                     type="button"
@@ -63,13 +73,10 @@ export default function SubcategoryFormModal({ isOpen, subcategory, onClose, onS
                                         setSelectedIcon(icon);
                                         form.setFieldsValue({ icon });
                                     }}
-                                    className={`p-3 text-2xl border-2 rounded-lg transition-all ${
-                                        selectedIcon === icon
-                                            ? 'border-orange-600 bg-orange-50'
-                                            : 'border-border hover:border-orange-300'
-                                    }`}
+                                    className={`p-3 border-2 rounded-lg transition-all flex items-center justify-center
+            ${selectedIcon === icon ? 'border-orange-600 bg-orange-50' : 'border-border hover:border-orange-300'}`}
                                 >
-                                    {icon}
+                                    <img src={icon} className="w-7 h-7 object-contain" alt="icon" />
                                 </button>
                             ))}
                         </div>

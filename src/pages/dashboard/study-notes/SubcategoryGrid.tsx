@@ -66,8 +66,9 @@ export default function SubcategoryGrid({
                         <Link key={s.id} to={`/study-notes/${category}/${s.id}`} style={{ textDecoration: 'none' }}>
                             <Card hoverable>
                                 <div className="flex justify-between items-center border-b pb-2">
-                                    <h4 className='text-lg font-medium' >
-                                        <span className="text-2xl mr-1"> {s.icon}</span> {s.name}
+                                    <h4 className="text-lg font-medium flex items-center gap-2">
+                                        <img src={s.icon} alt={s.name} className="w-7 h-7 object-contain" />
+                                        {s.name}
                                     </h4>
                                     <div onClick={(e) => e.preventDefault()} style={{ display: 'flex', gap: 8 }}>
                                         <Button

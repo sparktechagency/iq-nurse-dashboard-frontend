@@ -4,7 +4,7 @@ export const mockData: any = {
             id: 'sub-1',
             name: 'Medical-Surgical Nursing',
             description: 'Core medical and surgical nursing concepts',
-            icon: '🧠',
+            icon: '/icons/study-notes/icon1.png',
             topics: [
                 {
                     id: 'topic-1',
@@ -51,7 +51,7 @@ export const mockData: any = {
             id: 'sub-2',
             name: 'Pharmacology',
             description: 'Drug classifications and nursing considerations',
-            icon: '🧪',
+            icon: '/icons/study-notes/icon3.png',
             topics: [
                 {
                     id: 'topic-3',
@@ -68,6 +68,7 @@ export const mockData: any = {
         {
             id: 'sub-3',
             name: 'Pharmaceutical Sciences',
+            icon: '/icons/study-notes/icon9.png',
             description: 'Chemistry and pharmacokinetics',
             topics: [
                 {
@@ -91,6 +92,7 @@ export const mockData: any = {
         {
             id: 'sub-4',
             name: 'Basic Nursing Care',
+            icon: '/icons/study-notes/icon4.png',
             description: 'Fundamental nursing skills',
             topics: [
                 {
