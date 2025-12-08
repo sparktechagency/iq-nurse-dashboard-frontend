@@ -13,6 +13,7 @@ export default function UserModal({
   
   return (
     <Modal
+    centered
           title={<span className="text-lg font-semibold">User Details</span>}
           open={isModalVisible}
           onCancel={handleModalClose}

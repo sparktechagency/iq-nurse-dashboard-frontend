@@ -1,52 +1,41 @@
-import { Button, Input, Table } from 'antd';
+import { Button, Input, Select, Table } from 'antd';
 import { EyeOutlined, LockOutlined } from '@ant-design/icons';
+import { useMemo, useState } from 'react';
 import { User, userData } from '../../../demo-data/users.data';
-import { useState } from 'react';
 import UserModal from './UserModal';
 import BlockModal from './BlockModal';
 import HeaderTitle from '../../../components/shared/HeaderTitle';
 
 export default function Users({ dashboard }: { dashboard?: boolean }) {
-    const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+    const [isModalVisible, setIsModalVisible] = useState(false);
     const [selectedUser, setSelectedUser] = useState<User | null>(null);
-    const [isBlockModalVisible, setIsBlockModalVisible] = useState<boolean>(false);
+    const [isBlockModalVisible, setIsBlockModalVisible] = useState(false);
     const [userToBlock, setUserToBlock] = useState<User | null>(null);
+    const [countryFilter, setCountryFilter] = useState<string | null>(null);
 
-    
-    const showUserDetails = (user: User) => {
-        setSelectedUser(user);
-        setIsModalVisible(true);
-    };
+    // Unique country list
+    const countryOptions = useMemo(
+        () =>
+            Array.from(new Set(userData.map((user) => user.country))).map((country) => ({
+                label: country,
+                value: country,
+            })),
+        [],
+    );
 
-    const handleModalClose = () => {
-        setIsModalVisible(false);
-        setSelectedUser(null);
-    };
-
-   const showBlockModal = (user: User) => {
-    setUserToBlock(user);
-    setIsBlockModalVisible(true);
-  };
-
-  const handleBlockConfirm = () => {
-    // Handle block user logic here
-    console.log('Blocking user:', userToBlock);
-    setIsBlockModalVisible(false);
-    setUserToBlock(null);
-  };
-
-  const handleBlockCancel = () => {
-    setIsBlockModalVisible(false);
-    setUserToBlock(null);
-  };
-
+    // Filtered users
+    const filteredUsers = useMemo(() => {
+        return userData.filter((user) => {
+            if (!countryFilter) return true;
+            return user.country === countryFilter;
+        });
+    }, [countryFilter]);
 
     const columns = [
         {
             title: 'Serial ID',
             dataIndex: 'serialId',
             key: 'serialId',
-            responsive: ['sm'] as any,
         },
         {
             title: 'User Name',
@@ -54,10 +43,19 @@ export default function Users({ dashboard }: { dashboard?: boolean }) {
             key: 'userName',
         },
         {
+            title: 'Country',
+            dataIndex: 'country',
+            key: 'country',
+        },
+        {
+            title: 'Profession',
+            dataIndex: 'profession',
+            key: 'profession',
+        },
+        {
             title: 'Email',
             dataIndex: 'email',
             key: 'email',
-            responsive: ['md'] as any,
         },
         {
             title: 'Contact Number',
@@ -69,7 +67,6 @@ export default function Users({ dashboard }: { dashboard?: boolean }) {
             title: 'Subscription',
             dataIndex: 'subscription',
             key: 'subscription',
-            responsive: ['sm'] as any,
         },
         {
             title: 'Action',
@@ -79,14 +76,19 @@ export default function Users({ dashboard }: { dashboard?: boolean }) {
                     <Button
                         type="text"
                         icon={<EyeOutlined />}
-                        className="text-gray-500 hover:text-blue-500"
-                        onClick={() => showUserDetails(record)}
+                        onClick={() => {
+                            setSelectedUser(record);
+                            setIsModalVisible(true);
+                        }}
                     />
                     <Button
                         type="text"
                         icon={<LockOutlined />}
-                        className={record?.status =="active"? "text-gray-500 hover:!text-red-500":"hover:!text-gray-500 !text-red-500"}
-                        onClick={() => showBlockModal(record)}
+                        className={record.status === 'active' ? 'text-gray-500 hover:!text-red-500' : '!text-red-500'}
+                        onClick={() => {
+                            setUserToBlock(record);
+                            setIsBlockModalVisible(true);
+                        }}
                     />
                 </div>
             ),
@@ -95,29 +97,47 @@ export default function Users({ dashboard }: { dashboard?: boolean }) {
 
     return (
         <>
-            <div className="rounded-lg shadow-sm border border-gray-200 p-4"> 
-                <div className="flex items-center justify-between mb-4">  
+            <div className="rounded-lg shadow-sm border border-gray-200 p-4">
+                <div className="flex items-center justify-between mb-4">
                     <HeaderTitle title="Users" />
-                <Input placeholder="Search" className="" style={{ width: 280 , height: 40}} prefix={<i className="bi bi-search"></i>} />
+
+                    <div className="flex gap-3">
+                        <Select
+                            allowClear
+                            showSearch
+                            placeholder="Filter by country"
+                            options={countryOptions}
+                            style={{ width: 220, height: 40 }}
+                            onChange={(value) => setCountryFilter(value)}
+                            optionFilterProp="label"
+                        />
+
+                        <Input
+                            placeholder="Search"
+                            style={{ width: 280, height: 40 }}
+                            prefix={<i className="bi bi-search"></i>}
+                        />
+                    </div>
                 </div>
+
                 <Table
                     columns={columns}
-                    dataSource={userData}
-                    pagination={dashboard ? false : { pageSize: 9, total: userData.length }}
+                    dataSource={filteredUsers}
+                    pagination={dashboard ? false : { pageSize: 9 }}
                     className="custom-table"
                 />
             </div>
 
             <UserModal
                 isModalVisible={isModalVisible}
-                handleModalClose={handleModalClose}
+                handleModalClose={() => setIsModalVisible(false)}
                 selectedUser={selectedUser}
             />
 
             <BlockModal
                 isBlockModalVisible={isBlockModalVisible}
-                handleBlockCancel={handleBlockCancel}
-                handleBlockConfirm={handleBlockConfirm}
+                handleBlockCancel={() => setIsBlockModalVisible(false)}
+                handleBlockConfirm={() => setIsBlockModalVisible(false)}
                 isUserBlocked={userToBlock?.status !== 'active'}
             />
         </>
