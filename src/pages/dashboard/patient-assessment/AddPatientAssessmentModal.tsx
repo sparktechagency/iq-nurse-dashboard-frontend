@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Modal, Form, Input, message, } from 'antd';
 import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
-import FileUploadBox from '../../../components/shared/FileUploadBox';
 
 interface SyndromeRow {
   asessment: string;
@@ -20,8 +19,7 @@ const AddPatientAssessmentModal: React.FC<AddPatientAssessmentModalProps> = ({ v
   const [syndromes, setSyndromes] = useState<SyndromeRow[]>([
     { asessment: '', normal: '', abnormal: '' }
   ]);
-  const [_, setIconPreview] = useState<string | null>(null);
-  const [__, setImagePreview] = useState<string | null>(null);
+
 
   const handleAddSyndrome = () => {
     setSyndromes([...syndromes, { asessment: '', normal: '', abnormal: '' }]);
@@ -37,19 +35,6 @@ const AddPatientAssessmentModal: React.FC<AddPatientAssessmentModalProps> = ({ v
     setSyndromes(newSyndromes);
   };
 
-  const handleIconChange = (info: any) => {
-    if (info.file && info.file.originFileObj) {
-      setIconPreview(URL.createObjectURL(info.file.originFileObj));
-      form.setFieldsValue({ icon: info.file.originFileObj });
-    }
-  };
-
-  const handleImageChange = (info: any) => {
-    if (info.file && info.file.originFileObj) {
-      setImagePreview(URL.createObjectURL(info.file.originFileObj));
-      form.setFieldsValue({ image: info.file.originFileObj });
-    }
-  };
 
   const handleFinish = (values: any) => {
     if (syndromes.some(s => !s.asessment || !s.normal || !s.abnormal)) {
@@ -66,13 +51,11 @@ const AddPatientAssessmentModal: React.FC<AddPatientAssessmentModalProps> = ({ v
     });
     form.resetFields();
     setSyndromes([{ asessment: '', normal: '', abnormal: '' }]);
-    setIconPreview(null);
-    setImagePreview(null);
   };
 
   return (
     <Modal
-      title={<span className="text-lg font-semibold">Add Category</span>}
+      title={<span className="text-lg font-semibold">Add Assessment</span>}
       open={visible}
       onCancel={onCancel}
       footer={null}
@@ -81,36 +64,12 @@ const AddPatientAssessmentModal: React.FC<AddPatientAssessmentModalProps> = ({ v
       centered
     >
       <Form form={form} layout="vertical" onFinish={handleFinish}>
-        {/* File uploads side by side */}
-        <div className="flex gap-4 mb-6">
-          <Form.Item
-            label="Category Icon"
-            name="icon"
-            className="flex-1"
-          >
-            <FileUploadBox
-              getFile={handleIconChange}
-              title="Upload Icon"
-            />
-          </Form.Item>
-          <Form.Item
-            label="Category Image"
-            name="image"
-            className="flex-1"
-          >
-            <FileUploadBox
-              getFile={handleImageChange}
-              title="Upload Image"
-            />
-          </Form.Item>
-        </div>
-
         <Form.Item
-          label="Category Name"
+          label="Assessment Title"
           name="name"
-          rules={[{ required: true, message: 'Please enter category name' }]}
+          rules={[{ required: true, message: 'Please enter assessment name' }]}
         >
-          <Input placeholder="Enter Category Name" size="large" />
+          <Input placeholder="Enter Assessment Name" size="large" />
         </Form.Item>
 
         <Form.Item label="Description" name="description">
