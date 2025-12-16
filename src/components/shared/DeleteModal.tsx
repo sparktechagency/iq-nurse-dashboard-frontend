@@ -5,8 +5,8 @@ interface DeleteModalProps {
     isOpen: boolean;
     onCancel: () => void;
     handleDelete: () => void;
-    title: string;
-    description: string;
+    title?: string;
+    description?: string;
 }
 
 export default function DeleteModal({

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import { ArrowLeft, Plus, Pencil, Trash2, Search } from 'lucide-react';
-import { Card, Table, Button, Input, Badge, Space } from 'antd';
+import { ArrowLeft, Plus, Pencil, Trash2 } from 'lucide-react';
+import { Table, Button, Input, Badge, Space } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { useNavigate, useParams } from 'react-router-dom';
 import { carePlansCategories } from '../../../../utils/carePlansCategories';
