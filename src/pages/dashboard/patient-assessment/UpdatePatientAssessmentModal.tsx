@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Button, Modal, Form, Input, message } from 'antd';
-import FileUploadBox from '../../../components/shared/FileUploadBox';
 import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
 
 interface SyndromeRow {
@@ -21,14 +20,12 @@ const UpdatePatientAssessmentModal: React.FC<UpdatePatientAssessmentModalProps> 
   const [syndromes, setSyndromes] = useState<SyndromeRow[]>(
     initialData?.syndromes
       ? initialData.syndromes.asessment.map((a: string, idx: number) => ({
-          asessment: a,
-          normal: initialData.syndromes.normal[idx] || '',
-          abnormal: initialData.syndromes.abnormal[idx] || '',
-        }))
+        asessment: a,
+        normal: initialData.syndromes.normal[idx] || '',
+        abnormal: initialData.syndromes.abnormal[idx] || '',
+      }))
       : [{ asessment: '', normal: '', abnormal: '' }]
   );
-  const [_, setIconPreview] = useState<string | null>(initialData?.icon || null);
-  const [__, setImagePreview] = useState<string | null>(initialData?.image || null);
 
   const handleAddSyndrome = () => {
     setSyndromes([...syndromes, { asessment: '', normal: '', abnormal: '' }]);
@@ -42,20 +39,6 @@ const UpdatePatientAssessmentModal: React.FC<UpdatePatientAssessmentModalProps> 
     const newSyndromes = [...syndromes];
     newSyndromes[idx][field] = value;
     setSyndromes(newSyndromes);
-  };
-
-  const handleIconChange = (info: any) => {
-    if (info.file && info.file.originFileObj) {
-      setIconPreview(URL.createObjectURL(info.file.originFileObj));
-      form.setFieldsValue({ icon: info.file.originFileObj });
-    }
-  };
-
-  const handleImageChange = (info: any) => {
-    if (info.file && info.file.originFileObj) {
-      setImagePreview(URL.createObjectURL(info.file.originFileObj));
-      form.setFieldsValue({ image: info.file.originFileObj });
-    }
   };
 
   const handleFinish = (values: any) => {
@@ -76,7 +59,7 @@ const UpdatePatientAssessmentModal: React.FC<UpdatePatientAssessmentModalProps> 
 
   return (
     <Modal
-      title={<span className="text-lg font-semibold">Update Category</span>}
+      title={<span className="text-lg font-semibold">Update Assessment</span>}
       open={visible}
       onCancel={onCancel}
       footer={null}
@@ -85,17 +68,9 @@ const UpdatePatientAssessmentModal: React.FC<UpdatePatientAssessmentModalProps> 
       centered
     >
       <Form form={form} layout="vertical" onFinish={handleFinish} initialValues={initialData}>
-        <div className="flex gap-4 mb-6">
-          <Form.Item label="Category Icon" name="icon" className="flex-1">
-            <FileUploadBox file={initialData?.icon} getFile={handleIconChange} title="Upload Icon" />
-          </Form.Item>
-          <Form.Item label="Category Image" name="image" className="flex-1">
-            <FileUploadBox file={initialData?.image} getFile={handleImageChange} title="Upload Image" />
-          </Form.Item>
-        </div>
-        <Form.Item label="Category Name" name="name" rules={[{ required: true, message: 'Please enter category name' }]}> <Input placeholder="Enter Category Name" size="large" value={initialData?.name} /> </Form.Item>
+        <Form.Item label="Assessment Title" name="name" rules={[{ required: true, message: 'Please enter assessment name' }]}> <Input placeholder="Enter Assessment Name" size="large" value={initialData?.name} /> </Form.Item>
         <Form.Item label="Description" name="description"> <Input.TextArea rows={3} placeholder="Enter description" value={initialData?.description} /> </Form.Item>
-        <Form.Item label="Note" name="note"> <Input.TextArea rows={2} placeholder="Enter note"  value={initialData?.note} /> </Form.Item>
+        <Form.Item label="Note" name="note"> <Input.TextArea rows={2} placeholder="Enter note" value={initialData?.note} /> </Form.Item>
         <Form.Item label="Syndromes">
           <div className="border border-gray-300 rounded-lg overflow-hidden">
             <div className="max-h-80 overflow-y-auto">
