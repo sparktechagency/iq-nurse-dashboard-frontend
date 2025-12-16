@@ -28,6 +28,8 @@ import CategorySkillsPage from '../pages/dashboard/clinical-skills/skills';
 import TopicQuestionsPage from '../pages/dashboard/exams/topic-questions';
 import FAQCategoryPage from '../pages/dashboard/faq';
 import FAQs from '../pages/dashboard/faq/faqs';
+import CarePlansMainPage from '../pages/dashboard/care-plans';
+import CarePlansTopic from '../pages/dashboard/care-plans/topic-page';
 
 const router = createBrowserRouter([
     {
@@ -44,6 +46,8 @@ const router = createBrowserRouter([
             { path: 'body-system', element: <BodySystem /> },
             { path: 'body-system/add-body-system', element: <AddBodySystem /> },
             { path: 'patient-assessment', element: <PatientAssessment /> },
+            { path: 'care-plans', element: <CarePlansMainPage /> },
+            { path: 'care-plans/:categoryId', element: <CarePlansTopic /> },
             { path: 'clinical-skills', element: <ClinicalSkills /> },
             { path: 'clinical-skills/:categoryId', element: <CategorySkillsPage /> },
             { path: 'templates', element: <TemplatesPage /> },

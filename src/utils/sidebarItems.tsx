@@ -60,6 +60,12 @@ const sidebarItems: TSidebarItem[] = [
         icon: '/icons/assessment.png',
     },
     {
+        key: 'care-plans',
+        label: 'Care Plans',
+        path: 'care-plans',
+        icon: '/icons/care-plans-icon.svg',
+    },
+    {
         key: 'clinical-skills',
         label: 'Clinical Skills',
         path: 'clinical-skills',

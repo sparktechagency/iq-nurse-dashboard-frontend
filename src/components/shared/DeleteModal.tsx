@@ -5,15 +5,23 @@ interface DeleteModalProps {
     isOpen: boolean;
     onCancel: () => void;
     handleDelete: () => void;
+    title: string;
+    description: string;
 }
 
-export default function DeleteModal({ isOpen, onCancel, handleDelete }: DeleteModalProps) {
+export default function DeleteModal({
+    isOpen,
+    onCancel,
+    handleDelete,
+    title = 'Delete Item',
+    description = 'Are you sure?',
+}: DeleteModalProps) {
     return (
-        <Modal open={isOpen} onCancel={onCancel} title="Delete Item" footer={null} width={480} centered>
+        <Modal open={isOpen} onCancel={onCancel} title={title} footer={null} width={480} centered>
             <div style={{ display: 'flex', gap: '12px', marginBottom: '16px' }}>
                 <ExclamationCircleOutlined style={{ fontSize: 32, color: '#ff4d4f' }} />
                 <div>
-                    <h3 style={{ fontSize: '16px', marginBottom: 4 }}>Are you sure?</h3>
+                    <h3 style={{ fontSize: '16px', marginBottom: 4 }}>{description}</h3>
                     <p style={{ color: '#595959' }}>
                         This action cannot be undone. This will permanently delete the item and remove all associated
                         data.
