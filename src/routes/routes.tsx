@@ -18,7 +18,7 @@ import ExamsPage from '../pages/dashboard/exams';
 import TemplatesPage from '../pages/dashboard/templates';
 import FlashcardsPage from '../pages/dashboard/flashcards';
 import ErrorPage from '../pages/error/ErrorPage';
-import StudyNotesPage from '../pages/dashboard/study-notes';
+// import StudyNotesPage from '../pages/dashboard/study-notes';
 import SubcategoryTopicsPage from '../pages/dashboard/study-notes/SubCategoryIndex';
 import AddBodySystem from '../pages/dashboard/body-system/add-body-system';
 import FlashcardList from '../pages/dashboard/flashcards/FlashcardList';
@@ -29,6 +29,8 @@ import FAQs from '../pages/dashboard/faq/faqs';
 import CarePlansMainPage from '../pages/dashboard/care-plans';
 import CarePlansTopic from '../pages/dashboard/care-plans/topic-page';
 import PatientAssessmentCategory from '../pages/dashboard/patient-assessment/PatientAssessmentCategory';
+import StudyNoteMainTopic from '../pages/dashboard/study-notes/StudyNoteMainTopic';
+import StudyNoteCategory from '../pages/dashboard/study-notes/StudyNoteCategory';
 
 const router = createBrowserRouter([
     {
@@ -40,7 +42,9 @@ const router = createBrowserRouter([
             { path: 'users', element: <Users /> },
             { path: 'package', element: <Packages /> },
             // study notes
-            { path: 'study-notes/:category', element: <StudyNotesPage /> },
+            { path: 'study-notes', element: <StudyNoteMainTopic /> },
+            { path: 'study-notes/:category', element: <StudyNoteCategory /> },
+            // { path: 'study-notes/:category', element: <StudyNotesPage /> },
             { path: 'study-notes/:category/:subcategory', element: <SubcategoryTopicsPage /> },
             { path: 'body-system', element: <BodySystem /> },
             { path: 'body-system/add-body-system', element: <AddBodySystem /> },

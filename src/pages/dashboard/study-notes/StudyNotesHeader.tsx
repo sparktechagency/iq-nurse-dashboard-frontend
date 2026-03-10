@@ -1,16 +1,16 @@
 'use client';
 
 interface StudyNotesHeaderProps {
-    category: string;
+    category: string | undefined;
 }
 
 export default function StudyNotesHeader({ category }: StudyNotesHeaderProps) {
-    const formatCategory = (cat: string) => {
+    const formatCategory = (cat: string | undefined) => {
         if (!cat) return 'Study Notes';
         return cat
-            .split('-') // split by '-'
-            .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // capitalize each word
-            .join(' '); // join with space
+            .split('-')
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ');
     };
 
     return (

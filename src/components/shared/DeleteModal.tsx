@@ -4,18 +4,25 @@ import { ExclamationCircleOutlined, CloseCircleOutlined } from '@ant-design/icon
 interface DeleteModalProps {
     isOpen: boolean;
     onCancel: () => void;
-    handleDelete: () => void;
     title?: string;
     description?: string;
+    deletingId: string;
+    setIsDeleting: (value: boolean) => void;
 }
 
 export default function DeleteModal({
     isOpen,
     onCancel,
-    handleDelete,
+    deletingId,
     title = 'Delete Item',
     description = 'Are you sure?',
+    setIsDeleting,
 }: DeleteModalProps) {
+    const handleDelete = (id: string) => {
+        setIsDeleting(false);
+        console.log(id);
+    };
+
     return (
         <Modal open={isOpen} onCancel={onCancel} title={title} footer={null} width={480} centered>
             <div style={{ display: 'flex', gap: '12px', marginBottom: '16px' }}>
@@ -49,7 +56,7 @@ export default function DeleteModal({
 
             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '8px' }}>
                 <Button onClick={onCancel}>Cancel</Button>
-                <Button onClick={handleDelete} danger>
+                <Button onClick={() => handleDelete(deletingId)} danger>
                     Delete
                 </Button>
             </div>

@@ -26,12 +26,11 @@ interface TopicListProps {
     selectedTopic: string | null;
     onSelectTopic: (id: string | null) => void;
     onUpdateTopic: (id: string, updates: any) => void;
-    onDeleteTopic: (id: string) => void;
     setEditingTopicId: (id: string | null) => void;
     editingTopicId: string | null;
 }
 
-export default function TopicList({ subcategory, selectedTopic, onSelectTopic, onDeleteTopic }: TopicListProps) {
+export default function TopicList({ subcategory, selectedTopic, onSelectTopic }: TopicListProps) {
     const [isDeletingTopic, setIsDeletingTopic] = useState(false);
     const [topicToDeleteId, setTopicToDeleteId] = useState<string | null>(null);
     return (
@@ -77,11 +76,8 @@ export default function TopicList({ subcategory, selectedTopic, onSelectTopic, o
             <DeleteModal
                 isOpen={isDeletingTopic}
                 onCancel={() => setIsDeletingTopic(false)}
-                handleDelete={() => {
-                    onDeleteTopic(topicToDeleteId || '');
-                    setIsDeletingTopic(false);
-                    toast.success('Topic deleted successfully.');
-                }}
+                deletingId={subcategory?.id}
+                setIsDeleting={setIsDeletingTopic}
             />
         </div>
     );

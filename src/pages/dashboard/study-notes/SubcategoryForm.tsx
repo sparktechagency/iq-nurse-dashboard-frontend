@@ -1,92 +1,96 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Modal, Form, Input, Button } from 'antd';
-
-const NOTE_ICONS = [
-    '/icons/study-notes/icon1.png',
-    '/icons/study-notes/icon2.png',
-    '/icons/study-notes/icon3.png',
-    '/icons/study-notes/icon4.png',
-    '/icons/study-notes/icon5.png',
-    '/icons/study-notes/icon6.png',
-    '/icons/study-notes/icon7.png',
-    '/icons/study-notes/icon8.png',
-    '/icons/study-notes/icon9.png',
-];
+import { PlusOutlined } from '@ant-design/icons';
+import { Modal, Form, Input, Button, Upload, UploadProps } from 'antd';
 
 interface SubcategoryFormModalProps {
     isOpen: boolean;
     subcategory?: { id: string; name: string; icon: string } | null;
     onClose: () => void;
     onSubmit: (name: string, icon: string) => void;
+    title?: string;
 }
 
-export default function SubcategoryFormModal({ isOpen, subcategory, onClose, onSubmit }: SubcategoryFormModalProps) {
+export default function SubcategoryFormModal({
+    isOpen,
+    subcategory,
+    onClose,
+    onSubmit,
+    title,
+}: SubcategoryFormModalProps) {
     const [form] = Form.useForm();
-    const [selectedIcon, setSelectedIcon] = useState(NOTE_ICONS[0]);
+    const [imageUrl, setImageUrl] = useState<string>();
 
-    // Prefill form
+    const handleChange: UploadProps['onChange'] = (info) => {
+        const file = info.file.originFileObj;
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = () => {
+            const base64 = reader.result as string;
+            setImageUrl(base64);
+            form.setFieldsValue({ icon: base64 });
+        };
+
+        reader.readAsDataURL(file);
+    };
+
+    const uploadButton = (
+        <button style={{ border: 0, background: 'none' }} type="button">
+            <PlusOutlined />
+            <div style={{ marginTop: 8 }}>Upload</div>
+        </button>
+    );
+
     useEffect(() => {
         if (subcategory) {
             form.setFieldsValue({
                 name: subcategory.name,
                 icon: subcategory.icon,
             });
-            setSelectedIcon(subcategory.icon);
+            setImageUrl(subcategory.icon);
         } else {
             form.resetFields();
-            form.setFieldsValue({ icon: NOTE_ICONS[0] });
-            setSelectedIcon(NOTE_ICONS[0]);
+            setImageUrl(undefined);
         }
     }, [subcategory, isOpen]);
 
     const handleFinish = (values: any) => {
-        onSubmit(values.name, selectedIcon);
+        onSubmit(values.name, imageUrl || '');
     };
 
     return (
         <Modal open={isOpen} footer={null} onCancel={onClose} centered width={425}>
             <div className="space-y-4 py-4">
-                <h2 className="text-xl font-semibold px-1">
-                    {subcategory ? 'Edit Subcategory' : 'Add New Subcategory'}
-                </h2>
+                <h2 className="text-xl font-semibold px-1">{subcategory ? `Edit ${title}` : `Add New ${title}`}</h2>
 
                 <Form layout="vertical" form={form} onFinish={handleFinish}>
                     {/* Name */}
                     <Form.Item
-                        label="Subcategory Name"
+                        label={`${title} Name`}
                         name="name"
                         rules={[{ required: true, message: 'Please enter a name' }]}
                     >
-                        <Input placeholder="e.g., Cardiology Notes" />
+                        <Input placeholder="Enter name" />
                     </Form.Item>
 
-                    {/* Icon Picker */}
-                    <Form.Item label="Subcategory Icon" name="icon">
-                        <div className="grid grid-cols-5 gap-2 mt-2">
-                            {NOTE_ICONS.map((icon) => (
-                                <button
-                                    key={icon}
-                                    type="button"
-                                    onClick={() => {
-                                        setSelectedIcon(icon);
-                                        form.setFieldsValue({ icon });
-                                    }}
-                                    className={`p-3 border-2 rounded-lg transition-all flex items-center justify-center
-            ${selectedIcon === icon ? 'border-orange-600 bg-orange-50' : 'border-border hover:border-orange-300'}`}
-                                >
-                                    <img src={icon} className="w-7 h-7 object-contain" alt="icon" />
-                                </button>
-                            ))}
-                        </div>
+                    {/* Icon Upload */}
+                    <Form.Item
+                        label={`${title} Icon`}
+                        name="icon"
+                        rules={[{ required: true, message: 'Please upload an icon' }]}
+                    >
+                        <Upload listType="picture-card" showUploadList={false} onChange={handleChange}>
+                            {imageUrl ? <img src={imageUrl} alt="icon" style={{ width: '100%' }} /> : uploadButton}
+                        </Upload>
                     </Form.Item>
 
                     {/* Buttons */}
                     <div className="flex justify-end gap-2 mt-6">
                         <Button onClick={onClose}>Cancel</Button>
                         <Button type="primary" htmlType="submit">
-                            {subcategory ? 'Update Subcategory' : 'Create Subcategory'}
+                            {subcategory ? `Update ${title}` : `Create ${title}`}
                         </Button>
                     </div>
                 </Form>

@@ -26,26 +26,6 @@ const sidebarItems: TSidebarItem[] = [
         label: 'Study Notes',
         path: 'study-notes',
         icon: '/icons/study-notes.png',
-        children: [
-            {
-                key: 'np-study-notes',
-                label: 'NP Study Notes',
-                path: 'study-notes/np-study-notes',
-                icon: '/icons/study-notes.png',
-            },
-            {
-                key: 'rp-study-notes',
-                label: 'RP Study Notes',
-                path: 'study-notes/rp-study-notes',
-                icon: '/icons/study-notes.png',
-            },
-            {
-                key: 'lpn-study-notes',
-                label: 'LPN Study Notes',
-                path: 'study-notes/lpn-study-notes',
-                icon: '/icons/study-notes.png',
-            },
-        ],
     },
     {
         key: 'body-system',
