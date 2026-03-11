@@ -1,10 +1,9 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { ChevronLeft, Plus } from 'lucide-react';
-import { Button } from 'antd';
+import { Button, Modal } from 'antd';
 import { useNavigate, useParams } from 'react-router-dom';
 import { mainTopics } from '../../../demo-data/study-note';
 import TopicList from './TopicList';
-import TopicDetailModal from './topic-details-modal/TopicDetailModal';
 import TopicForm from './TopicForm';
 import PrimaryButton from '../../../components/shared/PrimaryButton';
 import StudyNotesHeader from './StudyNotesHeader';
@@ -14,21 +13,12 @@ export default function SubcategoryTopicsPage() {
     const router = useNavigate();
     const [isAddingTopic, setIsAddingTopic] = useState(false);
     const [editingTopicId, setEditingTopicId] = useState<string | null>(null);
-    const subcategoryId = subcategory as string;
     const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
-    const [showTopicDetail, setShowTopicDetail] = useState(false);
 
     const categoryData = mainTopics?.find((s: any) => s.title === category);
-    const subcategoryData = categoryData?.categories
-        .flatMap((cat: any) => cat.subCategories)
-        .find((sub: any) => sub.id === subcategoryId);
+    const subcategoryData = categoryData?.categories?.find((s: any) => s.id === subcategory);
 
     console.log('adasd', subcategoryData);
-
-    const currentTopic = useMemo(
-        () => subcategoryData?.subCategories?.find((t: any) => t.id === selectedTopic) || null,
-        [subcategoryData, selectedTopic],
-    );
 
     const handleAddTopic = (topic: any) => {
         if (!subcategoryData) return;
@@ -55,11 +45,11 @@ export default function SubcategoryTopicsPage() {
                             <div className="flex items-center gap-2">
                                 <h2 className="text-lg font-semibold text-foreground">{subcategoryData?.title}</h2>
                                 <p className="text-sm text-muted-foreground">
-                                    {subcategoryData?.topics.length} topic
-                                    {subcategoryData?.topics.length !== 1 ? 's' : ''}
+                                    {subcategoryData?.subCategories?.length} topic
+                                    {subcategoryData?.subCategories?.length !== 1 ? 's' : ''}
                                 </p>
                             </div>
-                            <p className="text-sm text-muted-foreground">{subcategoryData?.description}</p>
+                            {/* <p className="text-sm text-muted-foreground">{subcategoryData?.description}</p>  */}
                         </div>
                     </div>
 
@@ -73,38 +63,49 @@ export default function SubcategoryTopicsPage() {
                         width={'auto'}
                     />
                 </div>
-                {isAddingTopic && (
-                    <div className="mb-4 p-4 border border-border rounded-lg bg-muted/50">
+                <Modal
+                    title={editingTopicId ? 'Edit Topic' : 'Add New Topic'}
+                    open={isAddingTopic}
+                    onCancel={() => {
+                        setIsAddingTopic(false);
+                        setEditingTopicId(null);
+                    }}
+                    footer={null}
+                    width={800}
+                    centered
+                    destroyOnClose
+                >
+                    <div className="py-4">
                         <TopicForm
                             onSubmit={(topic) => {
-                                handleAddTopic(topic);
+                                if (editingTopicId) {
+                                    handleUpdateTopic();
+                                } else {
+                                    handleAddTopic(topic);
+                                }
                                 setIsAddingTopic(false);
+                                setEditingTopicId(null);
                             }}
-                            onCancel={() => setIsAddingTopic(false)}
+                            onCancel={() => {
+                                setIsAddingTopic(false);
+                                setEditingTopicId(null);
+                            }}
+                            isEditing={!!editingTopicId}
                         />
                     </div>
-                )}
+                </Modal>
             </div>
 
             <TopicList
-                subcategory={subcategoryData}
+                subcategory={subcategoryData?.subCategories}
                 selectedTopic={selectedTopic}
                 onSelectTopic={(topicId) => {
                     setSelectedTopic(topicId);
-                    setShowTopicDetail(true);
                 }}
                 onUpdateTopic={handleUpdateTopic}
                 setEditingTopicId={setEditingTopicId}
                 editingTopicId={editingTopicId}
             />
-
-            {currentTopic && showTopicDetail && (
-                <TopicDetailModal
-                    topic={currentTopic}
-                    onUpdate={handleUpdateTopic}
-                    onClose={() => setShowTopicDetail(false)}
-                />
-            )}
         </div>
     );
 }

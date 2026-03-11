@@ -50,7 +50,7 @@ export default function StudyNoteCategory() {
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {categoryData?.categories?.map((s: any, i: number) => (
-                        <Link key={i} to={`/study-notes/${category}/${s.title}`} style={{ textDecoration: 'none' }}>
+                        <Link key={i} to={`/study-notes/${category}/${s.id}`} style={{ textDecoration: 'none' }}>
                             <Card hoverable>
                                 <div className="flex justify-between items-center border-b pb-2">
                                     <h4 className="text-lg font-medium flex items-center gap-2">

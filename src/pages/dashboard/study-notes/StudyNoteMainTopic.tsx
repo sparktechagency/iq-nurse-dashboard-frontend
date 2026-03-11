@@ -21,7 +21,7 @@ export default function StudyNoteMainTopic() {
 
     return (
         <div className="">
-            <div className="mb-8 flex items-center justify-between">
+            <div className="mb-8 flex items-center justify-between ">
                 <div>
                     <StudyNotesHeader category={'Main Topics'} />
                     <p className="text-sm text-muted-foreground mt-1">Select a category to view and manage topics</p>
@@ -45,7 +45,7 @@ export default function StudyNoteMainTopic() {
                     }
                 />
             ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ps-2">
                     {mainTopics?.map((s: any, i: number) => (
                         <Link key={i} to={`/study-notes/${s.title}`} style={{ textDecoration: 'none' }}>
                             <Card hoverable>

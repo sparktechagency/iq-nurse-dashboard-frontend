@@ -3,6 +3,7 @@
 import { Button } from 'antd';
 import type React from 'react';
 import { useState } from 'react';
+import JoditNote from '../../../components/shared/JoditNote';
 
 interface TopicFormProps {
     onSubmit: (topic: any) => void;
@@ -66,13 +67,16 @@ export default function TopicForm({
                 />
                 {errors.title && <p className="text-xs text-destructive mt-1">{errors.title}</p>}
             </div>
-            <textarea
-                placeholder="Topic overview"
-                value={overview}
-                onChange={(e) => setOverview(e.target.value)}
-                rows={3}
-                className="w-full px-3 py-2 text-sm border border-border rounded bg-background text-foreground placeholder:text-muted-foreground resize-none"
-            />
+            <div className="min-h-[250px]">
+                <label className="block text-sm font-medium text-foreground mb-1">Topic overview</label>
+                <div className="min-h-[250px] border border-border rounded-lg">
+                    <JoditNote
+                        content={overview}
+                        handleContentChange={(newContent: string) => setOverview(newContent)}
+                        height="450px"
+                    />
+                </div>
+            </div>
             <div className="flex gap-2">
                 <Button size="large" className="flex-1 bg-primary hover:!bg-primary/90 text-white hover:!text-white">
                     {isEditing ? 'Update Topic' : 'Create Topic'}
