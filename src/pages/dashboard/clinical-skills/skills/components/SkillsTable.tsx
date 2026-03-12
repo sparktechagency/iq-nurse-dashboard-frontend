@@ -20,7 +20,7 @@ interface SkillsTableProps {
 
 export function SkillsTable({ skills, onEditSkill, onDeleteSkill }: SkillsTableProps) {
     const [isDeleting, setIsDeleting] = useState(false);
-    const [deleteId, setDeleteId] = useState<string | null>(null);
+    const [deleteId, setDeleteId] = useState<string>("");
     const columns = [
         {
             title: <span className="text-white font-semibold">Serial ID</span>,
@@ -111,14 +111,12 @@ export function SkillsTable({ skills, onEditSkill, onDeleteSkill }: SkillsTableP
         }
       `}</style>
 
-            <DeleteModal
+            {/* <DeleteModal
                 isOpen={isDeleting}
-                onCancel={() => setIsDeleting(false)}
-                handleDelete={() => {
-                    setIsDeleting(false);
-                    onDeleteSkill(deleteId!);
-                }}
-            />
+                onCancel={() => setIsDeleting(false)} 
+                deleteId={deleteId} 
+                setIsDeleting={setIsDeleting}
+            /> */}
         </div>
     );
 }

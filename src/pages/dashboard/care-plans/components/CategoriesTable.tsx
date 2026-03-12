@@ -56,7 +56,9 @@ export default function CategoriesTable({
 
             <DeleteModal
                 isOpen={!!deletingCategory}
-                handleDelete={() => setDeletingCategory(null)}
+                // handleDelete={() => setDeletingCategory(null)}  
+                deletingId={deletingCategory?.id}
+                setIsDeleting={() => setDeletingCategory(null)}
                 title="Delete Category"
                 description={`Are you sure you want to delete "${deletingCategory?.name}"? `}
                 onCancel={() => setDeletingCategory(null)}

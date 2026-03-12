@@ -133,11 +133,9 @@ export default function CarePlansTopic() {
                 isOpen={!!deletingTopic}
                 onCancel={() => setDeletingTopic(null)}
                 title="Delete Care Plan Topic"
-                description={`Are you sure you want to delete "${deletingTopic?.name}"? `}
-                handleDelete={() => {
-                    console.log('Deleting topic:', deletingTopic);
-                    setDeletingTopic(null);
-                }}
+                description={`Are you sure you want to delete "${deletingTopic?.name}"? `} 
+                deletingId={deletingTopic?.id} 
+                setIsDeleting={() => setDeletingTopic(null)}
             />
         </div>
     );

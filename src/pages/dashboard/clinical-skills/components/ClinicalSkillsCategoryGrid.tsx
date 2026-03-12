@@ -26,7 +26,7 @@ export function ClinicalSkillsCategoryGrid({
     onEditCategory,
     onDeleteCategory,
 }: CategoryGridProps) {
-    const [deleteId, setDeleteId] = useState<string | null>(null);
+    const [deleteId, setDeleteId] = useState<string>("");
     const [isDeleting, setIsDeleting] = useState(false);
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
@@ -72,11 +72,11 @@ export function ClinicalSkillsCategoryGrid({
             ))}
             <DeleteModal
                 isOpen={isDeleting}
-                onCancel={() => setIsDeleting(false)}
-                handleDelete={() => {
-                    onDeleteCategory(deleteId || '');
-                    setIsDeleting(false);
-                }}
+                onCancel={() => setIsDeleting(false)} 
+                title="Delete Skill Category"
+                description={`Are you sure you want to delete this skill category? This will also delete all associated skills.`}
+                deletingId={deleteId}
+                setIsDeleting={() => setIsDeleting(false)}
             />
         </div>
     );

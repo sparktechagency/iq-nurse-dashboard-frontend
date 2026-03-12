@@ -29,8 +29,13 @@ import FAQs from '../pages/dashboard/faq/faqs';
 import CarePlansMainPage from '../pages/dashboard/care-plans';
 import CarePlansTopic from '../pages/dashboard/care-plans/topic-page';
 import PatientAssessmentCategory from '../pages/dashboard/patient-assessment/PatientAssessmentCategory';
-import StudyNoteMainTopic from '../pages/dashboard/study-notes/StudyNoteMainTopic';
 import StudyNoteCategory from '../pages/dashboard/study-notes/StudyNoteCategory';
+import DosageCalculationPage from '../pages/dashboard/dosage-calculation';
+import StudyNoteMainTopic from '../pages/dashboard/study-notes/StudyNoteMainTopic';
+import ECGMasteryMainTopic from '../pages/dashboard/ecg-mastery';
+import ECGMasteryCategoryPage from '../pages/dashboard/ecg-mastery/subcategory';
+import DiagnosticMainTopic from '../pages/dashboard/diagnostic-tests-laboratory';
+import DiagnosticCategoryPage from '../pages/dashboard/diagnostic-tests-laboratory/subcategory';
 
 const router = createBrowserRouter([
     {
@@ -44,10 +49,24 @@ const router = createBrowserRouter([
             // study notes
             { path: 'study-notes', element: <StudyNoteMainTopic /> },
             { path: 'study-notes/:category', element: <StudyNoteCategory /> },
-            // { path: 'study-notes/:category', element: <StudyNotesPage /> },
             { path: 'study-notes/:category/:subcategory', element: <SubcategoryTopicsPage /> },
+            // { path: 'study-notes/:category', element: <StudyNotesPage /> },
+
+            //body system
             { path: 'body-system', element: <BodySystem /> },
             { path: 'body-system/add-body-system', element: <AddBodySystem /> },
+
+            // dosage calculation
+            { path: 'dosage-calculation', element: <DosageCalculationPage /> },
+
+            //ecg-mastery
+            { path: 'ecg-mastery', element: <ECGMasteryMainTopic /> },
+            { path: 'ecg-mastery/:category', element: <ECGMasteryCategoryPage /> },
+
+            //diagnostic-tests
+            { path: 'diagnostic-tests', element: <DiagnosticMainTopic /> },
+            { path: 'diagnostic-tests/:category', element: <DiagnosticCategoryPage /> },
+
             { path: 'patient-assessment', element: <PatientAssessment /> },
             { path: 'care-plans', element: <CarePlansMainPage /> },
             { path: 'care-plans/:categoryId', element: <CarePlansTopic /> },

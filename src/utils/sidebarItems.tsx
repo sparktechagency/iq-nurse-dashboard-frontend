@@ -28,6 +28,24 @@ const sidebarItems: TSidebarItem[] = [
         icon: '/icons/study-notes.png',
     },
     {
+        key: 'dosage-calculation',
+        label: 'Dosage Calculation',
+        path: 'dosage-calculation',
+        icon: '/icons/dosage-calculation.png',
+    },
+    {
+        key: 'diagnostic-tests',
+        label: 'Diagnostic Tests & Laboratory',
+        path: 'diagnostic-tests',
+        icon: '/icons/diagnostic.png',
+    },
+    {
+        key: 'ecg-mastery',
+        label: 'ECG Mastery',
+        path: 'ecg-mastery',
+        icon: '/icons/ecg-mastery.png',
+    },
+    {
         key: 'body-system',
         label: 'Body System',
         path: 'body-system',

@@ -6,7 +6,7 @@ interface DeleteModalProps {
     onCancel: () => void;
     title?: string;
     description?: string;
-    deletingId: string;
+    deletingId: string ;
     setIsDeleting: (value: boolean) => void;
 }
 
