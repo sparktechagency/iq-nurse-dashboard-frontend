@@ -58,9 +58,9 @@ const sidebarItems: TSidebarItem[] = [
         icon: '/icons/body-system.png',
     },
     {
-        key: 'patient-assessment',
-        label: 'Patient Assessment',
-        path: 'patient-assessment',
+        key: 'nursing-assessments',
+        label: 'Nursing Assessments',
+        path: 'nursing-assessments',
         icon: '/icons/assessment.png',
     },
     {

@@ -10,7 +10,6 @@ import TermsAndCondition from '../pages/dashboard/terms-and-condition';
 import Profile from '../pages/dashboard/profile';
 import Notification from '../pages/dashboard/notification';
 import Packages from '../pages/dashboard/package';
-import PatientAssessment from '../pages/dashboard/patient-assessment';
 import ClinicalSkills from '../pages/dashboard/clinical-skills';
 import PrivacyPolicy from '../pages/dashboard/privacy-policy';
 import BodySystem from '../pages/dashboard/body-system';
@@ -28,7 +27,6 @@ import FAQCategoryPage from '../pages/dashboard/faq';
 import FAQs from '../pages/dashboard/faq/faqs';
 import CarePlansMainPage from '../pages/dashboard/care-plans';
 import CarePlansTopic from '../pages/dashboard/care-plans/topic-page';
-import PatientAssessmentCategory from '../pages/dashboard/patient-assessment/PatientAssessmentCategory';
 import StudyNoteCategory from '../pages/dashboard/study-notes/StudyNoteCategory';
 import DosageCalculationPage from '../pages/dashboard/dosage-calculation';
 import StudyNoteMainTopic from '../pages/dashboard/study-notes/StudyNoteMainTopic';
@@ -40,6 +38,7 @@ import PracticalSkillsMainTopic from '../pages/dashboard/practical-skills';
 import PracticalSkillsCategoryPage from '../pages/dashboard/practical-skills/subcategory';
 import CheatSheetsMainTopic from '../pages/dashboard/cheat-sheets';
 import CheatSheetsCategoryPage from '../pages/dashboard/cheat-sheets/subcategory';
+import NursingAssessmentsPage from '../pages/dashboard/nursing-assessments';
 
 const router = createBrowserRouter([
     {
@@ -79,11 +78,10 @@ const router = createBrowserRouter([
             { path: 'diagnostic-tests', element: <DiagnosticMainTopic /> },
             { path: 'diagnostic-tests/:category', element: <DiagnosticCategoryPage /> },
 
-            { path: 'patient-assessment', element: <PatientAssessment /> },
+            { path: 'nursing-assessments', element: <NursingAssessmentsPage /> }, 
+            
             { path: 'care-plans', element: <CarePlansMainPage /> },
             { path: 'care-plans/:categoryId', element: <CarePlansTopic /> },
-            { path: 'patient-assessment', element: <PatientAssessmentCategory /> },
-            { path: 'patient-assessment/:categoryId', element: <PatientAssessment /> },
             { path: 'clinical-skills', element: <ClinicalSkills /> },
             { path: 'clinical-skills/:categoryId', element: <CategorySkillsPage /> },
             { path: 'templates', element: <TemplatesPage /> },
