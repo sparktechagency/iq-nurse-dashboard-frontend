@@ -14,11 +14,11 @@ interface ExamTopicGridProps {
     topics: ExamTopic[];
     onView: (topic: ExamTopic) => void;
     onEdit?: any;
-    onDelete: (id: string) => void;
+    // onDelete: (id: string) => void; 
 }
 
-export default function ExamTopicGrid({ topics, onView, onEdit, onDelete }: ExamTopicGridProps) {
-    const [deleteId, setDeleteId] = useState<string | null>(null);
+export default function ExamTopicGrid({ topics, onView, onEdit }: ExamTopicGridProps) {
+    const [deleteId, setDeleteId] = useState("");
     const [isDeleting, setIsDeleting] = useState(false);
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -70,10 +70,8 @@ export default function ExamTopicGrid({ topics, onView, onEdit, onDelete }: Exam
             <DeleteModal
                 isOpen={isDeleting}
                 onCancel={() => setIsDeleting(false)}
-                handleDelete={() => {
-                    onDelete(deleteId!);
-                    setIsDeleting(false);
-                }}
+                deletingId={deleteId}
+                setIsDeleting={setIsDeleting}
             />
         </div>
     );

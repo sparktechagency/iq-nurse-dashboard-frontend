@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { Button, Form, Input, Upload } from 'antd';
 import type { UploadProps } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';

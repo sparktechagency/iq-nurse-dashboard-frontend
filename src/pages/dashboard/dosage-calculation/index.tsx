@@ -15,7 +15,7 @@ export default function DosageCalculationPage() {
     const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
 
 
-    const handleAddTopic = (topic: any) => {
+    const handleAddTopic = () => {
         if (!DosageCalculationData) return;
     };
 
@@ -61,11 +61,11 @@ export default function DosageCalculationPage() {
             >
                 <div className="py-4">
                     <TopicForm
-                        onSubmit={(topic) => {
+                        onSubmit={() => {
                             if (editingTopicId) {
                                 handleUpdateTopic();
                             } else {
-                                handleAddTopic(topic);
+                                handleAddTopic();
                             }
                             setIsAddingTopic(false);
                             setEditingTopicId(null);

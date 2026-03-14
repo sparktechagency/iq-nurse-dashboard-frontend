@@ -96,7 +96,7 @@ export default function StudyNoteMainTopic() {
                 title={'Main Topic'}
                 subcategory={editData}
                 onClose={() => setIsModalOpen(false)}
-                onSubmit={(name: any, icon: any) => {
+                onSubmit={() => {
                     if (editData) {
                         // onUpdateSubcategory(editData.id, name, icon);
                         toast.success('Subcategory updated!');

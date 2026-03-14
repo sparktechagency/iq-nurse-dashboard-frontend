@@ -16,7 +16,8 @@ interface TopicListProps {
 
 export default function TopicList({ subcategory, selectedTopic, onSelectTopic , setIsAddingTopic}: TopicListProps) {
     const [isDeletingTopic, setIsDeletingTopic] = useState(false);
-    const [topicToDeleteId, setTopicToDeleteId] = useState<string | null>(null);
+    const [topicToDeleteId, setTopicToDeleteId] = useState<string | null>(null); 
+    console.log(topicToDeleteId);
     return (
         <div className=" p-6">
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 ">

@@ -3,7 +3,7 @@
 import { Edit2, Trash2 } from 'lucide-react';
 import { Button, Table, Tooltip } from 'antd';
 import { useState } from 'react';
-import DeleteModal from '../../../../../components/shared/DeleteModal';
+// import DeleteModal from '../../../../../components/shared/DeleteModal'; 
 
 interface Skill {
     id: string;
@@ -18,9 +18,10 @@ interface SkillsTableProps {
     onDeleteSkill: (skillId: string) => void;
 }
 
-export function SkillsTable({ skills, onEditSkill, onDeleteSkill }: SkillsTableProps) {
+export function SkillsTable({ skills, onEditSkill }: SkillsTableProps) {
     const [isDeleting, setIsDeleting] = useState(false);
     const [deleteId, setDeleteId] = useState<string>("");
+    console.log(`${isDeleting} & ${deleteId}`);
     const columns = [
         {
             title: <span className="text-white font-semibold">Serial ID</span>,

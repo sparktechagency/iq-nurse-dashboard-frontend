@@ -32,9 +32,9 @@ export default function ExamPage() {
         setIsFormOpen(false);
     };
 
-    const handleDeleteTopic = (id: string) => {
-        setTopics(topics.filter((t) => t.id !== id));
-    };
+    // const handleDeleteTopic = (id: string) => {
+    //     setTopics(topics.filter((t) => t.id !== id));
+    // };
 
     const handleEditClick = (topic: ExamTopic) => {
         setEditingTopic(topic);
@@ -74,7 +74,7 @@ export default function ExamPage() {
                 <ExamTopicGrid
                     topics={filteredTopics}
                     onEdit={handleEditClick}
-                    onDelete={handleDeleteTopic}
+                    // onDelete={handleDeleteTopic} 
                     onView={(topic) => router(`/exam/${topic.id}`)}
                 />
             ) : (

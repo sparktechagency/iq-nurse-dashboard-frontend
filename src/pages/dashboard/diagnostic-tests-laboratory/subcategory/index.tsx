@@ -13,7 +13,7 @@ export default function DiagnosticCategoryPage() {
     const [editingTopicId, setEditingTopicId] = useState<string | null>(null);
     const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
 
-    const handleAddTopic = (topic: any) => {
+    const handleAddTopic = () => {
         if (!DosageCalculationData) return;
     };
 
@@ -57,11 +57,11 @@ export default function DiagnosticCategoryPage() {
             >
                 <div className="py-4">
                     <TopicForm
-                        onSubmit={(topic) => {
+                        onSubmit={() => {
                             if (editingTopicId) {
                                 handleUpdateTopic();
                             } else {
-                                handleAddTopic(topic);
+                                handleAddTopic();
                             }
                             setIsAddingTopic(false);
                             setEditingTopicId(null);

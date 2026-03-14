@@ -24,7 +24,7 @@ export function ClinicalSkillsCategoryGrid({
     categories,
     onCategoryClick,
     onEditCategory,
-    onDeleteCategory,
+    // onDeleteCategory,
 }: CategoryGridProps) {
     const [deleteId, setDeleteId] = useState<string>("");
     const [isDeleting, setIsDeleting] = useState(false);

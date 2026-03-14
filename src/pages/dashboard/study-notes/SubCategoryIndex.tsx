@@ -20,7 +20,7 @@ export default function SubcategoryTopicsPage() {
 
     console.log('adasd', subcategoryData);
 
-    const handleAddTopic = (topic: any) => {
+    const handleAddTopic = () => {
         if (!subcategoryData) return;
     };
 
@@ -77,11 +77,11 @@ export default function SubcategoryTopicsPage() {
                 >
                     <div className="py-4">
                         <TopicForm
-                            onSubmit={(topic) => {
+                            onSubmit={() => {
                                 if (editingTopicId) {
                                     handleUpdateTopic();
                                 } else {
-                                    handleAddTopic(topic);
+                                    handleAddTopic();
                                 }
                                 setIsAddingTopic(false);
                                 setEditingTopicId(null);
