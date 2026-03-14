@@ -70,6 +70,12 @@ const sidebarItems: TSidebarItem[] = [
         icon: '/icons/care-plans-icon.svg',
     },
     {
+        key: 'cheat-sheets',
+        label: 'Cheat Sheets',
+        path: 'cheat-sheets',
+        icon: '/icons/cheat-sheets.png',
+    },
+    {
         key: 'clinical-skills',
         label: 'Clinical Skills',
         path: 'clinical-skills',

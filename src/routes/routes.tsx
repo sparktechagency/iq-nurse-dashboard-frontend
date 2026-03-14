@@ -38,6 +38,8 @@ import DiagnosticMainTopic from '../pages/dashboard/diagnostic-tests-laboratory'
 import DiagnosticCategoryPage from '../pages/dashboard/diagnostic-tests-laboratory/subcategory';
 import PracticalSkillsMainTopic from '../pages/dashboard/practical-skills';
 import PracticalSkillsCategoryPage from '../pages/dashboard/practical-skills/subcategory';
+import CheatSheetsMainTopic from '../pages/dashboard/cheat-sheets';
+import CheatSheetsCategoryPage from '../pages/dashboard/cheat-sheets/subcategory';
 
 const router = createBrowserRouter([
     {
@@ -68,6 +70,10 @@ const router = createBrowserRouter([
             //practical-skills
             { path: 'practical-skills', element: <PracticalSkillsMainTopic /> },
             { path: 'practical-skills/:category', element: <PracticalSkillsCategoryPage /> },
+
+            //cheat-sheets
+            { path: 'cheat-sheets', element: <CheatSheetsMainTopic /> },
+            { path: 'cheat-sheets/:category', element: <CheatSheetsCategoryPage /> },
 
             //diagnostic-tests
             { path: 'diagnostic-tests', element: <DiagnosticMainTopic /> },
