@@ -46,6 +46,12 @@ const sidebarItems: TSidebarItem[] = [
         icon: '/icons/ecg-mastery.png',
     },
     {
+        key: 'practical-skills',
+        label: 'Practical Skills',
+        path: 'practical-skills',
+        icon: '/icons/practical-skills.png',
+    },
+    {
         key: 'body-system',
         label: 'Body System',
         path: 'body-system',

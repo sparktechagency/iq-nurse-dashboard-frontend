@@ -36,6 +36,8 @@ import ECGMasteryMainTopic from '../pages/dashboard/ecg-mastery';
 import ECGMasteryCategoryPage from '../pages/dashboard/ecg-mastery/subcategory';
 import DiagnosticMainTopic from '../pages/dashboard/diagnostic-tests-laboratory';
 import DiagnosticCategoryPage from '../pages/dashboard/diagnostic-tests-laboratory/subcategory';
+import PracticalSkillsMainTopic from '../pages/dashboard/practical-skills';
+import PracticalSkillsCategoryPage from '../pages/dashboard/practical-skills/subcategory';
 
 const router = createBrowserRouter([
     {
@@ -62,6 +64,10 @@ const router = createBrowserRouter([
             //ecg-mastery
             { path: 'ecg-mastery', element: <ECGMasteryMainTopic /> },
             { path: 'ecg-mastery/:category', element: <ECGMasteryCategoryPage /> },
+
+            //practical-skills
+            { path: 'practical-skills', element: <PracticalSkillsMainTopic /> },
+            { path: 'practical-skills/:category', element: <PracticalSkillsCategoryPage /> },
 
             //diagnostic-tests
             { path: 'diagnostic-tests', element: <DiagnosticMainTopic /> },
