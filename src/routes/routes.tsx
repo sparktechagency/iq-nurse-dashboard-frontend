@@ -25,8 +25,6 @@ import CategorySkillsPage from '../pages/dashboard/clinical-skills/skills';
 import TopicQuestionsPage from '../pages/dashboard/exams/topic-questions';
 import FAQCategoryPage from '../pages/dashboard/faq';
 import FAQs from '../pages/dashboard/faq/faqs';
-import CarePlansMainPage from '../pages/dashboard/care-plans';
-import CarePlansTopic from '../pages/dashboard/care-plans/topic-page';
 import StudyNoteCategory from '../pages/dashboard/study-notes/StudyNoteCategory';
 import DosageCalculationPage from '../pages/dashboard/dosage-calculation';
 import StudyNoteMainTopic from '../pages/dashboard/study-notes/StudyNoteMainTopic';
@@ -39,6 +37,8 @@ import PracticalSkillsCategoryPage from '../pages/dashboard/practical-skills/sub
 import CheatSheetsMainTopic from '../pages/dashboard/cheat-sheets';
 import CheatSheetsCategoryPage from '../pages/dashboard/cheat-sheets/subcategory';
 import NursingAssessmentsPage from '../pages/dashboard/nursing-assessments';
+import CarePlansMainTopic from '../pages/dashboard/care-plans';
+import CarePlansCategoryPage from '../pages/dashboard/care-plans/subcategory';
 
 const router = createBrowserRouter([
     {
@@ -79,9 +79,10 @@ const router = createBrowserRouter([
             { path: 'diagnostic-tests/:category', element: <DiagnosticCategoryPage /> },
 
             { path: 'nursing-assessments', element: <NursingAssessmentsPage /> }, 
-            
-            { path: 'care-plans', element: <CarePlansMainPage /> },
-            { path: 'care-plans/:categoryId', element: <CarePlansTopic /> },
+
+            { path: 'care-plans', element: <CarePlansMainTopic /> },
+            { path: 'care-plans/:category', element: <CarePlansCategoryPage /> }, 
+
             { path: 'clinical-skills', element: <ClinicalSkills /> },
             { path: 'clinical-skills/:categoryId', element: <CategorySkillsPage /> },
             { path: 'templates', element: <TemplatesPage /> },
