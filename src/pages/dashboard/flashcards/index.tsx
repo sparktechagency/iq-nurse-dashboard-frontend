@@ -1,61 +1,78 @@
-import { FiEdit2, FiTrash2 } from "react-icons/fi";
-import { FlashCardData } from "../../../demo-data/flashcard-data";
-import { useState } from "react";
-import AddFlashCardModal from "./AddFlashCardModal";
-import { useNavigate } from "react-router-dom";
-interface EditEvent {
-    preventDefault: () => void;
-    stopPropagation: () => void;
-}
 
-const FlashcardsPage = () => {
-    const [open, setOpen] = useState(false);
-    const navigate = useNavigate();
+import { useState, useEffect } from 'react';
+import { toast, Toaster } from 'sonner';
+import { Flashcard } from './types';
+import { sampleFlashcards } from '../../../demo-data/flashcard-data';
+import FlashCard from './FlashCard';
 
-    const handleEdit = (e: EditEvent): void => {
-        e.preventDefault();
-        e.stopPropagation();
-        setOpen(true);
+export default function FlashCardsPage() {
+  const [flashcards, setFlashcards] = useState<Flashcard[]>([]);
+
+  useEffect(() => {
+    try {
+      const savedCustom = localStorage.getItem('customFlashcards');
+      const customCards: Flashcard[] = savedCustom ? JSON.parse(savedCustom) : [];
+
+      const merged = [...sampleFlashcards];
+
+      customCards.forEach(custom => {
+        if (!merged.some(c => c.id === custom.id)) {
+          merged.push(custom);
+        }
+      });
+
+      setFlashcards(merged);
+    } catch (err) {
+      console.error('Failed to load custom flashcards:', err);
+      toast.error('Failed to load your custom flashcards');
+      setFlashcards([...sampleFlashcards]);
     }
-    return (
-        <div className="">
-            <div className="flex items-center justify-between mb-8">
-                <div>
-                    <h1 className="text-2xl font-semibold text-gray-800">NCLEX Study Subjects</h1>
-                    <p className="text-gray-600 mt-1">
-                        Choose a subject to start studying with our pre-made flashcards
-                    </p>
-                </div>
-                <button className="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium shadow" onClick={() => setOpen(true)}>
-                    + Add FlashCard
-                </button>
-            </div>
+  }, []);
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                {FlashCardData.map((subject, index) => (
-                    <div
-                        key={index}
-                        className="relative bg-white shadow-sm border border-gray-200 rounded-lg p-4 hover:shadow-md transition-all"
-                        onClick={() => navigate(`/flashcards/${subject.title}`)}
-                    >
-                        <div className="absolute top-3 right-3 flex space-x-2 text-gray-500">
-                            <button className="text-yellow-500" onClick={(e) => handleEdit(e)}>
-                                <FiEdit2 size={16} />
-                            </button>
-                            <button className="text-red-500">
-                                <FiTrash2 size={16} />
-                            </button>
-                        </div>
-                        <h3 className="font-semibold text-gray-800 mb-2">{subject.title}</h3>
-                        <p className="text-gray-600 text-sm leading-relaxed">
-                            {subject.description}
-                        </p>
-                    </div>
-                ))}
-            </div>
-            <AddFlashCardModal open={open} setOpen={setOpen} />
-        </div>
+  // Save only custom flashcards back to localStorage
+  useEffect(() => {
+    if (flashcards.length === 0) return;
+
+    const customOnly = flashcards.filter(card => card.customCard === true);
+
+    try {
+      localStorage.setItem('customFlashcards', JSON.stringify(customOnly));
+    } catch (err) {
+      console.error('Failed to save custom flashcards:', err);
+      toast.error('Failed to save your flashcards');
+    }
+  }, [flashcards]);
+
+  // Handlers passed to admin page
+  const handleCreateFlashcard = (newCard: Omit<Flashcard, 'id'>) => {
+    const newId = `custom-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+    const cardWithId: Flashcard = { ...newCard, id: newId };
+    setFlashcards(prev => [...prev, cardWithId]);
+    toast.success('Flashcard created');
+  };
+
+  const handleUpdateFlashcard = (updatedCard: Flashcard) => {
+    setFlashcards(prev =>
+      prev.map(card => (card.id === updatedCard.id ? updatedCard : card))
     );
-};
+    toast.success('Flashcard updated');
+  };
 
-export default FlashcardsPage;
+  const handleDeleteFlashcard = (id: string) => {
+    setFlashcards(prev => prev.filter(card => card.id !== id));
+    toast.success('Flashcard deleted');
+  };
+
+  return (
+    <div className="">
+      <FlashCard
+        flashcards={flashcards}
+        onCreateFlashcard={handleCreateFlashcard}
+        onUpdateFlashcard={handleUpdateFlashcard}
+        onDeleteFlashcard={handleDeleteFlashcard}
+      />
+
+      <Toaster richColors position="top-right" />
+    </div>
+  );
+}

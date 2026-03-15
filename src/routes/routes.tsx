@@ -15,12 +15,10 @@ import PrivacyPolicy from '../pages/dashboard/privacy-policy';
 import BodySystem from '../pages/dashboard/body-system';
 import ExamsPage from '../pages/dashboard/exams';
 import TemplatesPage from '../pages/dashboard/templates';
-import FlashcardsPage from '../pages/dashboard/flashcards';
 import ErrorPage from '../pages/error/ErrorPage';
 // import StudyNotesPage from '../pages/dashboard/study-notes';
 import SubcategoryTopicsPage from '../pages/dashboard/study-notes/SubCategoryIndex';
 import AddBodySystem from '../pages/dashboard/body-system/add-body-system';
-import FlashcardList from '../pages/dashboard/flashcards/FlashcardList';
 import CategorySkillsPage from '../pages/dashboard/clinical-skills/skills';
 import TopicQuestionsPage from '../pages/dashboard/exams/topic-questions';
 import FAQCategoryPage from '../pages/dashboard/faq';
@@ -39,6 +37,7 @@ import CheatSheetsCategoryPage from '../pages/dashboard/cheat-sheets/subcategory
 import NursingAssessmentsPage from '../pages/dashboard/nursing-assessments';
 import CarePlansMainTopic from '../pages/dashboard/care-plans';
 import CarePlansCategoryPage from '../pages/dashboard/care-plans/subcategory';
+import FlashCardsPage from '../pages/dashboard/flashcards';
 
 const router = createBrowserRouter([
     {
@@ -88,8 +87,8 @@ const router = createBrowserRouter([
             { path: 'templates', element: <TemplatesPage /> },
             { path: 'exam', element: <ExamsPage /> },
             { path: 'exam/:topicId', element: <TopicQuestionsPage /> },
-            { path: 'flashcards', element: <FlashcardsPage /> },
-            { path: 'flashcards/:category', element: <FlashcardList /> },
+            { path: 'flashcards', element: <FlashCardsPage /> },
+            // { path: 'flashcards/:category', element: <FlashcardList /> }, 
             { path: 'profile', element: <Profile /> },
             { path: 'notification', element: <Notification /> },
             { path: 'privacy-policy', element: <PrivacyPolicy /> },

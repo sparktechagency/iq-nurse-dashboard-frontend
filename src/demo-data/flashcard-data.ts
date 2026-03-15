@@ -1,149 +1,296 @@
+// data/sampleFlashcards.ts
 
-const FlashCardData = [
-  {
-    title: "Management of Care",
-    description:
-      "Client plan of care, advocacy, collaboration, ethics, supervision, and prioritization.",
-  },
-  {
-    title: "Safety & Infection Control",
-    description:
-      "Standard precautions, emergency response, client safety, and handling of hazardous materials.",
-  },
-  {
-    title: "Health Promotion & Maintenance",
-    description:
-      "Human growth & development, aging, risk factors, lifestyle choices, and preventative practices.",
-  },
-  {
-    title: "Psychosocial Integrity",
-    description:
-      "Crisis intervention, abuse/neglect, behavioral management, cultural awareness, and mental health.",
-  },
-  {
-    title: "Fundamentals",
-    description:
-      "Client plan of care, advocacy, collaboration, ethics, supervision, and prioritization.",
-  },
-  {
-    title: "Bed Care & Comfort",
-    description:
-      "Assistive devices, elimination, mobility, nutrition, hydration, and hygiene.",
-  },
-  {
-    title: "Pharmacological Therapies",
-    description:
-      "Medication administration, side effects, contraindications, and parenteral therapies.",
-  },
-  {
-    title: "Reeducation of Risk Potential",
-    description:
-      "Vital signs, diagnostic testing, lab values, and complication prevention.",
-  },
-  {
-    title: "Physiological Adaption",
-    description:
-      "Body system alterations, fluid/electrolyte imbalances, pathophysiology, and emergency care.",
-  },
-  {
-    title: "Mental Health",
-    description:
-      "Assistive devices, elimination, mobility, nutrition, hydration, and hygiene.",
-  },
-  {
-    title: "Health Assessment",
-    description:
-      "Standard precautions, emergency response, client safety, and handling of hazardous materials.",
-  },
-  {
-    title: "Maternity/OB",
-    description:
-      "Human growth & development, aging, risk factors, lifestyle choices, and preventative practices.",
-  },
-  {
-    title: "Pediatrics",
-    description:
-      "Crisis intervention, abuse/neglect, behavioral management, cultural awareness, and mental health.",
-  },
-  {
-    title: "Medical Surgical",
-    description:
-      "Medication administration, side effects, contraindications, and parenteral therapies.",
-  },
-  {
-    title: "Critical Care",
-    description:
-      "Vital signs, diagnostic testing, lab values, and complication prevention.",
-  },
-  {
-    title: "Pharmacology",
-    description:
-      "Body system alterations, fluid/electrolyte imbalances, pathophysiology, and emergency care.",
-  },
-];  
+export interface NursingCategory {
+  name: string;
+  subcategories: string[];
+}
 
-const FlashCategoryData = [
+export const nursingCategories: NursingCategory[] = [
   {
-    key: "1",
-    frontTitle: "What is React?",
-    hint: "JS library for UI",
-    backDescription: "React is a JavaScript library used to build user interfaces using reusable components.",
+    name: "Fundamentals of Nursing",
+    subcategories: [
+      "Basic Concepts & Skills",
+      "Health Assessment",
+      "Nursing Process",
+      "Patient Safety",
+      "Infection Control",
+      "Vital Signs",
+      "Medication Administration",
+      "Documentation",
+    ],
   },
   {
-    key: "2",
-    frontTitle: "What is useState?",
-    hint: "React Hook",
-    backDescription: "useState is a React Hook that lets you add state variables to functional components.",
+    name: "Medical Surgical Nursing",
+    subcategories: [
+      "Cardiovascular Disorders",
+      "Respiratory Disorders",
+      "Gastrointestinal Disorders",
+      "Endocrine Disorders",
+      "Neurological Disorders",
+      "Musculoskeletal Disorders",
+      "Renal & Urinary Disorders",
+      "Oncology",
+      "Perioperative Care",
+    ],
   },
   {
-    key: "3",
-    frontTitle: "What is useEffect used for?",
-    hint: "Lifecycle management",
-    backDescription: "useEffect lets you perform side effects such as fetching data or updating the DOM in functional components.",
+    name: "Maternal Newborn Nursing",
+    subcategories: [
+      "Antepartum Care",
+      "Intrapartum Care",
+      "Postpartum Care",
+      "Newborn Care",
+      "High-Risk Pregnancy",
+      "Labor & Delivery Complications",
+    ],
   },
   {
-    key: "4",
-    frontTitle: "What is JSX?",
-    hint: "HTML in JS",
-    backDescription: "JSX stands for JavaScript XML and allows writing HTML-like syntax directly inside JavaScript code.",
+    name: "Pediatric Nursing",
+    subcategories: [
+      "Growth & Development",
+      "Pediatric Assessment",
+      "Common Childhood Illnesses",
+      "Congenital Disorders",
+      "Pediatric Emergencies",
+      "Childhood Immunizations",
+    ],
   },
   {
-    key: "5",
-    frontTitle: "What is Virtual DOM?",
-    hint: "Performance optimization",
-    backDescription: "The Virtual DOM is a lightweight copy of the actual DOM that React uses to efficiently update UI changes.",
+    name: "Mental Health Nursing",
+    subcategories: [
+      "Therapeutic Communication",
+      "Mood Disorders",
+      "Anxiety Disorders",
+      "Schizophrenia & Psychotic Disorders",
+      "Personality Disorders",
+      "Substance Use Disorders",
+      "Crisis Intervention",
+    ],
   },
   {
-    key: "6",
-    frontTitle: "What is props in React?",
-    hint: "Data passing",
-    backDescription: "Props are read-only attributes used to pass data from parent to child components in React.",
+    name: "Pharmacology",
+    subcategories: [
+      "Drug Classifications",
+      "Medication Safety",
+      "Adverse Effects & Interactions",
+      "Dosage Calculations",
+      "Cardiovascular Medications",
+      "Antimicrobials",
+      "Pain Management",
+      "Endocrine Medications",
+    ],
   },
   {
-    key: "7",
-    frontTitle: "What is a component?",
-    hint: "Building block",
-    backDescription: "A component is an independent, reusable piece of UI that can be either a function or class in React.",
+    name: "Critical Care Nursing",
+    subcategories: [
+      "Hemodynamic Monitoring",
+      "Mechanical Ventilation",
+      "Shock States",
+      "Sepsis & Septic Shock",
+      "ACLS Protocols",
+      "Trauma Care",
+    ],
   },
   {
-    key: "8",
-    frontTitle: "What is useRef?",
-    hint: "Access DOM elements",
-    backDescription: "useRef is a React Hook that allows you to directly access and persist DOM elements or mutable values.",
+    name: "Community Health Nursing",
+    subcategories: [
+      "Epidemiology",
+      "Health Promotion",
+      "Communicable Diseases",
+      "Environmental Health",
+      "Home Health Care",
+      "Disaster Preparedness",
+    ],
   },
   {
-    key: "9",
-    frontTitle: "What is useContext?",
-    hint: "Global state",
-    backDescription: "useContext allows components to access shared data without passing props through every level of the component tree.",
+    name: "Nursing Leadership and Management",
+    subcategories: [
+      "Delegation & Prioritization",
+      "Quality Improvement",
+      "Ethical & Legal Issues",
+      "Staff Development",
+      "Conflict Resolution",
+    ],
   },
   {
-    key: "10",
-    frontTitle: "What is React Router?",
-    hint: "Routing library",
-    backDescription: "React Router is a library used to handle client-side routing in React applications.",
+    name: "Gerontological Nursing",
+    subcategories: [
+      "Aging Process",
+      "Elder Abuse",
+      "Dementia & Alzheimer's",
+      "Polypharmacy",
+      "Fall Prevention",
+      "End-of-Life Care",
+    ],
+  },
+  {
+    name: "ECG Interpretation",
+    subcategories: [
+      "Basic ECG Waves & Intervals",
+      "Arrhythmias",
+      "Myocardial Infarction Patterns",
+      "Heart Blocks",
+      "Pacemaker Rhythms",
+    ],
+  },
+  {
+    name: "Dosage Calculations",
+    subcategories: [
+      "Metric Conversions",
+      "IV Flow Rates",
+      "Pediatric Dosage",
+      "Reconstitution",
+      "Insulin Calculations",
+    ],
+  },
+  {
+    name: "Nursing Assessment",
+    subcategories: [
+      "Head-to-Toe Assessment",
+      "Pain Assessment",
+      "Neurological Assessment",
+      "Cardiovascular Assessment",
+      "Respiratory Assessment",
+    ],
+  },
+  {
+    name: "Clinical Skills",
+    subcategories: [
+      "Wound Care",
+      "Catheterization",
+      "NG Tube Insertion",
+      "Tracheostomy Care",
+      "IV Therapy",
+      "Blood Transfusion",
+    ],
   },
 ];
- 
 
-export { FlashCardData , FlashCategoryData };
+// Sample flashcards (just 10–15 examples — you can add hundreds more)
+export const sampleFlashcards = [
+  {
+    id: "sample-1",
+    question: "What is the normal range for adult respiratory rate?",
+    answer: "12–20 breaths per minute",
+    category: "Fundamentals of Nursing",
+    subcategory: "Vital Signs",
+    timesReviewed: 0,
+    correctCount: 0,
+    customCard: false,
+  },
+  {
+    id: "sample-2",
+    question: "Which isolation precaution is used for tuberculosis?",
+    answer: "Airborne precautions",
+    category: "Fundamentals of Nursing",
+    subcategory: "Infection Control",
+    timesReviewed: 0,
+    correctCount: 0,
+    customCard: false,
+  },
+  {
+    id: "sample-3",
+    question: "What is the first step in the nursing process?",
+    answer: "Assessment",
+    category: "Fundamentals of Nursing",
+    subcategory: "Nursing Process",
+    timesReviewed: 0,
+    correctCount: 0,
+    customCard: false,
+  },
+  {
+    id: "sample-4",
+    question: "A patient with CHF is prescribed furosemide. What electrolyte imbalance should the nurse monitor for?",
+    answer: "Hypokalemia",
+    category: "Medical Surgical Nursing",
+    subcategory: "Cardiovascular Disorders",
+    timesReviewed: 0,
+    correctCount: 0,
+    customCard: false,
+  },
+  {
+    id: "sample-5",
+    question: "What is the priority nursing action for a patient experiencing anaphylaxis?",
+    answer: "Administer epinephrine",
+    category: "Critical Care Nursing",
+    subcategory: "Shock States",
+    timesReviewed: 0,
+    correctCount: 0,
+    customCard: false,
+  },
+  {
+    id: "sample-6",
+    question: "At what gestational age does quickening typically occur in a primigravida?",
+    answer: "18–20 weeks",
+    category: "Maternal Newborn Nursing",
+    subcategory: "Antepartum Care",
+    timesReviewed: 0,
+    correctCount: 0,
+    customCard: false,
+  },
+  {
+    id: "sample-7",
+    question: "A 2-year-old child is in which Piaget developmental stage?",
+    answer: "Preoperational stage",
+    category: "Pediatric Nursing",
+    subcategory: "Growth & Development",
+    timesReviewed: 0,
+    correctCount: 0,
+    customCard: false,
+  },
+  {
+    id: "sample-8",
+    question: "What is the therapeutic range for serum lithium?",
+    answer: "0.6–1.2 mEq/L",
+    category: "Mental Health Nursing",
+    subcategory: "Mood Disorders",
+    timesReviewed: 0,
+    correctCount: 0,
+    customCard: false,
+  },
+  {
+    id: "sample-9",
+    question: "Which insulin should be given before meals?",
+    answer: "Rapid-acting (e.g., lispro, aspart)",
+    category: "Pharmacology",
+    subcategory: "Endocrine Medications",
+    timesReviewed: 0,
+    correctCount: 0,
+    customCard: false,
+  },
+  {
+    id: "sample-10",
+    question: "What is the most common cause of acute kidney injury in hospitalized patients?",
+    answer: "Prerenal azotemia (hypoperfusion)",
+    category: "Medical Surgical Nursing",
+    subcategory: "Renal & Urinary Disorders",
+    timesReviewed: 0,
+    correctCount: 0,
+    customCard: false,
+  },
+  {
+    id: "sample-11",
+    question: "How many seconds should hands be rubbed together during routine handwashing?",
+    answer: "At least 20 seconds",
+    category: "Fundamentals of Nursing",
+    subcategory: "Infection Control",
+    timesReviewed: 0,
+    correctCount: 0,
+    customCard: false,
+  },
+  {
+    id: "sample-12",
+    question: "What is the antidote for heparin overdose?",
+    answer: "Protamine sulfate",
+    category: "Pharmacology",
+    subcategory: "Medication Safety",
+    timesReviewed: 0,
+    correctCount: 0,
+    customCard: false,
+  },
+];
+
+export default {
+  nursingCategories,
+  sampleFlashcards,
+};
