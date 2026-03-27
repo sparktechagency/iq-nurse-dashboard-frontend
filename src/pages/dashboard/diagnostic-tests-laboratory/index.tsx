@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import { Button, Card, Empty } from 'antd';
-import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined, PlusOutlined, QuestionOutlined } from '@ant-design/icons';
 import { mainTopics } from '../../../demo-data/study-note';
 import PrimaryButton from '../../../components/shared/PrimaryButton';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import DeleteModal from '../../../components/shared/DeleteModal';
 import { toast } from 'sonner';
 import HeaderTitle from '../../../components/shared/HeaderTitle';
 import DiagnosticCategoryFormModal from './DiagnosticCategoryForm';
 
 export default function DiagnosticMainTopic() {
+    const navigate = useNavigate();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
     const [deletingId, setDeletingId] = useState<any>(null);
@@ -27,9 +28,18 @@ export default function DiagnosticMainTopic() {
                     <p className="text-sm text-muted-foreground mt-1">Select a category to view and manage topics</p>
                 </div>
 
-                <Button className="!h-[40px] !bg-primary !text-white" icon={<PlusOutlined />} onClick={openAddModal}>
-                    Add Main Topic
-                </Button>
+                <div className="flex gap-2">
+                    <Button
+                        className="!h-[40px] !bg-orange-500 !text-white"
+                        icon={<QuestionOutlined />}
+                        onClick={() => navigate('/diagnostic-tests/practice-questions')}
+                    >
+                        Practice Questions
+                    </Button>
+                    <Button className="!h-[40px] !bg-primary !text-white" icon={<PlusOutlined />} onClick={openAddModal}>
+                        Add Main Topic
+                    </Button>
+                </div>
             </div>
             {mainTopics.length === 0 ? (
                 <Empty

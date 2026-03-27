@@ -30,6 +30,7 @@ import ECGMasteryMainTopic from '../pages/dashboard/ecg-mastery';
 import ECGMasteryCategoryPage from '../pages/dashboard/ecg-mastery/subcategory';
 import DiagnosticMainTopic from '../pages/dashboard/diagnostic-tests-laboratory';
 import DiagnosticCategoryPage from '../pages/dashboard/diagnostic-tests-laboratory/subcategory';
+import PracticeQuestionsPage from '../pages/dashboard/diagnostic-tests-laboratory/practice-questions';
 import PracticalSkillsMainTopic from '../pages/dashboard/practical-skills';
 import PracticalSkillsCategoryPage from '../pages/dashboard/practical-skills/subcategory';
 import CheatSheetsMainTopic from '../pages/dashboard/cheat-sheets';
@@ -75,6 +76,7 @@ const router = createBrowserRouter([
 
             //diagnostic-tests
             { path: 'diagnostic-tests', element: <DiagnosticMainTopic /> },
+            { path: 'diagnostic-tests/practice-questions', element: <PracticeQuestionsPage /> },
             { path: 'diagnostic-tests/:category', element: <DiagnosticCategoryPage /> },
 
             { path: 'nursing-assessments', element: <NursingAssessmentsPage /> }, 

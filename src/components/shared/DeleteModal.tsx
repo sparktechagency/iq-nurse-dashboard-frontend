@@ -8,6 +8,7 @@ interface DeleteModalProps {
     description?: string;
     deletingId: string ;
     setIsDeleting: (value: boolean) => void;
+    onDelete?: (id: string) => void;
 }
 
 export default function DeleteModal({
@@ -17,10 +18,15 @@ export default function DeleteModal({
     title = 'Delete Item',
     description = 'Are you sure?',
     setIsDeleting,
+    onDelete,
 }: DeleteModalProps) {
     const handleDelete = (id: string) => {
         setIsDeleting(false);
-        console.log(id);
+        if (onDelete) {
+            onDelete(id);
+        } else {
+            console.log(id);
+        }
     };
 
     return (
