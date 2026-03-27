@@ -11,17 +11,17 @@ interface QuestionFormProps {
     onClose: () => void;
     onSubmit: (values: any) => void;
     initialValues?: Question | null;
-    categories: string[];
+    categories?: any;
     allowedTypes?: ('matrix' | 'case-study' | 'multiple-response' | 'multiple-choice')[];
 }
 
-const QuestionForm: React.FC<QuestionFormProps> = ({ 
-    isOpen, 
-    onClose, 
-    onSubmit, 
-    initialValues, 
+const QuestionForm: React.FC<QuestionFormProps> = ({
+    isOpen,
+    onClose,
+    onSubmit,
+    initialValues,
     categories,
-    allowedTypes = ['multiple-choice', 'multiple-response', 'matrix', 'case-study']
+    allowedTypes = ['multiple-choice', 'multiple-response', 'matrix', 'case-study'],
 }) => {
     const [form] = Form.useForm();
     const type = Form.useWatch('type', form);
@@ -56,7 +56,7 @@ const QuestionForm: React.FC<QuestionFormProps> = ({
                 <div className="grid grid-cols-2 gap-4">
                     <Form.Item name="category" label="Category" rules={[{ required: true }]}>
                         <Select placeholder="Select or type a category">
-                            {categories.map((cat) => (
+                            {categories?.map((cat: any) => (
                                 <Option key={cat} value={cat}>
                                     {cat}
                                 </Option>
@@ -66,8 +66,12 @@ const QuestionForm: React.FC<QuestionFormProps> = ({
                     <div className="grid grid-cols-2 gap-4">
                         <Form.Item name="type" label="Question Type" rules={[{ required: true }]}>
                             <Select>
-                                {allowedTypes.includes('multiple-choice') && <Option value="multiple-choice">Multiple Choice</Option>}
-                                {allowedTypes.includes('multiple-response') && <Option value="multiple-response">Multiple Response</Option>}
+                                {allowedTypes.includes('multiple-choice') && (
+                                    <Option value="multiple-choice">Multiple Choice</Option>
+                                )}
+                                {allowedTypes.includes('multiple-response') && (
+                                    <Option value="multiple-response">Multiple Response</Option>
+                                )}
                                 {allowedTypes.includes('matrix') && <Option value="matrix">Matrix</Option>}
                                 {allowedTypes.includes('case-study') && <Option value="case-study">Case Study</Option>}
                             </Select>
@@ -308,7 +312,10 @@ const QuestionForm: React.FC<QuestionFormProps> = ({
                 </Form.Item>
 
                 <Form.Item name="explanation" label="Explanation (Step-by-step Solution)">
-                    <Input.TextArea rows={4} placeholder="Provide a step-by-step explanation or calculation if applicable" />
+                    <Input.TextArea
+                        rows={4}
+                        placeholder="Provide a step-by-step explanation or calculation if applicable"
+                    />
                 </Form.Item>
             </Form>
         </Modal>

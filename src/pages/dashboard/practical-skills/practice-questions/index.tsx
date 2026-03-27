@@ -6,7 +6,7 @@ import HeaderTitle from '../../../../components/shared/HeaderTitle';
 import DeleteModal from '../../../../components/shared/DeleteModal';
 import { toast } from 'sonner';
 import QuestionForm from '../../diagnostic-tests-laboratory/practice-questions/QuestionForm';
-import { initialPracticalSkillsQuestions, Question } from '../../../../demo-data/practice-questions';
+import { initialPracticalSkillsQuestions, Question, RationaleObject } from '../../../../demo-data/practice-questions';
 
 const { Text: AntText, Title } = Typography;
 
@@ -33,7 +33,7 @@ const PracticalSkillsQuestionsPage = () => {
     const filteredQuestions = useMemo(() => {
         return questions.filter(q => {
             const matchesSearch = q.question.toLowerCase().includes(searchText.toLowerCase()) || 
-                                q.category.toLowerCase().includes(searchText.toLowerCase());
+                                (q.category?.toLowerCase() || '').includes(searchText.toLowerCase());
             const matchesCategory = !categoryFilter || q.category === categoryFilter;
             const matchesDifficulty = !difficultyFilter || q.difficulty === difficultyFilter;
             return matchesSearch && matchesCategory && matchesDifficulty;
@@ -120,6 +120,37 @@ const PracticalSkillsQuestionsPage = () => {
             ),
         },
     ];
+
+    const renderRationale = (rationale: any) => {
+        if (!rationale) return null;
+        if (typeof rationale === 'string') return <p className="mt-1 bg-green-50 p-3 rounded">{rationale}</p>;
+        
+        const r = rationale as RationaleObject;
+        return (
+            <div className="mt-1 bg-green-50 p-4 rounded space-y-4">
+                {r.correct && (
+                    <div>
+                        <AntText strong className="text-green-600">Correct: </AntText>
+                        <AntText className="text-gray-700">{r.correct}</AntText>
+                    </div>
+                )}
+                {r.incorrect && (
+                    <div>
+                        <AntText strong className="text-red-600">Incorrect: </AntText>
+                        <AntText className="text-gray-700">{r.incorrect}</AntText>
+                    </div>
+                )}
+                {r.keyPoints && r.keyPoints.length > 0 && (
+                    <div>
+                        <AntText strong>Key Learning Points:</AntText>
+                        <ul className="list-disc pl-5 mt-1 space-y-1">
+                            {r.keyPoints.map((kp: string, i: number) => <li key={i} className="text-gray-700">{kp}</li>)}
+                        </ul>
+                    </div>
+                )}
+            </div>
+        );
+    };
 
     return (
         <Card className="m-4">
@@ -241,11 +272,11 @@ const PracticalSkillsQuestionsPage = () => {
                                     pagination={false}
                                     columns={[
                                         { title: 'Item', dataIndex: 'row', key: 'row' },
-                                        ...viewingQuestion.matrixData.columns.map(col => ({
+                                        ...(viewingQuestion.matrixData.columns.map((col: string) => ({
                                             title: col,
                                             key: col,
                                             render: (row: string) => viewingQuestion.matrixData?.correctCells.includes(`${row}-${col}`) ? "✓" : "-"
-                                        }))
+                                        })) as any)
                                     ]}
                                     dataSource={viewingQuestion.matrixData.rows}
                                 />
@@ -258,7 +289,7 @@ const PracticalSkillsQuestionsPage = () => {
                                 {viewingQuestion.caseStudyParts.map((part, index) => (
                                     <Card key={index} size="small" title={`Part ${part.part}: ${part.question}`}>
                                         <ul className="list-disc pl-5">
-                                            {part.options.map((opt, i) => (
+                                            {part.options.map((opt: string, i: number) => (
                                                 <li key={i} className={part.correctAnswers?.includes(opt) ? "text-green-600 font-bold" : ""}>
                                                     {opt} {part.correctAnswers?.includes(opt) && "✓"}
                                                 </li>
@@ -272,7 +303,7 @@ const PracticalSkillsQuestionsPage = () => {
                         <Divider />
                         <div>
                             <AntText strong className="text-green-700">Rationale:</AntText>
-                            <p className="mt-1 bg-green-50 p-3 rounded">{viewingQuestion.rationale}</p>
+                            {renderRationale(viewingQuestion.rationale)}
                         </div>
                     </div>
                 )}

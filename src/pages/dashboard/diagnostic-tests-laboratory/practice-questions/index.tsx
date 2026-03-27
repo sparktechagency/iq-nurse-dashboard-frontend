@@ -41,7 +41,7 @@ export default function PracticeQuestionsPage() {
         return questions.filter((q) => {
             const matchesSearch =
                 q.question.toLowerCase().includes(searchText.toLowerCase()) ||
-                q.category.toLowerCase().includes(searchText.toLowerCase());
+                q?.category?.toLowerCase().includes(searchText.toLowerCase());
             const matchesType = !typeFilter || q.type === typeFilter;
             const matchesCategory = !categoryFilter || q.category === categoryFilter;
             return matchesSearch && matchesType && matchesCategory;
@@ -210,7 +210,7 @@ export default function PracticeQuestionsPage() {
                 onClose={() => setIsFormModalOpen(false)}
                 onSubmit={handleFormSubmit}
                 initialValues={editingQuestion}
-                categories={categories.map((c) => c.value)}
+                categories={categories?.map((c) => c.value)}
             />
 
             <DeleteModal
@@ -291,7 +291,7 @@ export default function PracticeQuestionsPage() {
                                     <div>
                                         <Text strong>Rows:</Text>
                                         <ul className="list-disc pl-4">
-                                            {viewingQuestion.matrixData.rows.map((r) => (
+                                            {viewingQuestion.matrixData.rows.map((r: any) => (
                                                 <li key={r}>{r}</li>
                                             ))}
                                         </ul>
@@ -299,7 +299,7 @@ export default function PracticeQuestionsPage() {
                                     <div>
                                         <Text strong>Columns:</Text>
                                         <ul className="list-disc pl-4">
-                                            {viewingQuestion.matrixData.columns.map((c) => (
+                                            {viewingQuestion.matrixData.columns.map((c: any) => (
                                                 <li key={c}>{c}</li>
                                             ))}
                                         </ul>
@@ -309,7 +309,7 @@ export default function PracticeQuestionsPage() {
                                     Correct Pairings:
                                 </Text>
                                 <div className="flex flex-wrap gap-1 mt-1">
-                                    {viewingQuestion.matrixData.correctCells.map((cell) => (
+                                    {viewingQuestion.matrixData.correctCells.map((cell: any) => (
                                         <Tag key={cell}>{cell}</Tag>
                                     ))}
                                 </div>
@@ -327,7 +327,7 @@ export default function PracticeQuestionsPage() {
                                         key={index}
                                     >
                                         <ul className="list-disc pl-4">
-                                            {part.options.map((opt, i) => (
+                                            {part.options.map((opt: any, i: any) => (
                                                 <li
                                                     key={i}
                                                     className={
@@ -352,7 +352,36 @@ export default function PracticeQuestionsPage() {
                         <Divider />
                         <div>
                             <Title level={5}>Rationale</Title>
-                            <Paragraph className="text-gray-700">{viewingQuestion.rationale}</Paragraph>
+                            {viewingQuestion?.rationale && (
+                                typeof viewingQuestion.rationale === 'string' ? (
+                                    <Paragraph className="text-gray-700">{viewingQuestion.rationale}</Paragraph>
+                                ) : (
+                                    <div className="space-y-4">
+                                        {viewingQuestion.rationale.correct && (
+                                            <div>
+                                                <Text strong className="text-green-600">Correct: </Text>
+                                                <Paragraph className="text-gray-700 inline">{viewingQuestion.rationale.correct}</Paragraph>
+                                            </div>
+                                        )}
+                                        {viewingQuestion.rationale.incorrect && (
+                                            <div>
+                                                <Text strong className="text-red-600">Incorrect: </Text>
+                                                <Paragraph className="text-gray-700 inline">{viewingQuestion.rationale.incorrect}</Paragraph>
+                                            </div>
+                                        )}
+                                        {viewingQuestion.rationale.keyPoints && viewingQuestion.rationale.keyPoints.length > 0 && (
+                                            <div>
+                                                <div className="font-semibold mb-1">Key Points:</div>
+                                                <ul className="list-disc pl-6">
+                                                    {viewingQuestion.rationale.keyPoints.map((point, idx) => (
+                                                        <li key={idx} className="text-gray-700">{point}</li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        )}
+                                    </div>
+                                )
+                            )}
                         </div>
                     </Space>
                 )}

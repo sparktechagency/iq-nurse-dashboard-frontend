@@ -13,7 +13,7 @@ import HeaderTitle from '../../../../components/shared/HeaderTitle';
 import DeleteModal from '../../../../components/shared/DeleteModal';
 import { toast } from 'sonner';
 import DosageQuestionForm from './DosageQuestionForm';
-import { initialDosageCalculationQuestions, Question } from '../../../../demo-data/practice-questions';
+import { initialDosageCalculationQuestions, Question, RationaleObject } from '../../../../demo-data/practice-questions';
 
 const { Text: AntText, Title } = Typography;
 
@@ -40,7 +40,7 @@ const DosageCalculationQuestionsPage = () => {
         return questions.filter((q) => {
             const matchesSearch =
                 q.question.toLowerCase().includes(searchText.toLowerCase()) ||
-                q.category.toLowerCase().includes(searchText.toLowerCase());
+                (q.category?.toLowerCase() || '').includes(searchText.toLowerCase());
             const matchesCategory = !categoryFilter || q.category === categoryFilter;
             return matchesSearch && matchesCategory;
         });
@@ -114,6 +114,45 @@ const DosageCalculationQuestionsPage = () => {
         },
     ];
 
+    const renderRationale = (rationale: any) => {
+        if (!rationale) return null;
+        if (typeof rationale === 'string') return <p className="mt-1 bg-green-50 p-3 rounded">{rationale}</p>;
+
+        const r = rationale as RationaleObject;
+        return (
+            <div className="mt-1 bg-green-50 p-4 rounded space-y-4">
+                {r.correct && (
+                    <div>
+                        <AntText strong className="text-green-600">
+                            Correct:{' '}
+                        </AntText>
+                        <AntText className="text-gray-700">{r.correct}</AntText>
+                    </div>
+                )}
+                {r.incorrect && (
+                    <div>
+                        <AntText strong className="text-red-600">
+                            Incorrect:{' '}
+                        </AntText>
+                        <AntText className="text-gray-700">{r.incorrect}</AntText>
+                    </div>
+                )}
+                {r.keyPoints && r.keyPoints.length > 0 && (
+                    <div>
+                        <AntText strong>Key Learning Points:</AntText>
+                        <ul className="list-disc pl-5 mt-1 space-y-1">
+                            {r.keyPoints.map((kp: string, i: number) => (
+                                <li key={i} className="text-gray-700">
+                                    {kp}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
+            </div>
+        );
+    };
+
     return (
         <Card className="m-4">
             <div className="mb-6">
@@ -171,7 +210,7 @@ const DosageCalculationQuestionsPage = () => {
                 onClose={() => setIsFormModalOpen(false)}
                 onSubmit={handleFormSubmit}
                 initialValues={editingQuestion}
-                categories={categories.map((c) => c.value)}
+                categories={categories.map((c: any) => c.value)}
             />
 
             <DeleteModal
@@ -206,7 +245,7 @@ const DosageCalculationQuestionsPage = () => {
                             <div className="space-y-2">
                                 <AntText strong>Options:</AntText>
                                 <ul className="list-disc pl-5 mt-2">
-                                    {viewingQuestion.options.map((opt: string, i: number) => (
+                                    {(viewingQuestion.options as string[]).map((opt: string, i: number) => (
                                         <li
                                             key={i}
                                             className={
@@ -226,7 +265,7 @@ const DosageCalculationQuestionsPage = () => {
                                 <AntText strong className="text-green-700">
                                     Rationale:
                                 </AntText>
-                                <p className="mt-1 bg-green-50 p-3 rounded">{viewingQuestion.rationale}</p>
+                                {renderRationale(viewingQuestion.rationale)}
                             </div>
                             {viewingQuestion.explanation && (
                                 <div>
