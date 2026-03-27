@@ -61,7 +61,7 @@ const sidebarItems: TSidebarItem[] = [
         key: 'nursing-assessments',
         label: 'Nursing Assessments',
         path: 'nursing-assessments',
-        icon: '/icons/assessment.png',
+        icon: '/icons/nursing.svg',
     },
     {
         key: 'care-plans',

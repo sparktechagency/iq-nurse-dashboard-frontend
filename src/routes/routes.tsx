@@ -31,6 +31,7 @@ import ECGMasteryCategoryPage from '../pages/dashboard/ecg-mastery/subcategory';
 import DiagnosticMainTopic from '../pages/dashboard/diagnostic-tests-laboratory';
 import DiagnosticCategoryPage from '../pages/dashboard/diagnostic-tests-laboratory/subcategory';
 import PracticeQuestionsPage from '../pages/dashboard/diagnostic-tests-laboratory/practice-questions';
+import DosageCalculationQuestionsPage from '../pages/dashboard/dosage-calculation/practice-questions';
 import PracticalSkillsMainTopic from '../pages/dashboard/practical-skills';
 import PracticalSkillsCategoryPage from '../pages/dashboard/practical-skills/subcategory';
 import PracticalSkillsQuestionsPage from '../pages/dashboard/practical-skills/practice-questions';
@@ -62,6 +63,7 @@ const router = createBrowserRouter([
 
             // dosage calculation
             { path: 'dosage-calculation', element: <DosageCalculationPage /> },
+            { path: 'dosage-calculation/practice-questions', element: <DosageCalculationQuestionsPage /> },
 
             //ecg-mastery
             { path: 'ecg-mastery', element: <ECGMasteryMainTopic /> },

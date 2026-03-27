@@ -14,7 +14,7 @@ export interface CaseStudyPart {
 
 export interface Question {
     id: number | string;
-    type: 'matrix' | 'case-study' | 'multiple-response' | 'multiple-choice';
+    type?: 'matrix' | 'case-study' | 'multiple-response' | 'multiple-choice';
     category: string;
     question: string;
     matrixData?: MatrixData;
@@ -22,8 +22,10 @@ export interface Question {
     context?: string;
     options?: string[];
     correctAnswers?: string | string[];
+    correctAnswer?: number;
     rationale: string;
     difficulty?: 'Easy' | 'Medium' | 'Hard' | string;
+    explanation?: string;
 }
 
 export const initialPracticeQuestions: Question[] = [
@@ -197,5 +199,49 @@ export const initialPracticalSkillsQuestions: Question[] = [
             'The nurse should reassess the blood pressure after waiting 1-2 minutes to allow venous congestion to resolve and confirm the reading. A single elevated reading may not be accurate due to factors like recent activity, anxiety, or improper technique.',
         category: 'Fundamentals / Basic Skills',
         difficulty: 'Medium',
+    },
+];
+
+export const initialDosageCalculationQuestions: any[] = [
+    {
+        id: 1,
+        category: 'Basic Dosage',
+        question: 'A physician orders 0.5 g of medication. The medication is available in 250 mg tablets. How many tablets should the nurse administer?',
+        options: ['1 tablet', '2 tablets', '3 tablets', '4 tablets'],
+        correctAnswer: 1,
+        explanation: 'First, convert 0.5 g to mg: 0.5 g × 1000 = 500 mg. Then use the formula: Desired (500 mg) ÷ Available (250 mg) = 2 tablets.',
+        rationale: 'Always ensure units match before calculating. The metric conversion of grams to milligrams is essential for accurate dosage calculations.',
+    },
+    {
+        id: 2,
+        category: 'IV Drip Rates',
+        question: 'A patient is to receive 1000 mL of normal saline over 8 hours. The IV tubing has a drop factor of 20 gtts/mL. What is the drip rate in gtts/min?',
+        options: ['21 gtts/min', '32 gtts/min', '42 gtts/min', '52 gtts/min'],
+        correctAnswer: 2,
+        explanation: 'Formula: (Volume × Drop factor) ÷ Time in minutes = gtts/min. (1000 mL × 20 gtts/mL) ÷ (8 hrs × 60 min) = 20,000 ÷ 480 = 41.67, rounded to 42 gtts/min.',
+        rationale: 'When calculating drip rates, always convert hours to minutes. Round to the nearest whole number since you cannot count partial drops.',
+    },
+    {
+        id: 3,
+        category: 'Weight-Based',
+        question: 'A patient weighs 176 lbs. The order is for 5 mg/kg of medication. What is the correct dose? (1 kg = 2.2 lbs)',
+        options: ['350 mg', '400 mg', '450 mg', '500 mg'],
+        correctAnswer: 1,
+        explanation: 'First, convert weight: 176 lbs ÷ 2.2 = 80 kg. Then calculate dose: 80 kg × 5 mg/kg = 400 mg.',
+        rationale: 'Weight-based calculations require accurate conversion from pounds to kilograms. Always verify the patient\'s current weight before calculating.',
+    },
+    {
+        id: 4,
+        category: 'Pediatric',
+        question: 'A child weighs 25 kg. The safe dose range for the medication is 10-15 mg/kg/day given in 3 divided doses. The physician orders 100 mg TID (three times daily). Is this order safe?',
+        options: [
+            'Yes, the order is safe',
+            'No, the order is too low',
+            'No, the order is too high',
+            'Cannot determine from the information given',
+        ],
+        correctAnswer: 0,
+        explanation: 'Calculate safe range: Minimum = 25 kg × 10 mg/kg = 250 mg/day; Maximum = 25 kg × 15 mg/kg = 375 mg/day. Ordered dose: 100 mg × 3 = 300 mg/day. This falls within the safe range (250-375 mg/day).',
+        rationale: 'Always calculate the safe dose range and compare the ordered dose to ensure patient safety, especially with pediatric patients.',
     },
 ];

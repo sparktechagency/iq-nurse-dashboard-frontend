@@ -306,6 +306,10 @@ const QuestionForm: React.FC<QuestionFormProps> = ({
                 <Form.Item name="rationale" label="Rationale" rules={[{ required: true }]}>
                     <Input.TextArea rows={4} placeholder="Explain the correct answer..." />
                 </Form.Item>
+
+                <Form.Item name="explanation" label="Explanation (Step-by-step Solution)">
+                    <Input.TextArea rows={4} placeholder="Provide a step-by-step explanation or calculation if applicable" />
+                </Form.Item>
             </Form>
         </Modal>
     );
