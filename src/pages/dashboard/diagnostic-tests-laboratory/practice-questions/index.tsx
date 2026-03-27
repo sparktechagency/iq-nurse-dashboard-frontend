@@ -1,6 +1,13 @@
 import { useState, useMemo } from 'react';
 import { Table, Button, Input, Space, Tag, Modal, Card, Typography, Select, Breadcrumb, Divider } from 'antd';
-import { EditOutlined, DeleteOutlined, PlusOutlined, SearchOutlined, ArrowLeftOutlined, EyeOutlined } from '@ant-design/icons';
+import {
+    EditOutlined,
+    DeleteOutlined,
+    PlusOutlined,
+    SearchOutlined,
+    ArrowLeftOutlined,
+    EyeOutlined,
+} from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import HeaderTitle from '../../../../components/shared/HeaderTitle';
 import DeleteModal from '../../../../components/shared/DeleteModal';
@@ -16,7 +23,7 @@ export default function PracticeQuestionsPage() {
     const [searchText, setSearchText] = useState('');
     const [typeFilter, setTypeFilter] = useState<string | null>(null);
     const [categoryFilter, setCategoryFilter] = useState<string | null>(null);
-    
+
     const [isFormModalOpen, setIsFormModalOpen] = useState(false);
     const [editingQuestion, setEditingQuestion] = useState<Question | null>(null);
     const [isViewModalOpen, setIsViewModalOpen] = useState(false);
@@ -26,14 +33,15 @@ export default function PracticeQuestionsPage() {
 
     // Get unique categories for filter
     const categories = useMemo(() => {
-        const cats = Array.from(new Set(questions.map(q => q.category)));
-        return cats.map(c => ({ label: c, value: c }));
+        const cats = Array.from(new Set(questions.map((q) => q.category)));
+        return cats.map((c) => ({ label: c, value: c }));
     }, [questions]);
 
     const filteredQuestions = useMemo(() => {
-        return questions.filter(q => {
-            const matchesSearch = q.question.toLowerCase().includes(searchText.toLowerCase()) || 
-                                 q.category.toLowerCase().includes(searchText.toLowerCase());
+        return questions.filter((q) => {
+            const matchesSearch =
+                q.question.toLowerCase().includes(searchText.toLowerCase()) ||
+                q.category.toLowerCase().includes(searchText.toLowerCase());
             const matchesType = !typeFilter || q.type === typeFilter;
             const matchesCategory = !categoryFilter || q.category === categoryFilter;
             return matchesSearch && matchesType && matchesCategory;
@@ -61,17 +69,17 @@ export default function PracticeQuestionsPage() {
     };
 
     const confirmDelete = () => {
-        setQuestions(prev => prev.filter(q => q.id !== deletingId));
+        setQuestions((prev) => prev.filter((q) => q.id !== deletingId));
         setIsDeleting(false);
         toast.success('Question deleted successfully');
     };
 
     const handleFormSubmit = (values: any) => {
         if (editingQuestion) {
-            setQuestions(prev => prev.map(q => q.id === editingQuestion.id ? { ...q, ...values } : q));
+            setQuestions((prev) => prev.map((q) => (q.id === editingQuestion.id ? { ...q, ...values } : q)));
             toast.success('Question updated successfully');
         } else {
-            setQuestions(prev => [values, ...prev]);
+            setQuestions((prev) => [values, ...prev]);
             toast.success('Question added successfully');
         }
     };
@@ -148,21 +156,25 @@ export default function PracticeQuestionsPage() {
             <Card className="mb-6">
                 <div className="flex flex-wrap gap-4">
                     <div className="flex-1 min-w-[200px]">
-                        <Text strong className="block mb-2">Search</Text>
+                        <Text strong className="block mb-2">
+                            Search
+                        </Text>
                         <Input
                             placeholder="Search by question text or category..."
                             prefix={<SearchOutlined />}
                             value={searchText}
-                            onChange={e => setSearchText(e.target.value)}
+                            onChange={(e) => setSearchText(e.target.value)}
                         />
                     </div>
                     <div className="w-[200px]">
-                        <Text strong className="block mb-2">Filter by Type</Text>
+                        <Text strong className="block mb-2">
+                            Filter by Type
+                        </Text>
                         <Select
                             placeholder="All Types"
                             style={{ width: '100%' }}
                             allowClear
-                            onChange={value => setTypeFilter(value)}
+                            onChange={(value) => setTypeFilter(value)}
                         >
                             <Select.Option value="multiple-choice">Multiple Choice</Select.Option>
                             <Select.Option value="multiple-response">Multiple Response</Select.Option>
@@ -171,13 +183,15 @@ export default function PracticeQuestionsPage() {
                         </Select>
                     </div>
                     <div className="w-[200px]">
-                        <Text strong className="block mb-2">Filter by Category</Text>
+                        <Text strong className="block mb-2">
+                            Filter by Category
+                        </Text>
                         <Select
                             placeholder="All Categories"
                             style={{ width: '100%' }}
                             allowClear
                             options={categories}
-                            onChange={value => setCategoryFilter(value)}
+                            onChange={(value) => setCategoryFilter(value)}
                         />
                     </div>
                 </div>
@@ -196,7 +210,7 @@ export default function PracticeQuestionsPage() {
                 onClose={() => setIsFormModalOpen(false)}
                 onSubmit={handleFormSubmit}
                 initialValues={editingQuestion}
-                categories={categories.map(c => c.value)}
+                categories={categories.map((c) => c.value)}
             />
 
             <DeleteModal
@@ -212,7 +226,9 @@ export default function PracticeQuestionsPage() {
                 open={isViewModalOpen}
                 onCancel={() => setIsViewModalOpen(false)}
                 footer={[
-                    <Button key="close" onClick={() => setIsViewModalOpen(false)}>Close</Button>
+                    <Button key="close" onClick={() => setIsViewModalOpen(false)}>
+                        Close
+                    </Button>,
                 ]}
                 width={700}
             >
@@ -221,10 +237,12 @@ export default function PracticeQuestionsPage() {
                         <div>
                             <Text type="secondary">Category: </Text>
                             <Tag color="blue">{viewingQuestion.category}</Tag>
-                            <Text type="secondary" className="ml-4">Type: </Text>
-                            <Tag color="purple">{viewingQuestion.type.toUpperCase()}</Tag>
+                            <Text type="secondary" className="ml-4">
+                                Type:{' '}
+                            </Text>
+                            <Tag color="purple">{viewingQuestion.type?.toUpperCase()}</Tag>
                         </div>
-                        
+
                         <div>
                             <Title level={5}>Question</Title>
                             <Paragraph>{viewingQuestion.question}</Paragraph>
@@ -233,7 +251,9 @@ export default function PracticeQuestionsPage() {
                         {viewingQuestion.context && (
                             <div>
                                 <Title level={5}>Context</Title>
-                                <Paragraph className="italic bg-gray-50 p-2 rounded">{viewingQuestion.context}</Paragraph>
+                                <Paragraph className="italic bg-gray-50 p-2 rounded">
+                                    {viewingQuestion.context}
+                                </Paragraph>
                             </div>
                         )}
 
@@ -242,15 +262,21 @@ export default function PracticeQuestionsPage() {
                                 <Title level={5}>Options</Title>
                                 <ul className="list-disc pl-6">
                                     {viewingQuestion.options.map((opt, i) => (
-                                        <li key={i} className={
-                                            (Array.isArray(viewingQuestion.correctAnswers) 
-                                                ? viewingQuestion.correctAnswers.includes(opt) 
-                                                : viewingQuestion.correctAnswers === opt) 
-                                            ? "text-green-600 font-medium" 
-                                            : ""
-                                        }>
-                                            {opt} {(Array.isArray(viewingQuestion.correctAnswers) 
-                                                ? viewingQuestion.correctAnswers.includes(opt) 
+                                        <li
+                                            key={i}
+                                            className={
+                                                (
+                                                    Array.isArray(viewingQuestion.correctAnswers)
+                                                        ? viewingQuestion.correctAnswers.includes(opt)
+                                                        : viewingQuestion.correctAnswers === opt
+                                                )
+                                                    ? 'text-green-600 font-medium'
+                                                    : ''
+                                            }
+                                        >
+                                            {opt}{' '}
+                                            {(Array.isArray(viewingQuestion.correctAnswers)
+                                                ? viewingQuestion.correctAnswers.includes(opt)
                                                 : viewingQuestion.correctAnswers === opt) && '✓'}
                                         </li>
                                     ))}
@@ -264,16 +290,28 @@ export default function PracticeQuestionsPage() {
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
                                         <Text strong>Rows:</Text>
-                                        <ul className="list-disc pl-4">{viewingQuestion.matrixData.rows.map(r => <li key={r}>{r}</li>)}</ul>
+                                        <ul className="list-disc pl-4">
+                                            {viewingQuestion.matrixData.rows.map((r) => (
+                                                <li key={r}>{r}</li>
+                                            ))}
+                                        </ul>
                                     </div>
                                     <div>
                                         <Text strong>Columns:</Text>
-                                        <ul className="list-disc pl-4">{viewingQuestion.matrixData.columns.map(c => <li key={c}>{c}</li>)}</ul>
+                                        <ul className="list-disc pl-4">
+                                            {viewingQuestion.matrixData.columns.map((c) => (
+                                                <li key={c}>{c}</li>
+                                            ))}
+                                        </ul>
                                     </div>
                                 </div>
-                                <Text strong className="mt-2 block">Correct Pairings:</Text>
+                                <Text strong className="mt-2 block">
+                                    Correct Pairings:
+                                </Text>
                                 <div className="flex flex-wrap gap-1 mt-1">
-                                    {viewingQuestion.matrixData.correctCells.map(cell => <Tag key={cell}>{cell}</Tag>)}
+                                    {viewingQuestion.matrixData.correctCells.map((cell) => (
+                                        <Tag key={cell}>{cell}</Tag>
+                                    ))}
                                 </div>
                             </div>
                         )}
@@ -282,16 +320,26 @@ export default function PracticeQuestionsPage() {
                             <div>
                                 <Title level={5}>Case Study Parts</Title>
                                 {viewingQuestion.caseStudyParts.map((part, index) => (
-                                    <Card size="small" title={`Part ${part.part}: ${part.question}`} className="mb-2" key={index}>
+                                    <Card
+                                        size="small"
+                                        title={`Part ${part.part}: ${part.question}`}
+                                        className="mb-2"
+                                        key={index}
+                                    >
                                         <ul className="list-disc pl-4">
                                             {part.options.map((opt, i) => (
-                                                <li key={i} className={
-                                                    (Array.isArray(part.correctAnswers) 
-                                                        ? part.correctAnswers.includes(opt) 
-                                                        : part.correctAnswers === opt) 
-                                                    ? "text-green-600 font-medium" 
-                                                    : ""
-                                                }>
+                                                <li
+                                                    key={i}
+                                                    className={
+                                                        (
+                                                            Array.isArray(part.correctAnswers)
+                                                                ? part.correctAnswers.includes(opt)
+                                                                : part.correctAnswers === opt
+                                                        )
+                                                            ? 'text-green-600 font-medium'
+                                                            : ''
+                                                    }
+                                                >
                                                     {opt}
                                                 </li>
                                             ))}
