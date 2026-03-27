@@ -16,10 +16,10 @@ const Sidebar = () => {
 
     const getIcon = (icon: ReactNode | string) => {
         if (typeof icon === 'string') {
-            return <img src={icon} className='w-6' alt="icon" />
+            return <img src={icon} className="w-6" alt="icon" />;
         }
-        return icon
-    }
+        return icon;
+    };
 
     const sidebarItemsGenerator = (items: TSidebarItem[]): MenuProps['items'] => {
         return items.map((item) => {
@@ -44,21 +44,19 @@ const Sidebar = () => {
     };
 
     return (
-        <div className='relative h-screen pt-5 w-full'>
-            <div className=' flex flex-col h-[100%] '>
-
+        <div className="relative h-screen pt-5 w-full">
+            <div className=" flex flex-col h-[100%] ">
                 <Link to="/">
                     <div className="flex flex-col gap-3 items-center justify-center p-5 pt-0 pb-2">
-                        <img src="/logo.png" alt="" className="h-14" />
+                        <img src="/logo.png" alt="" className="h-10 2xl:h-12 w-fit object-contain" />
                     </div>
                 </Link>
 
-                <div className='flex-1 overflow-y-auto w-full pb-12 '>
+                <div className="flex-1 overflow-y-auto w-full pb-12 ">
                     <ConfigProvider
                         theme={{
                             token: {
-                                colorText: '#414446', 
-                               
+                                colorText: '#414446',
                             },
                             components: {
                                 Menu: {
@@ -67,8 +65,7 @@ const Sidebar = () => {
                                     itemBorderRadius: '10px 10px 10px 10px' as any,
                                     itemHeight: 45,
                                     itemMarginBlock: 9,
-                                    itemSelectedBg: '#003877', 
-                                    
+                                    itemSelectedBg: '#003877',
                                 },
                             },
                         }}
@@ -81,7 +78,6 @@ const Sidebar = () => {
                             onOpenChange={handleOpenChange}
                             items={sidebarItemsGenerator(sidebarItems)}
                             style={{ background: 'transparent' }}
-
                         />
                     </ConfigProvider>
                 </div>
@@ -89,7 +85,7 @@ const Sidebar = () => {
                 <div className="py-3 ps-4 absolute bottom-0 w-full bg-[#F6F7F8]">
                     <button
                         onClick={() => {
-                            navigate("/login");
+                            navigate('/login');
                         }}
                         className="w-full flex items-center gap-3 px-4  bg-white/15 
                           text-[#F44336]  font-semibold rounded-md transition"
