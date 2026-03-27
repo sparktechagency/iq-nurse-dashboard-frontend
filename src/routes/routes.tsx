@@ -41,6 +41,7 @@ import NursingAssessmentsPage from '../pages/dashboard/nursing-assessments';
 import CarePlansMainTopic from '../pages/dashboard/care-plans';
 import CarePlansCategoryPage from '../pages/dashboard/care-plans/subcategory';
 import FlashCardsPage from '../pages/dashboard/flashcards';
+import ECGMasteryQuestionsPage from '../pages/dashboard/ecg-mastery/practice-questions';
 
 const router = createBrowserRouter([
     {
@@ -65,8 +66,8 @@ const router = createBrowserRouter([
             { path: 'dosage-calculation', element: <DosageCalculationPage /> },
             { path: 'dosage-calculation/practice-questions', element: <DosageCalculationQuestionsPage /> },
 
-            //ecg-mastery
             { path: 'ecg-mastery', element: <ECGMasteryMainTopic /> },
+            { path: 'ecg-mastery/practice-questions', element: <ECGMasteryQuestionsPage /> },
             { path: 'ecg-mastery/:category', element: <ECGMasteryCategoryPage /> },
 
             //practical-skills
@@ -83,10 +84,10 @@ const router = createBrowserRouter([
             { path: 'diagnostic-tests/practice-questions', element: <PracticeQuestionsPage /> },
             { path: 'diagnostic-tests/:category', element: <DiagnosticCategoryPage /> },
 
-            { path: 'nursing-assessments', element: <NursingAssessmentsPage /> }, 
+            { path: 'nursing-assessments', element: <NursingAssessmentsPage /> },
 
             { path: 'care-plans', element: <CarePlansMainTopic /> },
-            { path: 'care-plans/:category', element: <CarePlansCategoryPage /> }, 
+            { path: 'care-plans/:category', element: <CarePlansCategoryPage /> },
 
             { path: 'clinical-skills', element: <ClinicalSkills /> },
             { path: 'clinical-skills/:categoryId', element: <CategorySkillsPage /> },
@@ -94,7 +95,7 @@ const router = createBrowserRouter([
             { path: 'exam', element: <ExamsPage /> },
             { path: 'exam/:topicId', element: <TopicQuestionsPage /> },
             { path: 'flashcards', element: <FlashCardsPage /> },
-            // { path: 'flashcards/:category', element: <FlashcardList /> }, 
+            // { path: 'flashcards/:category', element: <FlashcardList /> },
             { path: 'profile', element: <Profile /> },
             { path: 'notification', element: <Notification /> },
             { path: 'privacy-policy', element: <PrivacyPolicy /> },

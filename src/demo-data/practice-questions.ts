@@ -12,20 +12,37 @@ export interface CaseStudyPart {
     correctAnswers: string | string[];
 }
 
+export interface RationaleObject {
+    correct: string;
+    incorrect: string;
+    keyPoints: string[];
+}
+
 export interface Question {
     id: number | string;
-    type?: 'matrix' | 'case-study' | 'multiple-response' | 'multiple-choice';
-    category: string;
+    type?: string;
+    category?: string;
     question: string;
-    matrixData?: MatrixData;
-    caseStudyParts?: CaseStudyPart[];
+    scenario?: string;
+    stripType?: string;
     context?: string;
     options?: string[];
     correctAnswers?: string | string[];
-    correctAnswer?: number;
-    rationale: string;
+    correctAnswer?: string | string[] | number;
+    rationale: string | RationaleObject;
     difficulty?: 'Easy' | 'Medium' | 'Hard' | string;
     explanation?: string;
+    matrixData?: any;
+    caseStudyParts?: any[];
+    dropdownOptions?: { [key: string]: string[] };
+    dropdownAnswers?: { [key: string]: string };
+    matrixOptions?: {
+        rows: string[];
+        columns: string[];
+        correctAnswers: { [key: string]: string };
+    };
+    orderingItems?: string[];
+    correctOrder?: number[];
 }
 
 export const initialPracticeQuestions: Question[] = [
@@ -243,5 +260,284 @@ export const initialDosageCalculationQuestions: any[] = [
         correctAnswer: 0,
         explanation: 'Calculate safe range: Minimum = 25 kg × 10 mg/kg = 250 mg/day; Maximum = 25 kg × 15 mg/kg = 375 mg/day. Ordered dose: 100 mg × 3 = 300 mg/day. This falls within the safe range (250-375 mg/day).',
         rationale: 'Always calculate the safe dose range and compare the ordered dose to ensure patient safety, especially with pediatric patients.',
+    },
+];
+
+export const initialECGMasteryQuestions: Question[] = [
+    {
+        id: 1,
+        type: 'multiple-choice',
+        scenario: 'A 68-year-old male client is admitted to the telemetry unit. You observe the following rhythm on the cardiac monitor:',
+        stripType: 'NSR',
+        question: 'Based on the ECG strip, what rhythm is the client experiencing?',
+        options: ['Normal Sinus Rhythm', 'Sinus Bradycardia', 'Sinus Tachycardia', 'Atrial Fibrillation'],
+        correctAnswer: 'Normal Sinus Rhythm',
+        rationale: {
+            correct: 'This is correct! The ECG shows Normal Sinus Rhythm with a regular rate of 60-100 bpm, regular P waves before each QRS, and normal intervals.',
+            incorrect: 'This is incorrect. Review the characteristics: regular rhythm, rate 60-100 bpm, P waves present before each QRS, PR interval 0.12-0.20 sec.',
+            keyPoints: [
+                'NSR criteria: Rate 60-100 bpm, regular rhythm',
+                'P waves: Present, upright, one before each QRS',
+                'PR interval: 0.12-0.20 seconds (constant)',
+                'QRS complex: <0.12 seconds (narrow)',
+                'No intervention needed for NSR unless symptomatic',
+            ],
+        },
+    },
+    {
+        id: 2,
+        type: 'select-all',
+        scenario: 'A 55-year-old female client with a history of COPD presents to the emergency department with irregular heart palpitations. The monitor shows atrial fibrillation with rapid ventricular response (RVR) at 145 bpm.',
+        question: 'Which interventions should the nurse anticipate? (Select all that apply)',
+        options: [
+            'Administer prescribed diltiazem IV',
+            'Prepare for immediate defibrillation',
+            'Initiate anticoagulation therapy as ordered',
+            'Monitor for signs of decreased cardiac output',
+            'Administer atropine 0.5mg IV push',
+            'Assess CHA₂DS₂-VASc score for stroke risk',
+        ],
+        correctAnswer: [
+            'Administer prescribed diltiazem IV',
+            'Initiate anticoagulation therapy as ordered',
+            'Monitor for signs of decreased cardiac output',
+            'Assess CHA₂DS₂-VASc score for stroke risk',
+        ],
+        rationale: {
+            correct: 'Excellent! You identified all appropriate interventions for atrial fibrillation with RVR.',
+            incorrect: 'Review the correct interventions. Defibrillation is only for unstable clients or V-fib/pulseless V-tach. Atropine increases heart rate and would worsen tachycardia.',
+            keyPoints: [
+                'A-fib treatment goals: Rate control, rhythm control, anticoagulation',
+                'Calcium channel blockers (diltiazem) or beta-blockers for rate control',
+                'Anticoagulation prevents stroke (major complication of A-fib)',
+                'CHA₂DS₂-VASc score determines stroke risk and need for anticoagulation',
+                'Defibrillation only for unstable patients (not routine for stable A-fib)',
+                'Monitor for decreased CO: Loss of atrial kick reduces output by 20-30%',
+            ],
+        },
+    },
+    {
+        id: 3,
+        type: 'dropdown',
+        scenario: 'A 72-year-old client post-inferior wall MI is on continuous cardiac monitoring. The monitor alarm sounds.',
+        question: 'Complete the nursing documentation:',
+        dropdownOptions: {
+            rhythm: ['Normal Sinus Rhythm', 'Sinus Bradycardia', 'Sinus Tachycardia', 'First-Degree AV Block'],
+            intervention: ['Continue monitoring', 'Administer atropine 0.5mg IV', 'Prepare for cardioversion', 'Administer adenosine 6mg IV'],
+            priority: ['No immediate action needed', 'Monitor closely for progression', 'Immediate emergency intervention', 'Notify provider within 1 hour'],
+        },
+        dropdownAnswers: {
+            rhythm: 'First-Degree AV Block',
+            intervention: 'Continue monitoring',
+            priority: 'Monitor closely for progression',
+        },
+        rationale: {
+            correct: 'Correct! First-degree AV block is common after inferior MI, usually benign, but requires monitoring for progression to higher-degree blocks.',
+            incorrect: 'Review first-degree AV block management. It\'s characterized by PR interval >0.20 sec (constant), usually requires no treatment, but monitoring is essential post-MI.',
+            keyPoints: [
+                'First-degree AV block: PR interval >0.20 seconds (prolonged but constant)',
+                'Common after inferior MI (right coronary artery involvement)',
+                'Usually asymptomatic and benign - no treatment needed',
+                'Monitor for progression to second or third-degree heart block',
+                'May be caused by medications: digoxin, beta-blockers, CCBs',
+                'Every P wave is followed by a QRS (1:1 conduction)',
+            ],
+        },
+    },
+    {
+        id: 4,
+        type: 'matrix',
+        question: 'Match each ECG characteristic to the appropriate rhythm:',
+        matrixOptions: {
+            rows: [
+                'Irregularly irregular rhythm with no discernible P waves',
+                'Sawtooth flutter waves at 250-350 bpm',
+                'PR interval progressively lengthens until QRS is dropped',
+                'Complete AV dissociation with independent P and QRS',
+            ],
+            columns: ['Atrial Fibrillation', 'Atrial Flutter', 'Second-Degree AV Block Type I', 'Third-Degree AV Block'],
+            correctAnswers: {
+                'Irregularly irregular rhythm with no discernible P waves': 'Atrial Fibrillation',
+                'Sawtooth flutter waves at 250-350 bpm': 'Atrial Flutter',
+                'PR interval progressively lengthens until QRS is dropped': 'Second-Degree AV Block Type I',
+                'Complete AV dissociation with independent P and QRS': 'Third-Degree AV Block',
+            },
+        },
+        rationale: {
+            correct: 'Perfect! You correctly matched all ECG characteristics to their rhythms.',
+            incorrect: 'Review the distinctive features of each rhythm pattern.',
+            keyPoints: [
+                'A-fib: Most common arrhythmia, irregularly irregular, absent P waves',
+                'A-flutter: Regular sawtooth pattern best seen in leads II, III, aVF',
+                '2nd-degree Type I (Wenckebach): Progressive PR lengthening, usually benign',
+                '3rd-degree: Life-threatening, requires pacemaker, no relationship between P and QRS',
+                'Recognize patterns quickly for NCLEX prioritization questions',
+            ],
+        },
+    },
+    {
+        id: 5,
+        type: 'ordering',
+        scenario: 'A client suddenly develops pulseless ventricular tachycardia in the cardiac unit.',
+        question: 'Place the following nursing interventions in the correct order of priority:',
+        orderingItems: [
+            'Begin chest compressions immediately',
+            'Call for help and activate emergency response',
+            'Attach defibrillator pads and analyze rhythm',
+            'Deliver shock if indicated and resume CPR',
+            'Establish IV access and administer epinephrine',
+            'Check for pulse and rhythm every 2 minutes',
+        ],
+        correctOrder: [1, 0, 2, 3, 4, 5],
+        rationale: {
+            correct: 'Excellent! You correctly prioritized interventions following ACLS guidelines for pulseless V-tach.',
+            incorrect: 'Review ACLS algorithms. Remember: Call for help first, then start CPR immediately, defibrillate ASAP.',
+            keyPoints: [
+                'Pulseless V-tach = shockable rhythm requiring immediate defibrillation',
+                'Call for help FIRST - you need the defibrillator and team',
+                'Start high-quality CPR immediately (before defibrillator arrives)',
+                'Shock as soon as defibrillator available, then resume CPR immediately',
+                'Minimize interruptions in chest compressions',
+                'ACLS sequence: Call → CPR → Shock → CPR → Medications → Reassess',
+            ],
+        },
+    },
+    {
+        id: 6,
+        type: 'multiple-choice',
+        scenario: 'A 45-year-old client reports sudden onset of rapid heart palpitations. BP: 118/76, HR: 180 bpm. The monitor shows a narrow-complex regular tachycardia with no visible P waves.',
+        stripType: 'SVT',
+        question: 'What is the priority nursing intervention?',
+        options: [
+            'Prepare for immediate synchronized cardioversion',
+            'Teach vagal maneuvers and attempt Valsalva',
+            'Administer diltiazem 20mg IV push',
+            'Begin CPR and call a code',
+        ],
+        correctAnswer: 'Teach vagal maneuvers and attempt Valsalva',
+        rationale: {
+            correct: 'Correct! This stable SVT should be treated with vagal maneuvers first. The client is hemodynamically stable (normal BP).',
+            incorrect: 'Review SVT management. For stable patients, try vagal maneuvers first. Synchronized cardioversion is for unstable patients.',
+            keyPoints: [
+                'SVT: Narrow complex tachycardia, rate 150-250 bpm, regular rhythm',
+                'Stable patient criteria: Normal BP, no chest pain, alert and oriented',
+                'First-line for stable SVT: Vagal maneuvers (Valsalva, carotid massage)',
+                'If vagal maneuvers fail: Adenosine 6mg rapid IV push',
+                'Warn patient adenosine causes brief sense of \'impending doom\'',
+                'Unstable SVT (hypotensive, altered mental status): Synchronized cardioversion',
+            ],
+        },
+    },
+    {
+        id: 7,
+        type: 'select-all',
+        scenario: 'A nurse is caring for a client with a permanent pacemaker inserted 2 days ago for third-degree heart block.',
+        question: 'Which assessment findings require immediate notification of the healthcare provider? (Select all that apply)',
+        options: [
+            'Pacing spikes present but no QRS complexes following',
+            'Heart rate of 72 bpm (pacemaker set at 70 bpm)',
+            'Swelling and redness at pacemaker insertion site',
+            'Client reports hiccups that won\'t stop',
+            'Pacing spike visible before each P wave and QRS complex',
+            'Client\'s heart rate drops to 55 bpm during sleep',
+        ],
+        correctAnswer: [
+            'Pacing spikes present but no QRS complexes following',
+            'Swelling and redness at pacemaker insertion site',
+            'Client reports hiccups that won\'t stop',
+            'Client\'s heart rate drops to 55 bpm during sleep',
+        ],
+        rationale: {
+            correct: 'Excellent recognition of pacemaker complications! All these findings indicate potential problems.',
+            incorrect: 'Review pacemaker complications and normal function.',
+            keyPoints: [
+                'Failure to capture: Pacing spike without depolarization (no P or QRS)',
+                'Failure to sense: Pacemaker fires when it shouldn\'t (competition)',
+                'Infection signs: Redness, swelling, warmth, drainage at site',
+                'Hiccups = possible lead displacement stimulating diaphragm',
+                'Heart rate below pacemaker setting = malfunction',
+                'Normal: Rate slightly above setting is okay (intrinsic rhythm)',
+                'Normal: Pacing spikes with appropriate capture',
+            ],
+        },
+    },
+    {
+        id: 8,
+        type: 'dropdown',
+        scenario: 'A client with COPD is admitted with irregular heart rhythm. Monitor shows multiple P wave morphologies with variable PR intervals and heart rate of 130 bpm.',
+        question: 'Complete the clinical reasoning:',
+        dropdownOptions: {
+            rhythm: ['Atrial Fibrillation', 'Multifocal Atrial Tachycardia', 'Wandering Atrial Pacemaker', 'Atrial Flutter'],
+            cause: ['Chronic hypoxia', 'Increased vagal tone', 'Electrolyte imbalance', 'Beta-blocker therapy'],
+            treatment: ['Treat underlying COPD/hypoxia', 'Administer digoxin', 'Immediate cardioversion', 'Administer atropine'],
+        },
+        dropdownAnswers: {
+            rhythm: 'Multifocal Atrial Tachycardia',
+            cause: 'Chronic hypoxia',
+            treatment: 'Treat underlying COPD/hypoxia',
+        },
+        rationale: {
+            correct: 'Perfect clinical reasoning! MAT is classic in COPD patients and requires treating the underlying hypoxia.',
+            incorrect: 'Review MAT characteristics and management. Key: ≥3 different P wave shapes, rate >100, strongly associated with lung disease.',
+            keyPoints: [
+                'MAT: ≥3 different P wave morphologies, rate >100 bpm, irregular',
+                'Most common in COPD and pulmonary disease patients',
+                'Caused by hypoxia - treat underlying condition first',
+                'Calcium channel blockers for rate control (NOT digoxin - ineffective)',
+                'MAT vs WAP: MAT rate >100, WAP rate <100',
+                'Fix hypoxia: Oxygen, bronchodilators, treat respiratory infection',
+            ],
+        },
+    },
+    {
+        id: 9,
+        type: 'matrix',
+        question: 'Classify each medication by its appropriate use in arrhythmia management:',
+        matrixOptions: {
+            rows: ['Adenosine', 'Atropine', 'Amiodarone', 'Diltiazem'],
+            columns: ['Rate Control', 'Rhythm Conversion', 'Bradycardia', 'SVT Treatment'],
+            correctAnswers: {
+                Adenosine: 'SVT Treatment',
+                Atropine: 'Bradycardia',
+                Amiodarone: 'Rhythm Conversion',
+                Diltiazem: 'Rate Control',
+            },
+        },
+        rationale: {
+            correct: 'Excellent! You understand the specific uses of each antiarrhythmic medication.',
+            incorrect: 'Review cardiac medication classifications and their primary uses.',
+            keyPoints: [
+                'Adenosine: First-line for stable SVT, 6mg rapid IV push, very short half-life',
+                'Atropine: Symptomatic bradycardia, 0.5mg IV, blocks vagal effects',
+                'Amiodarone: Rhythm control for A-fib, V-tach, works on multiple channels',
+                'Diltiazem: Calcium channel blocker for rate control in A-fib/flutter',
+                'Know onset, dose, and key side effects for NCLEX',
+            ],
+        },
+    },
+    {
+        id: 10,
+        type: 'multiple-choice',
+        scenario: 'A 58-year-old client admitted with chest pain has the following ECG changes: ST elevation in leads II, III, and aVF.',
+        question: 'Which coronary artery is most likely affected, and what complication should the nurse monitor for?',
+        options: [
+            'Left anterior descending artery; monitor for heart failure',
+            'Right coronary artery; monitor for bradycardia and heart blocks',
+            'Circumflex artery; monitor for hypertension',
+            'Left main coronary artery; monitor for tachycardia',
+        ],
+        correctAnswer: 'Right coronary artery; monitor for bradycardia and heart blocks',
+        rationale: {
+            correct: 'Excellent! Inferior MI (leads II, III, aVF) involves RCA and commonly causes bradycardia/blocks due to AV node involvement.',
+            incorrect: 'Review MI localization by ECG leads. Inferior leads (II, III, aVF) = RCA = risk for conduction problems.',
+            keyPoints: [
+                'Inferior MI: Leads II, III, aVF show ST elevation',
+                'Right coronary artery (RCA) supplies: Inferior wall and AV node',
+                'Common complications: Bradycardia, AV blocks (first, second, third degree)',
+                'Anterior MI (V3-V4): LAD → heart failure risk',
+                'Lateral MI (I, aVL, V5-V6): Circumflex',
+                'Always check right-sided leads (V4R) for RV involvement in inferior MI',
+            ],
+        },
     },
 ];
