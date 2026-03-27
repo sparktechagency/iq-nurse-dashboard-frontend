@@ -12,9 +12,17 @@ interface QuestionFormProps {
     onSubmit: (values: any) => void;
     initialValues?: Question | null;
     categories: string[];
+    allowedTypes?: ('matrix' | 'case-study' | 'multiple-response' | 'multiple-choice')[];
 }
 
-const QuestionForm: React.FC<QuestionFormProps> = ({ isOpen, onClose, onSubmit, initialValues, categories }) => {
+const QuestionForm: React.FC<QuestionFormProps> = ({ 
+    isOpen, 
+    onClose, 
+    onSubmit, 
+    initialValues, 
+    categories,
+    allowedTypes = ['multiple-choice', 'multiple-response', 'matrix', 'case-study']
+}) => {
     const [form] = Form.useForm();
     const type = Form.useWatch('type', form);
 
@@ -55,14 +63,23 @@ const QuestionForm: React.FC<QuestionFormProps> = ({ isOpen, onClose, onSubmit, 
                             ))}
                         </Select>
                     </Form.Item>
-                    <Form.Item name="type" label="Question Type" rules={[{ required: true }]}>
-                        <Select>
-                            <Option value="multiple-choice">Multiple Choice</Option>
-                            <Option value="multiple-response">Multiple Response</Option>
-                            <Option value="matrix">Matrix</Option>
-                            <Option value="case-study">Case Study</Option>
-                        </Select>
-                    </Form.Item>
+                    <div className="grid grid-cols-2 gap-4">
+                        <Form.Item name="type" label="Question Type" rules={[{ required: true }]}>
+                            <Select>
+                                {allowedTypes.includes('multiple-choice') && <Option value="multiple-choice">Multiple Choice</Option>}
+                                {allowedTypes.includes('multiple-response') && <Option value="multiple-response">Multiple Response</Option>}
+                                {allowedTypes.includes('matrix') && <Option value="matrix">Matrix</Option>}
+                                {allowedTypes.includes('case-study') && <Option value="case-study">Case Study</Option>}
+                            </Select>
+                        </Form.Item>
+                        <Form.Item name="difficulty" label="Difficulty">
+                            <Select placeholder="Select difficulty">
+                                <Option value="Easy">Easy</Option>
+                                <Option value="Medium">Medium</Option>
+                                <Option value="Hard">Hard</Option>
+                            </Select>
+                        </Form.Item>
+                    </div>
                 </div>
 
                 <Form.Item name="question" label="Question Text" rules={[{ required: true }]}>

@@ -75,18 +75,7 @@ const sidebarItems: TSidebarItem[] = [
         path: 'cheat-sheets',
         icon: '/icons/cheat-sheets.png',
     },
-    {
-        key: 'clinical-skills',
-        label: 'Clinical Skills',
-        path: 'clinical-skills',
-        icon: '/icons/clinical-skill.png',
-    },
-    {
-        key: 'templates',
-        label: 'Templates',
-        path: 'templates',
-        icon: '/icons/templates.png',
-    },
+
     {
         key: 'exams',
         label: 'Exams',

@@ -33,6 +33,7 @@ import DiagnosticCategoryPage from '../pages/dashboard/diagnostic-tests-laborato
 import PracticeQuestionsPage from '../pages/dashboard/diagnostic-tests-laboratory/practice-questions';
 import PracticalSkillsMainTopic from '../pages/dashboard/practical-skills';
 import PracticalSkillsCategoryPage from '../pages/dashboard/practical-skills/subcategory';
+import PracticalSkillsQuestionsPage from '../pages/dashboard/practical-skills/practice-questions';
 import CheatSheetsMainTopic from '../pages/dashboard/cheat-sheets';
 import CheatSheetsCategoryPage from '../pages/dashboard/cheat-sheets/subcategory';
 import NursingAssessmentsPage from '../pages/dashboard/nursing-assessments';
@@ -68,6 +69,7 @@ const router = createBrowserRouter([
 
             //practical-skills
             { path: 'practical-skills', element: <PracticalSkillsMainTopic /> },
+            { path: 'practical-skills/practice-questions', element: <PracticalSkillsQuestionsPage /> },
             { path: 'practical-skills/:category', element: <PracticalSkillsCategoryPage /> },
 
             //cheat-sheets
